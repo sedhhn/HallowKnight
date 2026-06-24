@@ -1,0 +1,60 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Bench1.tsx": {
+            "scaleInDock": 1
+        },
+        "DecorativeBackground_Orb_1.tsx": {
+            "scaleInDock": 1
+        },
+        "ForgottenCrossroad_Tile0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "ForgottonCrossroads_Floor&Wall1.tsx": {
+            "scaleInDock": 0.75
+        },
+        "map1.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 3851.5151515151515,
+                "y": 7845.454545454546
+            }
+        },
+        "platform_float_1.tsx": {
+            "scaleInDock": 1
+        },
+        "spikes1.tsx": {
+            "scaleInDock": 1
+        },
+        "spikes2.tsx": {
+            "scaleInDock": 3
+        }
+    },
+    "map.height": 2000,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 8,
+    "map.tileWidth": 8,
+    "map.width": 1000,
+    "openFiles": [
+        "map1.tmx"
+    ],
+    "project": "NewMap.tiled-project",
+    "recentFiles": [
+        "map1.tmx",
+        "ForgottenCrossroad_Tile0.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 8
+    }
+}

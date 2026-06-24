@@ -1,0 +1,53 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map1.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "map1.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 9,
+            "viewCenter": {
+                "x": 542.6666666666666,
+                "y": 245.33333333333331
+            }
+        },
+        "map1.tmx#atlas_floor_wall_0": {
+            "scaleInDock": 0.75
+        },
+        "map1.tmx#atlas_spikes_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#bench_1": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#floor_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#platform_float_01": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "/media/sedhhn/CG_Files/Code/Java/AP Exercises/Exercise4/HallowKnight/assets/map1",
+    "map.height": 60,
+    "map.lastUsedExportFilter": "Tiled map files (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 8,
+    "map.tileWidth": 8,
+    "map.width": 100,
+    "openFiles": [
+        "map1.tmx"
+    ],
+    "project": "map1-project.tiled-project",
+    "recentFiles": [
+        "map1.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 8
+    }
+}
