@@ -23,6 +23,7 @@ public class GameController {
     public void update(float dt){
         handleInput();
         hud.update(dt);
+        hud.updateHealth(knight.getHp(), Knight.MAX_HP);
     }
 
     private void handleInput(){

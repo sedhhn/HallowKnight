@@ -1,6 +1,7 @@
 package com.HallowKnight.Model.Map;
 
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.FixtureType;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -36,7 +37,7 @@ public class MapObjectInitializer {
                 , (rect.getHeight()/2)/HallowKnight.PPM);
             b2FixtureDefine.shape=shape;
 
-            b2Body.createFixture(b2FixtureDefine);
+            b2Body.createFixture(b2FixtureDefine).setUserData(FixtureType.GROUND);
         }
     }
 
@@ -54,7 +55,7 @@ public class MapObjectInitializer {
                 , (rect.getHeight()/2)/HallowKnight.PPM);
             b2FixtureDefine.shape=shape;
 
-            b2Body.createFixture(b2FixtureDefine);
+            b2Body.createFixture(b2FixtureDefine).setUserData(FixtureType.PLATFORM);
         }
     }
 
@@ -73,7 +74,7 @@ public class MapObjectInitializer {
             b2FixtureDefine.shape=shape;
             b2FixtureDefine.isSensor=true;
 
-            b2Body.createFixture(b2FixtureDefine);
+            b2Body.createFixture(b2FixtureDefine).setUserData(FixtureType.DEADLY);
         }
     }
 }

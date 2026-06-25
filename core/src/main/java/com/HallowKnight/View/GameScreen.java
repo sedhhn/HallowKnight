@@ -1,5 +1,6 @@
 package com.HallowKnight.View;
 
+import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Knight;
@@ -42,8 +43,9 @@ public class GameScreen extends MenuScreen{
         b2DebugRenderer=new Box2DDebugRenderer();
         camera=new OrthographicCamera(viewport.getScreenWidth(),viewport.getScreenHeight());
         gameViewport=new FitViewport(1280/HallowKnight.PPM
-            ,720/HallowKnight.PPM,camera);
+            ,960/HallowKnight.PPM,camera);
         knight= new Knight(world);
+        world.setContactListener(new ContactController(knight));
         hud=new HUD();
         mainStack.add(hud);
         controller=new GameController(knight,hud);
