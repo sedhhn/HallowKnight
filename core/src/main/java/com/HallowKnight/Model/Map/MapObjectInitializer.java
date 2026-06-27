@@ -1,11 +1,14 @@
 package com.HallowKnight.Model.Map;
 
+import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.FixtureType;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.PointMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class MapObjectInitializer {
@@ -75,6 +78,15 @@ public class MapObjectInitializer {
             b2FixtureDefine.isSensor=true;
 
             b2Body.createFixture(b2FixtureDefine).setUserData(FixtureType.DEADLY);
+        }
+    }
+
+    public void initializeEnemySpawnPoints(GameController gameController){
+        for (PointMapObject point:map.getLayers().get("Enemies_Boxes").getObjects().getByType(PointMapObject.class)){
+            gameController.getEnemySpawnPositions().add(new Vector2(point.getPoint().x,point.getPoint().y));
+        }
+        for (PointMapObject point : map.getLayers().get("EnemyStartAndEnd").getObjects().getByType(PointMapObject.class)){
+            gameController.getEnemyStartAndEndPositions().add(new Vector2(point.getPoint().x,point.getPoint().y));
         }
     }
 }

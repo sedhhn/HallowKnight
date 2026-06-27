@@ -27,6 +27,8 @@ public class ContactController implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
+        Object userDataA = contact.getFixtureA().getUserData();
+        Object userDataB = contact.getFixtureB().getUserData();
 
     }
 

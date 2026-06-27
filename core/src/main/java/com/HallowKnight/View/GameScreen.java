@@ -48,7 +48,7 @@ public class GameScreen extends MenuScreen{
         world.setContactListener(new ContactController(knight));
         hud=new HUD();
         mainStack.add(hud);
-        controller=new GameController(knight,hud);
+        controller=new GameController(world,knight,hud);
         //stage.setViewport(gameViewport);
 
         camera.update();
@@ -62,6 +62,8 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.InitializeGrounds();
         mapObjectInitializer.InitializeFloatingPlatforms();
         mapObjectInitializer.InitializeDeadlyBoxes();
+        mapObjectInitializer.initializeEnemySpawnPoints(controller);
+        controller.defineEnemies();
     }
 
     @Override
@@ -94,6 +96,9 @@ public class GameScreen extends MenuScreen{
         game.getBatch().begin();
         knight.draw(game.getBatch());
         game.getBatch().end();
+
+        //rendering enemies
+        controller.renderEnemies();
 
         // Render Box2D debug
         b2DebugRenderer.render(world, camera.combined);

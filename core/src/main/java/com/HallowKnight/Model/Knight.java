@@ -6,6 +6,7 @@ import com.HallowKnight.HallowKnight;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 
@@ -59,6 +60,7 @@ public class Knight extends Sprite {
         setRegion(controller.getCurrentFrame());
         setPosition(b2Body.getPosition().x-getWidth()/2f,b2Body.getPosition().y-getHeight()/3.5f);
 
+
         if (invincible) {
             invincibleTimer -= deltaTime;
             if (invincibleTimer <= 0) {
@@ -70,9 +72,9 @@ public class Knight extends Sprite {
     public void takeDamage(int damage) {
         if (invincible) return;
         hp -= damage;
+        if (hp < 0) hp = 0;
         invincible = true;
         invincibleTimer = INVINCIBILITY_TIME;
-        if (hp < 0) hp = 0;
     }
 
     public int getHp() {

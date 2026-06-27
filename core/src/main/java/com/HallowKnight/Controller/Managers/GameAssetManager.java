@@ -21,6 +21,9 @@ public class GameAssetManager {
     public static TextureAtlas soulContainer;
     public static TextureAtlas knightHp;
 
+    //========= enemies ==========
+    public static TextureAtlas crawlidAtlas;
+
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
         logoTexture = new Texture("MenuBackgrounds/hollow_knight_logo.png");
@@ -30,6 +33,7 @@ public class GameAssetManager {
         knightRunningAtlas=new TextureAtlas("Animations/Knight/knightRunning.atlas");
         soulContainer=new TextureAtlas("Animations/HUD/SoulContainer.atlas");
         knightHp=new TextureAtlas("Animations/HUD/KnightHp.atlas");
+        crawlidAtlas=new TextureAtlas("Animations/Enemies/Crawlid.atlas");
     }
 
     public static void dispose() {
