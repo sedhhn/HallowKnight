@@ -766,15 +766,15 @@
   <object id="12" x="2461.25" y="265.125" width="308.371" height="232.613"/>
  </objectgroup>
  <objectgroup id="12" name="EnemyStartAndEnd">
-  <object id="15" name="start_0" x="706.667" y="450.667">
+  <object id="15" name="start_0" x="700" y="462.667">
    <point/>
   </object>
-  <object id="16" name="end_0" x="1289.33" y="441.333">
+  <object id="16" name="end_0" x="1302.67" y="458.667">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="7" name="Enemies_Boxes">
-  <object id="10" name="Enemy_0" x="1066" y="477">
+  <object id="10" name="Enemy_0" x="1040.67" y="479.667">
    <point/>
   </object>
  </objectgroup>

@@ -1,9 +1,10 @@
-package com.HallowKnight.Model;
+package com.HallowKnight.Model.Knight;
 
 public enum KnightState {
     IDLE,
     RUNNING,
     JUMPING,
     DASHING,
-    FALLING;
+    FALLING,
+    ATTACKING;
 }

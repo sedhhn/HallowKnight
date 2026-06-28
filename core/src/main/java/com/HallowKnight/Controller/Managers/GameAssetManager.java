@@ -16,6 +16,9 @@ public class GameAssetManager {
     //========= knight ==============
     public static TextureAtlas knightIdleAtlas;
     public static TextureAtlas knightRunningAtlas;
+    public static TextureAtlas knightAtlas;
+    public static TextureAtlas knightSlashEffect;
+    public static TextureAtlas knightJumpAtlas;
 
     //========= HUD =============
     public static TextureAtlas soulContainer;
@@ -31,6 +34,9 @@ public class GameAssetManager {
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         knightIdleAtlas=new TextureAtlas("Animations/Knight/knightIdle.atlas");
         knightRunningAtlas=new TextureAtlas("Animations/Knight/knightRunning.atlas");
+        knightAtlas=new TextureAtlas("Animations/Knight/knight.atlas");
+        knightSlashEffect=new TextureAtlas("Animations/Enemies/SlashEffect.atlas");
+        knightJumpAtlas=new TextureAtlas("Animations/Knight/Jump.atlas");
         soulContainer=new TextureAtlas("Animations/HUD/SoulContainer.atlas");
         knightHp=new TextureAtlas("Animations/HUD/KnightHp.atlas");
         crawlidAtlas=new TextureAtlas("Animations/Enemies/Crawlid.atlas");

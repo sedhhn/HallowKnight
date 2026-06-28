@@ -3,12 +3,10 @@ package com.HallowKnight.View;
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.HallowKnight;
-import com.HallowKnight.Model.Knight;
+import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Map.MapObjectInitializer;
 import com.HallowKnight.View.Modals.HUD;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -104,6 +102,7 @@ public class GameScreen extends MenuScreen{
         b2DebugRenderer.render(world, camera.combined);
 
         world.step(1/60f,6,2);
+        controller.processPendingActions();
         super.render(delta);
     }
 }

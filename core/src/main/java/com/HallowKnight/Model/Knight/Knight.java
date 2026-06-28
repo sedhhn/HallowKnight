@@ -1,14 +1,14 @@
-package com.HallowKnight.Model;
+package com.HallowKnight.Model.Knight;
 
 import com.HallowKnight.Controller.KnightController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.Model.Knight.State.IdleState;
+import com.HallowKnight.Model.Knight.State.State;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 
 
 public class Knight extends Sprite {
@@ -19,17 +19,21 @@ public class Knight extends Sprite {
     public World world;
     public Body b2Body;
 
+    private boolean facingRight;
+    private int touchingGround=0;
+
+    private State state;
+
     private KnightController controller;
     private int hp;
     private boolean invincible;
     private float invincibleTimer;
 
-    private Animation knightWalk;
-    private Animation knightJump;
-
     public Knight(World world){
         super(GameAssetManager.knightIdleAtlas.findRegion("Idle"));
+        facingRight=true;
         controller=new KnightController(this);
+        state=new IdleState(this);
         this.world=world;
         hp = MAX_HP;
         invincible = false;
@@ -53,13 +57,21 @@ public class Knight extends Sprite {
         fixtureDef.shape=shape;
         Fixture fixture = b2Body.createFixture(fixtureDef);
         fixture.setUserData(FixtureType.KNIGHT);
+
+        FixtureDef bottomSensor=new FixtureDef();
+        PolygonShape bottomSensorShape=new PolygonShape();
+        bottomSensorShape.setAsBox((getWidth()/17)/HallowKnight.PPM
+            ,(getHeight()/4)/HallowKnight.PPM
+            ,new Vector2(b2Body.getWorldCenter().x-getWidth()/17/HallowKnight.PPM,b2Body.getWorldCenter().y)
+            ,0);
+        bottomSensor.shape=shape;
+        bottomSensor.isSensor=true;
+        b2Body.createFixture(bottomSensor);
     }
 
     public void update(float deltaTime){
-        controller.update(deltaTime);
-        setRegion(controller.getCurrentFrame());
+        state.update(deltaTime);
         setPosition(b2Body.getPosition().x-getWidth()/2f,b2Body.getPosition().y-getHeight()/3.5f);
-
 
         if (invincible) {
             invincibleTimer -= deltaTime;
@@ -81,11 +93,35 @@ public class Knight extends Sprite {
         return hp;
     }
 
-    public boolean isInvincible() {
-        return invincible;
-    }
-
     public KnightController getController(){
         return controller;
     }
+
+    public void setFacingRight(boolean facingRight){
+        this.facingRight=facingRight;
+
+    }
+
+    public void setState(State state){
+        this.state.exit();
+        this.state=state;
+        state.enter();
+    }
+
+    public boolean isTouchingGround(){
+        return touchingGround > 0;
+    }
+
+    public void incrementTouchingGround(){
+        touchingGround++;
+    }
+
+    public void decrementTouchingGround(){
+        touchingGround--;
+    }
+
+    public boolean isFacingRight(){
+        return this.facingRight;
+    }
+
 }

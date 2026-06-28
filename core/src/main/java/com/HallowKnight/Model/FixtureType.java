@@ -4,5 +4,7 @@ public enum FixtureType {
     KNIGHT,
     DEADLY,
     GROUND,
-    PLATFORM
+    PLATFORM,
+    ENEMY,
+    NAIL
 }

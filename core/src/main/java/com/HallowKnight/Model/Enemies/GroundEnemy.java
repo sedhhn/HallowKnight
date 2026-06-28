@@ -3,6 +3,7 @@ package com.HallowKnight.Model.Enemies;
 import com.HallowKnight.Controller.GroundEnemyController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.FixtureType;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -14,6 +15,7 @@ public class GroundEnemy extends Sprite {
     private float speed=1f;
     private float startX;
     private float endX;
+    private boolean dead;
 
     public GroundEnemy(World world, Vector2 position, float startX, float endX){
         super(GameAssetManager.crawlidAtlas.findRegion("Walk"));
@@ -21,6 +23,7 @@ public class GroundEnemy extends Sprite {
         this.world=world;
         this.startX=startX;
         this.endX=endX;
+        dead = false;
         defineGroundEnemy(position);
         setBounds(0, 0
             ,301/HallowKnight.PPM
@@ -37,9 +40,21 @@ public class GroundEnemy extends Sprite {
         PolygonShape shape=new PolygonShape();
         shape.setAsBox(getWidth()/4.5f/ HallowKnight.PPM,getHeight()/4.5f/HallowKnight.PPM);
         fixtureDef.shape=shape;
-        //fixtureDef.isSensor=true;
 
-        b2Body.createFixture(fixtureDef);
+        b2Body.createFixture(fixtureDef).setUserData(FixtureType.ENEMY);
+        b2Body.setUserData(this);
+    }
+
+    public void takeDamage() {
+        dead = true;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public Body getBody() {
+        return b2Body;
     }
 
     public void update(float dt){

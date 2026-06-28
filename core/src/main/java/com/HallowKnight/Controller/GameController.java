@@ -2,8 +2,8 @@ package com.HallowKnight.Controller;
 
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Enemies.GroundEnemy;
-import com.HallowKnight.Model.Knight;
-import com.HallowKnight.Model.KnightState;
+import com.HallowKnight.Model.Knight.Knight;
+import com.HallowKnight.Model.Knight.KnightState;
 import com.HallowKnight.View.Modals.HUD;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -46,32 +46,6 @@ public class GameController {
     }
 
     private void handleInput(){
-        boolean isIdle=true;
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            knight.b2Body.applyLinearImpulse(new Vector2(0,6f),knight.b2Body.getWorldCenter()
-                ,true);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            if (knight.b2Body.getLinearVelocity().x<= Knight.MAX_MOVEMENT_SPEED){
-                knight.b2Body.applyLinearImpulse(new Vector2(0.3f,0),knight.b2Body.getWorldCenter()
-                    ,true);
-            }
-            knightController.setFacingRight(true);
-            knightController.setState(KnightState.RUNNING);
-            isIdle=false;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            if (knight.b2Body.getLinearVelocity().x >= -Knight.MAX_MOVEMENT_SPEED){
-                knight.b2Body.applyLinearImpulse(new Vector2(-0.3f,0),knight.b2Body.getWorldCenter()
-                    ,true);
-            }
-            knightController.setFacingRight(false);
-            knightController.setState(KnightState.RUNNING);
-            isIdle=false;
-        }
-        if (isIdle){
-            knightController.setState(KnightState.IDLE);
-        }
     }
 
     public void defineEnemies(){
@@ -85,6 +59,17 @@ public class GameController {
             e.draw(HallowKnight.hallowKnight.getBatch());
         }
         HallowKnight.hallowKnight.getBatch().end();
+    }
+
+    public void processPendingActions() {
+        List<GroundEnemy> toRemove = new ArrayList<>();
+        for (GroundEnemy e : enemies) {
+            if (e.isDead()) {
+                world.destroyBody(e.getBody());
+                toRemove.add(e);
+            }
+        }
+        enemies.removeAll(toRemove);
     }
 
     public List<Vector2> getEnemySpawnPositions(){
