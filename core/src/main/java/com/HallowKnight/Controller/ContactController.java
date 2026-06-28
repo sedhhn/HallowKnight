@@ -35,9 +35,9 @@ public class ContactController implements ContactListener {
             if (enemy != null) enemy.takeDamage();
         }
 
-        if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.GROUND){
+        if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
             knight.incrementTouchingGround();
-        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT){
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_BOTTOM){
             knight.incrementTouchingGround();
         }
     }
@@ -47,9 +47,9 @@ public class ContactController implements ContactListener {
         Object userDataA = contact.getFixtureA().getUserData();
         Object userDataB = contact.getFixtureB().getUserData();
 
-        if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.GROUND){
+        if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
             knight.decrementTouchingGround();
-        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT){
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_BOTTOM){
             knight.decrementTouchingGround();
         }
     }

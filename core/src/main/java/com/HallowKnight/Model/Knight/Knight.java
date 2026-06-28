@@ -24,6 +24,8 @@ public class Knight extends Sprite {
 
     private State state;
 
+    SurroundSensors surroundSensors;
+
     private KnightController controller;
     private int hp;
     private boolean invincible;
@@ -34,6 +36,7 @@ public class Knight extends Sprite {
         facingRight=true;
         controller=new KnightController(this);
         state=new IdleState(this);
+        surroundSensors=new SurroundSensors();
         this.world=world;
         hp = MAX_HP;
         invincible = false;
@@ -50,23 +53,18 @@ public class Knight extends Sprite {
         bodyDef.type= BodyDef.BodyType.DynamicBody;
         b2Body=world.createBody(bodyDef);
 
+        float hx=(getWidth()/17)/HallowKnight.PPM;
+        float hy=(getHeight()/4)/HallowKnight.PPM;
+
         FixtureDef fixtureDef=new FixtureDef();
         PolygonShape shape=new PolygonShape();
-        shape.setAsBox((getWidth()/17)/HallowKnight.PPM,(getHeight()/4)/HallowKnight.PPM);
+        shape.setAsBox(hx, hy);
 
         fixtureDef.shape=shape;
         Fixture fixture = b2Body.createFixture(fixtureDef);
         fixture.setUserData(FixtureType.KNIGHT);
 
-        FixtureDef bottomSensor=new FixtureDef();
-        PolygonShape bottomSensorShape=new PolygonShape();
-        bottomSensorShape.setAsBox((getWidth()/17)/HallowKnight.PPM
-            ,(getHeight()/4)/HallowKnight.PPM
-            ,new Vector2(b2Body.getWorldCenter().x-getWidth()/17/HallowKnight.PPM,b2Body.getWorldCenter().y)
-            ,0);
-        bottomSensor.shape=shape;
-        bottomSensor.isSensor=true;
-        b2Body.createFixture(bottomSensor);
+        surroundSensors.createSensors(this.b2Body,hx,hy);
     }
 
     public void update(float deltaTime){
