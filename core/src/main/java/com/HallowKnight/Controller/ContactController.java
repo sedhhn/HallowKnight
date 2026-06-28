@@ -36,9 +36,15 @@ public class ContactController implements ContactListener {
         }
 
         if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
-            knight.incrementTouchingGround();
+            knight.getSurroundSensors().bottomSensor++;
         } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_BOTTOM){
-            knight.incrementTouchingGround();
+            knight.getSurroundSensors().bottomSensor++;
+        }
+
+        if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().bottomSensor++;
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().bottomSensor++;
         }
     }
 
@@ -48,9 +54,15 @@ public class ContactController implements ContactListener {
         Object userDataB = contact.getFixtureB().getUserData();
 
         if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
-            knight.decrementTouchingGround();
+            knight.getSurroundSensors().bottomSensor--;
         } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_BOTTOM){
-            knight.decrementTouchingGround();
+            knight.getSurroundSensors().bottomSensor--;
+        }
+
+        if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().bottomSensor--;
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().bottomSensor--;
         }
     }
 

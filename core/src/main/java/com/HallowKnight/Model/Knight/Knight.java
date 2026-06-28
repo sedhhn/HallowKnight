@@ -20,7 +20,6 @@ public class Knight extends Sprite {
     public Body b2Body;
 
     private boolean facingRight;
-    private int touchingGround=0;
 
     private State state;
 
@@ -107,19 +106,15 @@ public class Knight extends Sprite {
     }
 
     public boolean isTouchingGround(){
-        return touchingGround > 0;
-    }
-
-    public void incrementTouchingGround(){
-        touchingGround++;
-    }
-
-    public void decrementTouchingGround(){
-        touchingGround--;
+        return surroundSensors.bottomSensor > 0;
     }
 
     public boolean isFacingRight(){
         return this.facingRight;
+    }
+
+    public SurroundSensors getSurroundSensors(){
+        return surroundSensors;
     }
 
 }

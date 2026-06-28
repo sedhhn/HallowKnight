@@ -10,12 +10,12 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 public class SurroundSensors {
     public int rightSensor;
     public int leftSensor;
-    public int downSensor;
+    public int bottomSensor;
 
     public SurroundSensors(){
         rightSensor = 0;
         leftSensor = 0;
-        downSensor = 0;
+        bottomSensor = 0;
     }
 
     public void createSensors(Body body , float hx , float hy){
