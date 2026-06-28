@@ -33,15 +33,25 @@ public class JumpState extends State{
     @Override
     protected void handleInputs() {
         super.handleInputs();
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && knight.b2Body.getLinearVelocity().x<=Knight.MAX_MOVEMENT_SPEED){
+        boolean movingRightOrLeft=false;
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            if (knight.b2Body.getLinearVelocity().x<=Knight.MAX_MOVEMENT_SPEED){
+                knight.b2Body.applyLinearImpulse(new Vector2(0.3f,0f),knight.b2Body.getWorldCenter()
+                    ,true);
+            }
             knight.setFacingRight(true);
-            knight.b2Body.applyLinearImpulse(new Vector2(0.3f,0f),knight.b2Body.getWorldCenter()
-                ,true);
+            movingRightOrLeft=true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)&& knight.b2Body.getLinearVelocity().x>=-Knight.MAX_MOVEMENT_SPEED){
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            if (knight.b2Body.getLinearVelocity().x>=-Knight.MAX_MOVEMENT_SPEED){
+                knight.b2Body.applyLinearImpulse(new Vector2(-0.3f,0f),knight.b2Body.getWorldCenter()
+                    ,true);
+            }
             knight.setFacingRight(false);
-            knight.b2Body.applyLinearImpulse(new Vector2(-0.3f,0f),knight.b2Body.getWorldCenter()
-                ,true);
+            movingRightOrLeft=true;
+        }
+        if (!movingRightOrLeft){
+            knight.b2Body.setLinearVelocity(0,knight.b2Body.getLinearVelocity().y);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
             knight.setState(new AttackState(knight));

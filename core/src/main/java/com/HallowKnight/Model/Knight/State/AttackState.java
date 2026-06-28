@@ -2,18 +2,17 @@ package com.HallowKnight.Model.Knight.State;
 
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Knight.Knight;
-import com.HallowKnight.Model.Knight.Nail;
+import com.HallowKnight.Model.Knight.Nail.Nail;
+import com.HallowKnight.Model.Knight.Nail.State.NormalSlash;
+import com.HallowKnight.Model.Knight.Nail.State.SlashStates;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.Comparator;
 
 public class AttackState extends State{
-    private final float attackDuration=0.4f;
     private boolean isAttacking;
 
     private Nail nail;
@@ -21,17 +20,17 @@ public class AttackState extends State{
         super(knight);
         frames= GameAssetManager.knightAtlas.findRegions("Slash");
         frames.sort(Comparator.comparingInt(a->a.index));
-        stateAnimation=new Animation<>(attackDuration/frames.size,frames);
+        stateAnimation=new Animation<>(Knight.ATTACK_DURATION/frames.size,frames);
 
         isAttacking=true;
 
-        nail=new Nail(knight.world,knight);
+        nail=new Nail(knight.world,knight, SlashStates.NORMAL);
     }
 
     @Override
     public void update(float dt) {
         super.update(dt);
-        if (stateTime>=attackDuration){
+        if (stateTime>=Knight.ATTACK_DURATION){
             isAttacking=false;
         }
         handleInputs();

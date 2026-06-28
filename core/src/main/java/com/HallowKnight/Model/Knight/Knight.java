@@ -4,6 +4,7 @@ import com.HallowKnight.Controller.KnightController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.Model.Knight.Nail.Nail;
 import com.HallowKnight.Model.Knight.State.IdleState;
 import com.HallowKnight.Model.Knight.State.State;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,6 +16,7 @@ public class Knight extends Sprite {
     public static final float MAX_MOVEMENT_SPEED=4f;
     public static final int MAX_HP = 5;
     private static final float INVINCIBILITY_TIME = 1.5f;
+    public static final float ATTACK_DURATION=0.3f;
 
     public World world;
     public Body b2Body;

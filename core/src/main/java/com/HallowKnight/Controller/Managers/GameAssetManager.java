@@ -35,7 +35,7 @@ public class GameAssetManager {
         knightIdleAtlas=new TextureAtlas("Animations/Knight/knightIdle.atlas");
         knightRunningAtlas=new TextureAtlas("Animations/Knight/knightRunning.atlas");
         knightAtlas=new TextureAtlas("Animations/Knight/knight.atlas");
-        knightSlashEffect=new TextureAtlas("Animations/Enemies/SlashEffect.atlas");
+        knightSlashEffect=new TextureAtlas("Animations/Knight/SlashEffect.atlas");
         knightJumpAtlas=new TextureAtlas("Animations/Knight/Jump.atlas");
         soulContainer=new TextureAtlas("Animations/HUD/SoulContainer.atlas");
         knightHp=new TextureAtlas("Animations/HUD/KnightHp.atlas");
