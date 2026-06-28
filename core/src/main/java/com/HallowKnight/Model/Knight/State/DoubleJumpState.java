@@ -9,10 +9,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.Comparator;
 
-public class JumpState extends State{
-    public JumpState(Knight knight) {
+public class DoubleJumpState extends State{
+
+    public DoubleJumpState(Knight knight) {
         super(knight);
-        frames= GameAssetManager.knightJumpAtlas.findRegions("Airborne");
+        frames= GameAssetManager.knightAtlas.findRegions("Double Jump");
         frames.sort(Comparator.comparingInt(a->a.index));
         stateAnimation=new Animation<>(1/10f,frames);
     }
@@ -55,9 +56,6 @@ public class JumpState extends State{
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
             knight.setState(new AttackState(knight));
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            knight.setState(new DoubleJumpState(knight));
         }
         if (!knight.isTouchingGround() && knight.isTouchingWall()){
             knight.setState(new WallSlideState(knight));
