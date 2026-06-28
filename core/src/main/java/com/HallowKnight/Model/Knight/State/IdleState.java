@@ -43,5 +43,8 @@ public class IdleState extends State{
         if (!knight.isTouchingGround() && knight.isTouchingWall()){
             knight.setState(new WallSlideState(knight));
         }
+        if (!knight.isTouchingGround() && !knight.isTouchingWall()){
+            knight.setState(new FallState(knight));
+        }
     }
 }
