@@ -58,6 +58,9 @@ public class FallState extends State {
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new DoubleJumpState(knight));
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            knight.setState(new DownSlashState(knight));
+        }
             if (knight.isTouchingGround()) {
                 knight.setState(new IdleState(knight));
             }
