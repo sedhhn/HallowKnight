@@ -46,6 +46,32 @@ public class ContactController implements ContactListener {
         } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.PLATFORM){
             knight.getSurroundSensors().bottomSensor++;
         }
+
+        //knight left sensor
+        if (userDataA==FixtureType.KNIGHT_LEFT && userDataB==FixtureType.GROUND){
+            knight.getSurroundSensors().leftSensor++;
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_LEFT){
+            knight.getSurroundSensors().leftSensor++;
+        }
+
+        if (userDataA==FixtureType.KNIGHT_LEFT && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().leftSensor++;
+        } else if(userDataA==FixtureType.PLATFORM && userDataB==FixtureType.KNIGHT_LEFT){
+            knight.getSurroundSensors().leftSensor++;
+        }
+
+        //knight right sensor
+        if (userDataA==FixtureType.KNIGHT_RIGHT && userDataB==FixtureType.GROUND){
+            knight.getSurroundSensors().rightSensor++;
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_RIGHT){
+            knight.getSurroundSensors().rightSensor++;
+        }
+
+        if (userDataA==FixtureType.KNIGHT_RIGHT && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().rightSensor++;
+        } else if(userDataA==FixtureType.PLATFORM && userDataB==FixtureType.KNIGHT_RIGHT){
+            knight.getSurroundSensors().rightSensor++;
+        }
     }
 
     @Override
@@ -63,6 +89,32 @@ public class ContactController implements ContactListener {
             knight.getSurroundSensors().bottomSensor--;
         } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.PLATFORM){
             knight.getSurroundSensors().bottomSensor--;
+        }
+
+        //knight left sensor
+        if (userDataA==FixtureType.KNIGHT_LEFT && userDataB==FixtureType.GROUND){
+            knight.getSurroundSensors().leftSensor--;
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_LEFT){
+            knight.getSurroundSensors().leftSensor--;
+        }
+
+        if (userDataA==FixtureType.KNIGHT_LEFT && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().leftSensor--;
+        } else if(userDataA==FixtureType.PLATFORM && userDataB==FixtureType.KNIGHT_LEFT){
+            knight.getSurroundSensors().leftSensor--;
+        }
+
+        //knight right sensor
+        if (userDataA==FixtureType.KNIGHT_RIGHT && userDataB==FixtureType.GROUND){
+            knight.getSurroundSensors().rightSensor--;
+        } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_RIGHT){
+            knight.getSurroundSensors().rightSensor--;
+        }
+
+        if (userDataA==FixtureType.KNIGHT_RIGHT && userDataB==FixtureType.PLATFORM){
+            knight.getSurroundSensors().rightSensor--;
+        } else if(userDataA==FixtureType.PLATFORM && userDataB==FixtureType.KNIGHT_RIGHT){
+            knight.getSurroundSensors().rightSensor--;
         }
     }
 

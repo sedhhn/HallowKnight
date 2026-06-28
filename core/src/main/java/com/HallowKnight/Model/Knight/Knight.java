@@ -109,6 +109,10 @@ public class Knight extends Sprite {
         return surroundSensors.bottomSensor > 0;
     }
 
+    public boolean isTouchingWall(){
+        return surroundSensors.leftSensor>0 || surroundSensors.rightSensor>0;
+    }
+
     public boolean isFacingRight(){
         return this.facingRight;
     }

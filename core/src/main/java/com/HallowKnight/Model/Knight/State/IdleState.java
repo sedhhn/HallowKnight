@@ -5,7 +5,6 @@ import com.HallowKnight.Model.Knight.Knight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.utils.Array;
 
 import java.util.Comparator;
 
@@ -40,6 +39,9 @@ public class IdleState extends State{
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
             knight.setState(new AttackState(knight));
+        }
+        if (!knight.isTouchingGround() && knight.isTouchingWall()){
+            knight.setState(new WallSlideState(knight));
         }
     }
 }
