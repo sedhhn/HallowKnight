@@ -40,10 +40,7 @@ public class IdleState extends State{
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
             knight.setState(new AttackState(knight));
         }
-        if (!knight.isTouchingGround() && knight.isTouchingWall()){
-            knight.setState(new WallSlideState(knight));
-        }
-        if (!knight.isTouchingGround() && !knight.isTouchingWall()){
+        if (!knight.isTouchingGround()){
             knight.setState(new FallState(knight));
         }
     }

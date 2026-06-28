@@ -40,12 +40,18 @@ public class JumpState extends State{
                     ,true);
             }
             knight.setFacingRight(true);
+            if (!knight.isTouchingGround() && knight.isTouchingWall()){
+                knight.setState(new WallSlideState(knight));
+            }
             movingRightOrLeft=true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             if (knight.b2Body.getLinearVelocity().x>=-Knight.MAX_MOVEMENT_SPEED){
                 knight.b2Body.applyLinearImpulse(new Vector2(-0.3f,0f),knight.b2Body.getWorldCenter()
                     ,true);
+            }
+            if (!knight.isTouchingGround() && knight.isTouchingWall()){
+                knight.setState(new WallSlideState(knight));
             }
             knight.setFacingRight(false);
             movingRightOrLeft=true;
@@ -58,9 +64,6 @@ public class JumpState extends State{
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new DoubleJumpState(knight));
-        }
-        if (!knight.isTouchingGround() && knight.isTouchingWall()){
-            knight.setState(new WallSlideState(knight));
         }
         if(stateTime>=0.1f) {
             if (knight.isTouchingGround()) {

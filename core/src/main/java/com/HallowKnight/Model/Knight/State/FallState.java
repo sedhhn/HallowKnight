@@ -33,6 +33,9 @@ public class FallState extends State {
                     ,true);
             }
             knight.setFacingRight(true);
+            if (knight.isTouchingWall()){
+                knight.setState(new WallSlideState(knight));
+            }
             movingRightOrLeft=true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
@@ -41,6 +44,9 @@ public class FallState extends State {
                     ,true);
             }
             knight.setFacingRight(false);
+            if (knight.isTouchingWall()){
+                knight.setState(new WallSlideState(knight));
+            }
             movingRightOrLeft=true;
         }
         if (!movingRightOrLeft){
@@ -51,9 +57,6 @@ public class FallState extends State {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new DoubleJumpState(knight));
-        }
-        if (!knight.isTouchingGround() && knight.isTouchingWall()){
-            knight.setState(new WallSlideState(knight));
         }
             if (knight.isTouchingGround()) {
                 knight.setState(new IdleState(knight));

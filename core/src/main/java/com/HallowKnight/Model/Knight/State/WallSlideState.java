@@ -20,13 +20,14 @@ public class WallSlideState extends State {
     @Override
     public void update(float dt) {
         super.update(dt);
-        knight.b2Body.applyForce(new Vector2(0,2),knight.b2Body.getWorldCenter(),true);
+        knight.b2Body.applyForce(new Vector2(0,4),knight.b2Body.getWorldCenter(),true);
         handleInputs();
     }
 
     @Override
     protected void handleInputs() {
         super.handleInputs();
+        boolean stickingToWall=false;
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new JumpState(knight));
         }
@@ -34,13 +35,15 @@ public class WallSlideState extends State {
             knight.setFacingRight(true);
             knight.b2Body.applyLinearImpulse(new Vector2(0.3f,0f),knight.b2Body.getWorldCenter()
                 ,true);
+            stickingToWall=true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)&& knight.b2Body.getLinearVelocity().x>=-Knight.MAX_MOVEMENT_SPEED){
             knight.setFacingRight(false);
             knight.b2Body.applyLinearImpulse(new Vector2(-0.3f,0f),knight.b2Body.getWorldCenter()
                 ,true);
+            stickingToWall=true;
         }
-        if (!knight.isTouchingWall()){
+        if (!knight.isTouchingWall() || !stickingToWall){
             knight.setState(new IdleState(knight));
         }
     }

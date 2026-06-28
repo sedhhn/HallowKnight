@@ -54,6 +54,9 @@ public class RunState extends State {
             knight.setState(new AttackState(knight));
             isIdle=false;
         }
+        if (!knight.isTouchingGround()){
+            knight.setState(new FallState(knight));
+        }
         if (isIdle){
             knight.setState(new IdleState(knight));
         }
