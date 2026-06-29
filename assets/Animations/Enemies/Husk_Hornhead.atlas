@@ -1,0 +1,127 @@
+Husk_Hornhead.png
+size:1024,2048
+repeat:none
+Attack Anticipate
+index:4
+bounds:243,1770,239,219
+Attack Anticipate
+index:1
+bounds:2,1107,239,219
+Attack Anticipate
+index:3
+bounds:725,1328,239,219
+Attack Anticipate
+index:0
+bounds:725,1107,239,219
+Attack Anticipate
+index:2
+bounds:725,665,239,219
+Attack Cooldown
+bounds:484,223,239,219
+Attack Lunge
+index:11
+bounds:2,1549,239,219
+Attack Lunge
+index:3
+bounds:2,1549,239,219
+Attack Lunge
+index:7
+bounds:2,1549,239,219
+Attack Lunge
+index:8
+bounds:243,1328,239,219
+Attack Lunge
+index:0
+bounds:243,1328,239,219
+Attack Lunge
+index:4
+bounds:243,1328,239,219
+Attack Lunge
+index:5
+bounds:484,1328,239,219
+Attack Lunge
+index:9
+bounds:484,1328,239,219
+Attack Lunge
+index:1
+bounds:484,1328,239,219
+Attack Lunge
+index:10
+bounds:243,886,239,219
+Attack Lunge
+index:2
+bounds:243,886,239,219
+Attack Lunge
+index:6
+bounds:243,886,239,219
+Death Air
+bounds:725,886,239,219
+Death Land
+index:5
+bounds:2,1770,239,219
+Death Land
+index:2
+bounds:484,1770,239,219
+Death Land
+index:7
+bounds:484,1549,239,219
+Death Land
+index:4
+bounds:484,1107,239,219
+Death Land
+index:1
+bounds:243,665,239,219
+Death Land
+index:6
+bounds:2,223,239,219
+Death Land
+index:3
+bounds:243,223,239,219
+Death Land
+index:0
+bounds:725,444,239,219
+Idle
+index:3
+bounds:243,1549,239,219
+Idle
+index:0
+bounds:2,886,239,219
+Idle
+index:5
+bounds:2,665,239,219
+Idle
+index:2
+bounds:484,886,239,219
+Idle
+index:4
+bounds:484,444,239,219
+Idle
+index:1
+bounds:484,2,239,219
+Turn
+index:1
+bounds:725,1770,239,219
+Turn
+index:0
+bounds:243,444,239,219
+Walk
+index:4
+bounds:2,1328,239,219
+Walk
+index:1
+bounds:243,1107,239,219
+Walk
+index:6
+bounds:725,1549,239,219
+Walk
+index:3
+bounds:2,444,239,219
+Walk
+index:0
+bounds:484,665,239,219
+Walk
+index:5
+bounds:2,2,239,219
+Walk
+index:2
+bounds:243,2,239,219

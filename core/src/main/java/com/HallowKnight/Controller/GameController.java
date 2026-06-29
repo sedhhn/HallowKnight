@@ -1,6 +1,7 @@
 package com.HallowKnight.Controller;
 
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.Enemies.GroundEnemy;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Knight.KnightState;
@@ -20,7 +21,7 @@ public class GameController {
     HUD hud;
     List<Vector2> enemySpawnPositions;
     List<Vector2> enemyStartAndEndPositions;
-    List<GroundEnemy> enemies;
+    List<Enemy> enemies;
 
     public GameController(World world, Knight knight,HUD hud){
         this.world=world;
@@ -40,7 +41,7 @@ public class GameController {
         hud.update(dt);
         hud.updateHealth(knight.getHp(), Knight.MAX_HP);
 
-        for (GroundEnemy e: enemies){
+        for (Enemy e: enemies){
             e.update(dt);
         }
     }
@@ -48,24 +49,19 @@ public class GameController {
     private void handleInput(){
     }
 
-    public void defineEnemies(){
-        GroundEnemy enemy=new GroundEnemy(world,enemySpawnPositions.get(0),enemyStartAndEndPositions.get(0).x,enemyStartAndEndPositions.get(1).x);
-        enemies.add(enemy);
-    }
-
     public void renderEnemies(){
         HallowKnight.hallowKnight.getBatch().begin();
-        for (GroundEnemy e: enemies) {
+        for (Enemy e: enemies) {
             e.draw(HallowKnight.hallowKnight.getBatch());
         }
         HallowKnight.hallowKnight.getBatch().end();
     }
 
     public void processPendingActions() {
-        List<GroundEnemy> toRemove = new ArrayList<>();
-        for (GroundEnemy e : enemies) {
+        List<Enemy> toRemove = new ArrayList<>();
+        for (Enemy e : enemies) {
             if (e.isDead()) {
-                world.destroyBody(e.getBody());
+                world.destroyBody(e.getB2Body());
                 toRemove.add(e);
             }
         }
@@ -78,5 +74,9 @@ public class GameController {
 
     public List<Vector2> getEnemyStartAndEndPositions(){
         return enemyStartAndEndPositions;
+    }
+
+    public List<Enemy> getEnemies(){
+        return enemies;
     }
 }

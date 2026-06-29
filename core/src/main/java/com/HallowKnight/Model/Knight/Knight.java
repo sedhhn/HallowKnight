@@ -32,7 +32,7 @@ public class Knight extends Sprite {
     private boolean invincible;
     private float invincibleTimer;
 
-    public Knight(World world){
+    public Knight(World world, Vector2 spawnPos){
         super(GameAssetManager.knightIdleAtlas.findRegion("Idle"));
         facingRight=true;
         controller=new KnightController(this);
@@ -42,15 +42,15 @@ public class Knight extends Sprite {
         hp = MAX_HP;
         invincible = false;
         invincibleTimer = 0;
-        defineKnight();
+        defineKnight(spawnPos);
         setBounds(0, 0
             ,349/HallowKnight.PPM
             ,186/HallowKnight.PPM);
     }
 
-    public void defineKnight(){
+    public void defineKnight(Vector2 spawnPos){
         BodyDef bodyDef=new BodyDef();
-        bodyDef.position.set(100/ HallowKnight.PPM,700/HallowKnight.PPM);
+        bodyDef.position.set(spawnPos.x/ HallowKnight.PPM,spawnPos.y/HallowKnight.PPM);
         bodyDef.type= BodyDef.BodyType.DynamicBody;
         b2Body=world.createBody(bodyDef);
 

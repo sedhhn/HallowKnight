@@ -8,18 +8,18 @@
     ],
     "fileStates": {
         "map1.tmx": {
-            "scale": 0.75,
-            "selectedLayer": 3,
+            "scale": 0.25,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": -412,
-                "y": 389.3333333333333
+                "x": 1750,
+                "y": 492
             }
         },
         "map1.tmx#atlas_floor_wall_0": {
             "scaleInDock": 0.75
         },
         "map1.tmx#atlas_spikes_01": {
-            "scaleInDock": 1
+            "scaleInDock": 1.5
         },
         "map1.tmx#bench_1": {
             "scaleInDock": 1

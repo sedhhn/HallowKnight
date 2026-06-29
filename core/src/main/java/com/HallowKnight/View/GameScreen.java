@@ -42,12 +42,6 @@ public class GameScreen extends MenuScreen{
         camera=new OrthographicCamera(viewport.getScreenWidth(),viewport.getScreenHeight());
         gameViewport=new FitViewport(1280/HallowKnight.PPM
             ,960/HallowKnight.PPM,camera);
-        knight= new Knight(world);
-        world.setContactListener(new ContactController(knight));
-        hud=new HUD();
-        mainStack.add(hud);
-        controller=new GameController(world,knight,hud);
-        //stage.setViewport(gameViewport);
 
         camera.update();
         gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -60,8 +54,12 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.InitializeGrounds();
         mapObjectInitializer.InitializeFloatingPlatforms();
         mapObjectInitializer.InitializeDeadlyBoxes();
-        mapObjectInitializer.initializeEnemySpawnPoints(controller);
-        controller.defineEnemies();
+        knight=mapObjectInitializer.initializeKnight();
+        world.setContactListener(new ContactController(knight));
+        hud=new HUD();
+        mainStack.add(hud);
+        controller=new GameController(world,knight,hud);
+        mapObjectInitializer.initializeHuskHornheads(controller);
     }
 
     @Override
