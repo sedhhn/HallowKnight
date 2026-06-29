@@ -30,4 +30,8 @@ public abstract class SlashState {
         nail.setRegion(stateAnimation.getKeyFrame(stateTime));
         stateTime+=dt;
     }
+
+    public void onContactWithDeadly(){
+
+    }
 }

@@ -94,7 +94,8 @@ public class MainMenuScreen extends MenuScreen {
     @Override
     public void show() {
         super.show();
-        AudioManager.getInstance().playMusic("audio/Musics/53-Silksong.mp3",true,0.7f);
+        AudioManager.getInstance().playMusic("audio/Musics/53-Silksong.mp3",true
+            ,HallowKnight.hallowKnight.getsettings().getMusicVolume());
     }
 
     @Override

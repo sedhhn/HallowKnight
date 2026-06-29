@@ -9,10 +9,10 @@
     "fileStates": {
         "map1.tmx": {
             "scale": 0.75,
-            "selectedLayer": 8,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1040,
-                "y": 392
+                "x": -412,
+                "y": 389.3333333333333
             }
         },
         "map1.tmx#atlas_floor_wall_0": {

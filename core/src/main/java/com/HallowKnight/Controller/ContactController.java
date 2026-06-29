@@ -3,6 +3,8 @@ package com.HallowKnight.Controller;
 import com.HallowKnight.Model.Enemies.GroundEnemy;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
+import com.HallowKnight.Model.Knight.Nail.Nail;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -25,14 +27,6 @@ public class ContactController implements ContactListener {
             || userDataA == FixtureType.KNIGHT && userDataB == FixtureType.ENEMY
             || userDataA == FixtureType.ENEMY && userDataB == FixtureType.KNIGHT) {
             knight.takeDamage(1);
-        }
-
-        if (userDataA == FixtureType.NAIL && userDataB == FixtureType.ENEMY) {
-            GroundEnemy enemy = (GroundEnemy) contact.getFixtureB().getBody().getUserData();
-            if (enemy != null) enemy.takeDamage();
-        } else if (userDataA == FixtureType.ENEMY && userDataB == FixtureType.NAIL) {
-            GroundEnemy enemy = (GroundEnemy) contact.getFixtureA().getBody().getUserData();
-            if (enemy != null) enemy.takeDamage();
         }
 
         if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
@@ -71,6 +65,27 @@ public class ContactController implements ContactListener {
             knight.getSurroundSensors().rightSensor++;
         } else if(userDataA==FixtureType.PLATFORM && userDataB==FixtureType.KNIGHT_RIGHT){
             knight.getSurroundSensors().rightSensor++;
+        }
+
+        //Pogo jump
+        if (userDataA==FixtureType.NAIL && userDataB==FixtureType.DEADLY){
+            Nail nail= (Nail) contact.getFixtureA().getBody().getUserData();
+            if (nail!=null) nail.getState().onContactWithDeadly();
+        } else if(userDataA==FixtureType.DEADLY && userDataB==FixtureType.NAIL){
+            Nail nail= (Nail) contact.getFixtureB().getBody().getUserData();
+            if (nail!=null) nail.getState().onContactWithDeadly();
+        }
+
+        if (userDataA == FixtureType.NAIL && userDataB == FixtureType.ENEMY) {
+            GroundEnemy enemy = (GroundEnemy) contact.getFixtureB().getBody().getUserData();
+            if (enemy != null) enemy.takeDamage();
+            Nail nail= (Nail) contact.getFixtureA().getBody().getUserData();
+            if (nail!=null) nail.getState().onContactWithDeadly();
+        } else if (userDataA == FixtureType.ENEMY && userDataB == FixtureType.NAIL) {
+            GroundEnemy enemy = (GroundEnemy) contact.getFixtureA().getBody().getUserData();
+            if (enemy != null) enemy.takeDamage();
+            Nail nail= (Nail) contact.getFixtureB().getBody().getUserData();
+            if (nail!=null) nail.getState().onContactWithDeadly();
         }
     }
 

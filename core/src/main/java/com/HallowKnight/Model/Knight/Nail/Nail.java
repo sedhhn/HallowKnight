@@ -21,6 +21,7 @@ public class Nail extends Sprite {
         super(GameAssetManager.knightSlashEffect.findRegion("SlashEffect"));
         this.world=world;
         this.knight=knight;
+
         defineNail(state);
         switch (state){
             case NORMAL -> this.state=new NormalSlash(this);
@@ -41,7 +42,7 @@ public class Nail extends Sprite {
             , knight.b2Body.getPosition().y-50f/HallowKnight.PPM);
             }
         }
-        bodyDef.type= BodyDef.BodyType.KinematicBody;
+        bodyDef.type= BodyDef.BodyType.DynamicBody;
         b2Body=world.createBody(bodyDef);
 
         FixtureDef fixtureDef=new FixtureDef();
@@ -55,6 +56,7 @@ public class Nail extends Sprite {
 
         Fixture fixture = b2Body.createFixture(fixtureDef);
         fixture.setUserData(FixtureType.NAIL);
+        b2Body.setUserData(this);
     }
 
     public void update(float dt){
@@ -75,5 +77,9 @@ public class Nail extends Sprite {
 
     public Body getB2Body(){
         return b2Body;
+    }
+
+    public SlashState getState(){
+        return state;
     }
 }

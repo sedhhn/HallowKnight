@@ -75,7 +75,7 @@ public class MapObjectInitializer {
             shape.setAsBox((rect.getWidth()/2)/HallowKnight.PPM
                 , (rect.getHeight()/2)/HallowKnight.PPM);
             b2FixtureDefine.shape=shape;
-            b2FixtureDefine.isSensor=true;
+            //b2FixtureDefine.isSensor=true;
 
             b2Body.createFixture(b2FixtureDefine).setUserData(FixtureType.DEADLY);
         }
