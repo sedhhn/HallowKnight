@@ -25,6 +25,7 @@ public class IdleState extends State{
     @Override
     public void update(float dt) {
         super.update(dt);
+        knight.b2Body.setLinearVelocity(0,knight.b2Body.getLinearVelocity().y);
         handleInputs();
     }
 
@@ -39,6 +40,9 @@ public class IdleState extends State{
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
             knight.setState(new AttackState(knight));
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldown()<=0){
+            knight.setState(new DashState(knight));
         }
         if (!knight.isTouchingGround()){
             knight.setState(new FallState(knight));

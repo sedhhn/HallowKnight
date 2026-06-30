@@ -61,6 +61,9 @@ public class DoubleJumpState extends State{
                 knight.setState(new AttackState(knight));
             }
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldown()<=0){
+            knight.setState(new DashState(knight));
+        }
         if (!knight.isTouchingGround() && knight.isTouchingWall()){
             knight.setState(new WallSlideState(knight));
         }

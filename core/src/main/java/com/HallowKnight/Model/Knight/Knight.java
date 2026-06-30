@@ -17,6 +17,9 @@ public class Knight extends Sprite {
     public static final int MAX_HP = 5;
     private static final float INVINCIBILITY_TIME = 1.5f;
     public static final float ATTACK_DURATION=0.3f;
+    public static final float DASH_TIME=0.35f;
+    public static final float DASH_SPEED=7f;
+    public static final float DASH_COOLDOWN=1.5f;
 
     public World world;
     public Body b2Body;
@@ -31,6 +34,7 @@ public class Knight extends Sprite {
     private int hp;
     private boolean invincible;
     private float invincibleTimer;
+    private float dashCooldown;
 
     public Knight(World world, Vector2 spawnPos){
         super(GameAssetManager.knightIdleAtlas.findRegion("Idle"));
@@ -46,6 +50,8 @@ public class Knight extends Sprite {
         setBounds(0, 0
             ,349/HallowKnight.PPM
             ,186/HallowKnight.PPM);
+
+        dashCooldown=0;
     }
 
     public void defineKnight(Vector2 spawnPos){
@@ -78,6 +84,10 @@ public class Knight extends Sprite {
             if (invincibleTimer <= 0) {
                 invincible = false;
             }
+        }
+
+        if (dashCooldown>0){
+            dashCooldown-=deltaTime;
         }
     }
 
@@ -122,6 +132,14 @@ public class Knight extends Sprite {
 
     public SurroundSensors getSurroundSensors(){
         return surroundSensors;
+    }
+
+    public void resetDashCooldown(){
+        dashCooldown=DASH_COOLDOWN;
+    }
+
+    public float getDashCooldown(){
+        return dashCooldown;
     }
 
 }

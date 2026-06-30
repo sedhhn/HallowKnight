@@ -69,6 +69,9 @@ public class JumpState extends State{
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new DoubleJumpState(knight));
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldown()<=0){
+            knight.setState(new DashState(knight));
+        }
         if(stateTime>=0.1f) {
             if (knight.isTouchingGround()) {
                 knight.setState(new IdleState(knight));
