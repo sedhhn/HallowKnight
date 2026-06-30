@@ -27,6 +27,10 @@ public class GameAssetManager {
     //========= enemies ==========
     public static TextureAtlas crawlidAtlas;
     public static TextureAtlas huskHornheadAtlas;
+    public static TextureAtlas crystallizedAtlas;
+
+    //========= effects ==========
+    public static TextureAtlas crystalLaserAtlas;
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
@@ -42,6 +46,8 @@ public class GameAssetManager {
         knightHp=new TextureAtlas("Animations/HUD/KnightHp.atlas");
         crawlidAtlas=new TextureAtlas("Animations/Enemies/Crawlid.atlas");
         huskHornheadAtlas=new TextureAtlas("Animations/Enemies/Husk_Hornhead.atlas");
+        crystallizedAtlas=new TextureAtlas("Animations/Enemies/Crystallized.atlas");
+        crystalLaserAtlas=new TextureAtlas("Animations/Effects/CrystalLaser.atlas");
     }
 
     public static void dispose() {

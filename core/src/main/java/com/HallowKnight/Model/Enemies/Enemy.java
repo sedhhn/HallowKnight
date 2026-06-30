@@ -67,4 +67,8 @@ public abstract class Enemy extends Sprite {
     public void setMovementSpeed(float movementSpeed){
         this.movementSpeed=movementSpeed;
     }
+
+    public World getWorld(){
+        return world;
+    }
 }

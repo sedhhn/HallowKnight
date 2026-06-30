@@ -8,11 +8,11 @@
     ],
     "fileStates": {
         "map1.tmx": {
-            "scale": 0.25,
-            "selectedLayer": 2,
+            "scale": 0.125,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 1750,
-                "y": 492
+                "x": 1836,
+                "y": 960
             }
         },
         "map1.tmx#atlas_floor_wall_0": {
@@ -24,10 +24,28 @@
         "map1.tmx#bench_1": {
             "scaleInDock": 1
         },
+        "map1.tmx#cd_spikes_BG": {
+            "scaleInDock": 1
+        },
         "map1.tmx#floor_01": {
             "scaleInDock": 1
         },
+        "map1.tmx#fungd_wall_side_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#lamp_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#plat_lifts_0000_a": {
+            "scaleInDock": 1
+        },
         "map1.tmx#platform_float_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#pole_03": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#spike_back": {
             "scaleInDock": 1
         }
     },

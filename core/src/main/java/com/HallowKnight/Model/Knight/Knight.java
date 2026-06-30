@@ -64,6 +64,7 @@ public class Knight extends Sprite {
         fixtureDef.shape=shape;
         Fixture fixture = b2Body.createFixture(fixtureDef);
         fixture.setUserData(FixtureType.KNIGHT);
+        b2Body.setUserData(this);
 
         surroundSensors.createSensors(this.b2Body,hx,hy);
     }

@@ -3,6 +3,7 @@ package com.HallowKnight.Model.Map;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Enemies.Crystallized.Crystallized;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
@@ -101,6 +102,16 @@ public class MapObjectInitializer {
                 , world
                 , new Vector2(point.getPoint().x, point.getPoint().y));
             gameController.getEnemies().add(huskHornhead);
+        }
+    }
+
+    public void initializeCrystallizeds(GameController gameController){
+        for (PointMapObject point : map.getLayers().get("Crystallizeds").getObjects().getByType(PointMapObject.class)) {
+            Crystallized crystallized = new Crystallized(
+                GameAssetManager.crystallizedAtlas.findRegion("Idle")
+                , world
+                , new Vector2(point.getPoint().x, point.getPoint().y));
+            gameController.getEnemies().add(crystallized);
         }
     }
 
