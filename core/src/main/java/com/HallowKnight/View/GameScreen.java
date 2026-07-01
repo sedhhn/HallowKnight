@@ -61,6 +61,7 @@ public class GameScreen extends MenuScreen{
         controller=new GameController(world,knight,hud);
         mapObjectInitializer.initializeHuskHornheads(controller);
         mapObjectInitializer.initializeCrystallizeds(controller);
+        mapObjectInitializer.initializeMosquitoes(controller);
     }
 
     @Override

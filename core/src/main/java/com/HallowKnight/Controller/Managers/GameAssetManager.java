@@ -28,6 +28,7 @@ public class GameAssetManager {
     public static TextureAtlas crawlidAtlas;
     public static TextureAtlas huskHornheadAtlas;
     public static TextureAtlas crystallizedAtlas;
+    public static TextureAtlas mosquitoAtlas;
 
     //========= effects ==========
     public static TextureAtlas crystalLaserAtlas;
@@ -48,6 +49,7 @@ public class GameAssetManager {
         huskHornheadAtlas=new TextureAtlas("Animations/Enemies/Husk_Hornhead.atlas");
         crystallizedAtlas=new TextureAtlas("Animations/Enemies/Crystallized.atlas");
         crystalLaserAtlas=new TextureAtlas("Animations/Effects/CrystalLaser.atlas");
+        mosquitoAtlas=new TextureAtlas("Animations/Enemies/Mosquito.atlas");
     }
 
     public static void dispose() {

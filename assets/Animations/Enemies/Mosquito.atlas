@@ -1,0 +1,81 @@
+Mosquito.png
+size:2048,512
+repeat:none
+Attack
+index:0
+bounds:2,2,220,155
+Attack
+index:2
+bounds:446,2,220,155
+Attack
+index:1
+bounds:1556,316,220,155
+Attack Anticipate
+index:4
+bounds:2,159,220,155
+Attack Anticipate
+index:1
+bounds:446,316,220,155
+Attack Anticipate
+index:3
+bounds:890,316,220,155
+Attack Anticipate
+index:0
+bounds:890,2,220,155
+Attack Anticipate
+index:5
+bounds:1334,159,220,155
+Attack Anticipate
+index:2
+bounds:1556,159,220,155
+Death Air
+index:2
+bounds:224,2,220,155
+Death Air
+index:1
+bounds:1112,159,220,155
+Death Air
+index:0
+bounds:1778,159,220,155
+Death Land
+index:1
+bounds:890,159,220,155
+Death Land
+index:0
+bounds:1556,2,220,155
+Idle
+index:6
+bounds:2,316,220,155
+Idle
+index:3
+bounds:224,159,220,155
+Idle
+index:0
+bounds:668,316,220,155
+Idle
+index:5
+bounds:668,159,220,155
+Idle
+index:2
+bounds:1112,316,220,155
+Idle
+index:7
+bounds:1334,316,220,155
+Idle
+index:4
+bounds:1334,2,220,155
+Idle
+index:1
+bounds:1778,316,220,155
+Turn
+index:1
+bounds:446,159,220,155
+Turn
+index:0
+bounds:1112,2,220,155
+Turn2
+index:1
+bounds:224,316,220,155
+Turn2
+index:0
+bounds:668,2,220,155

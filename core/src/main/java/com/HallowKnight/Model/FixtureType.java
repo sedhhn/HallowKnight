@@ -9,6 +9,7 @@ public enum FixtureType {
     GROUND,
     PLATFORM,
     ENEMY,
+    ENEMY_TOP,
     ENEMY_RIGHT,
     ENEMY_LEFT,
     ENEMY_BOTTOM,
@@ -16,6 +17,7 @@ public enum FixtureType {
     ENEMY_BOTTOM_RIGHT,
     ENEMY_RIGHT_RADAR,
     ENEMY_LEFT_RADAR,
+    ENEMY_CIRCULAR_RADAR,
     LASER,
     NAIL
 }

@@ -5,6 +5,7 @@ import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Enemies.Crystallized.Crystallized;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
+import com.HallowKnight.Model.Enemies.Mosquito.Mosquito;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.View.GameScreen;
@@ -112,6 +113,16 @@ public class MapObjectInitializer {
                 , world
                 , new Vector2(point.getPoint().x, point.getPoint().y));
             gameController.getEnemies().add(crystallized);
+        }
+    }
+
+    public void initializeMosquitoes(GameController gameController){
+        for (PointMapObject point : map.getLayers().get("Mosquitos").getObjects().getByType(PointMapObject.class)) {
+            Mosquito mosquito = new Mosquito(
+                GameAssetManager.mosquitoAtlas.findRegion("Idle")
+                , world
+                , new Vector2(point.getPoint().x, point.getPoint().y));
+            gameController.getEnemies().add(mosquito);
         }
     }
 
