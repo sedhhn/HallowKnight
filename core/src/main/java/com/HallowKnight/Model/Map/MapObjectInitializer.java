@@ -9,6 +9,7 @@ import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.Enemies.Mosquito.Mosquito;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
+import com.HallowKnight.Model.NPCs.Zote.Zote;
 import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PointMapObject;
@@ -107,7 +108,7 @@ public class MapObjectInitializer {
         }
     }
 
-    public void initializeCrystallizeds(GameController gameController){
+    public void initializeCrystallizeds(GameController gameController) {
         for (PointMapObject point : map.getLayers().get("Crystallizeds").getObjects().getByType(PointMapObject.class)) {
             Crystallized crystallized = new Crystallized(
                 GameAssetManager.crystallizedAtlas.findRegion("Idle")
@@ -117,7 +118,7 @@ public class MapObjectInitializer {
         }
     }
 
-    public void initializeMosquitoes(GameController gameController){
+    public void initializeMosquitoes(GameController gameController) {
         for (PointMapObject point : map.getLayers().get("Mosquitos").getObjects().getByType(PointMapObject.class)) {
             Mosquito mosquito = new Mosquito(
                 GameAssetManager.mosquitoAtlas.findRegion("Idle")
@@ -127,7 +128,7 @@ public class MapObjectInitializer {
         }
     }
 
-    public void initializeCrystalCrawlers(GameController gameController){
+    public void initializeCrystalCrawlers(GameController gameController) {
         for (PointMapObject point : map.getLayers().get("Crystal_Crawlers").getObjects().getByType(PointMapObject.class)) {
             GroundEnemy groundEnemy = new GroundEnemy(
                 GameAssetManager.crystalCrawlerAtlas.findRegion("Walk")
@@ -140,5 +141,14 @@ public class MapObjectInitializer {
     public Knight initializeKnight() {
         PointMapObject point = (PointMapObject) map.getLayers().get("Knight").getObjects().get("Knight_Spawn_Point");
         return new Knight(world, new Vector2(point.getPoint().x, point.getPoint().y));
+    }
+
+    public void initializeZote(GameController controller) {
+        PointMapObject point = (PointMapObject) map.getLayers().get("NPCs").getObjects().get("Zote");
+        controller.getNPCs().add(new Zote(
+            GameAssetManager.zoteAtlas.findRegion("Idle")
+            , world
+            , new Vector2(point.getPoint().x, point.getPoint().y)
+        ));
     }
 }

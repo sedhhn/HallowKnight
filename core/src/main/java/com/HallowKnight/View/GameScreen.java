@@ -63,6 +63,7 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.initializeCrystallizeds(controller);
         mapObjectInitializer.initializeMosquitoes(controller);
         mapObjectInitializer.initializeCrystalCrawlers(controller);
+        mapObjectInitializer.initializeZote(controller);
     }
 
     @Override
@@ -89,6 +90,9 @@ public class GameScreen extends MenuScreen{
         mapRenderer.setView(camera);
         mapRenderer.render();
 
+        //rendering enemies
+        controller.renderEnemies();
+
         //rendering player
         game.getBatch().setProjectionMatrix(camera.combined);
         knight.update(delta);
@@ -96,8 +100,6 @@ public class GameScreen extends MenuScreen{
         knight.draw(game.getBatch());
         game.getBatch().end();
 
-        //rendering enemies
-        controller.renderEnemies();
 
         // Render Box2D debug
         b2DebugRenderer.render(world, camera.combined);

@@ -31,6 +31,9 @@ public class GameAssetManager {
     public static TextureAtlas mosquitoAtlas;
     public static TextureAtlas crystalCrawlerAtlas;
 
+    //========= NPCs ============
+    public static TextureAtlas zoteAtlas;
+
     //========= effects ==========
     public static TextureAtlas crystalLaserAtlas;
 
@@ -52,6 +55,7 @@ public class GameAssetManager {
         crystalLaserAtlas=new TextureAtlas("Animations/Effects/CrystalLaser.atlas");
         mosquitoAtlas=new TextureAtlas("Animations/Enemies/Mosquito.atlas");
         crystalCrawlerAtlas=new TextureAtlas("Animations/Enemies/Crystal_Crawler.atlas");
+        zoteAtlas=new TextureAtlas("Animations/NPCs/Zote.atlas");
     }
 
     public static void dispose() {

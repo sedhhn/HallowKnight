@@ -17,6 +17,11 @@ public abstract class MenuScreen extends ScreenAdapter {
     protected Skin skin;
     protected Table rootTable;
     protected Stack mainStack;
+    private static MenuScreen instance;
+
+    public static MenuScreen getInstance(){
+        return instance;
+    }
 
     public MenuScreen(HallowKnight game){
         this.game=game;
@@ -45,5 +50,9 @@ public abstract class MenuScreen extends ScreenAdapter {
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height,true);
+    }
+
+    public Stack getMainStack(){
+        return mainStack;
     }
 }

@@ -19,5 +19,7 @@ public enum FixtureType {
     ENEMY_LEFT_RADAR,
     ENEMY_CIRCULAR_RADAR,
     LASER,
-    NAIL
+    NAIL,
+    NPC,
+    NPC_RADAR;
 }
