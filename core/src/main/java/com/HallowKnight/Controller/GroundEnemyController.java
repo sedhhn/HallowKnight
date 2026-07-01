@@ -1,7 +1,7 @@
 package com.HallowKnight.Controller;
 
 import com.HallowKnight.Controller.Managers.GameAssetManager;
-import com.HallowKnight.Model.Enemies.GroundEnemy;
+import com.HallowKnight.Model.Enemies.GroundEnemy.GroundEnemy;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;

@@ -62,6 +62,7 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.initializeHuskHornheads(controller);
         mapObjectInitializer.initializeCrystallizeds(controller);
         mapObjectInitializer.initializeMosquitoes(controller);
+        mapObjectInitializer.initializeCrystalCrawlers(controller);
     }
 
     @Override

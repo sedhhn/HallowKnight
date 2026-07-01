@@ -2,12 +2,8 @@ package com.HallowKnight.Controller;
 
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Enemies.Enemy;
-import com.HallowKnight.Model.Enemies.GroundEnemy;
 import com.HallowKnight.Model.Knight.Knight;
-import com.HallowKnight.Model.Knight.KnightState;
 import com.HallowKnight.View.Modals.HUD;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 

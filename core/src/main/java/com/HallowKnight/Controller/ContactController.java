@@ -1,11 +1,9 @@
 package com.HallowKnight.Controller;
 
 import com.HallowKnight.Model.Enemies.Enemy;
-import com.HallowKnight.Model.Enemies.GroundEnemy;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Knight.Nail.Nail;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
