@@ -33,8 +33,13 @@ public class NPC extends Sprite {
     }
 
     public void setState(State state){
+        this.state.exit();
         this.state=state;
         state.enter();
+    }
+
+    public State getState() {
+        return state;
     }
 
     public Body getB2Body(){

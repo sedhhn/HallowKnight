@@ -143,12 +143,13 @@ public class MapObjectInitializer {
         return new Knight(world, new Vector2(point.getPoint().x, point.getPoint().y));
     }
 
-    public void initializeZote(GameController controller) {
+    public void initializeZote(GameController controller,GameScreen gameScreen) {
         PointMapObject point = (PointMapObject) map.getLayers().get("NPCs").getObjects().get("Zote");
         controller.getNPCs().add(new Zote(
             GameAssetManager.zoteAtlas.findRegion("Idle")
             , world
             , new Vector2(point.getPoint().x, point.getPoint().y)
+            ,gameScreen
         ));
     }
 }

@@ -17,11 +17,6 @@ public abstract class MenuScreen extends ScreenAdapter {
     protected Skin skin;
     protected Table rootTable;
     protected Stack mainStack;
-    private static MenuScreen instance;
-
-    public static MenuScreen getInstance(){
-        return instance;
-    }
 
     public MenuScreen(HallowKnight game){
         this.game=game;

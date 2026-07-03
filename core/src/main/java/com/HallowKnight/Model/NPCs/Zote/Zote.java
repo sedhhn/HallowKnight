@@ -3,8 +3,10 @@ package com.HallowKnight.Model.NPCs.Zote;
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.NPC;
 import com.HallowKnight.Model.NPCs.Zote.State.Idle;
+import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -13,10 +15,14 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
 public class Zote extends NPC {
+    GameScreen gameScreen;
     SurroundSensors surroundSensors;
     ContactManager contactManager;
-    public Zote(TextureAtlas.AtlasRegion atlasRegion, World world, Vector2 position) {
+    Knight knight;
+    public Zote(TextureAtlas.AtlasRegion atlasRegion, World world, Vector2 position, GameScreen gameScreen) {
         super(atlasRegion, world, position);
+        this.gameScreen=gameScreen;
+        knight=gameScreen.getController().getKnight();
         defineNPC(position);
         this.contactManager=new ContactManager(this);
         ContactController.getInstance().contactListeners.add(contactManager);
@@ -51,5 +57,13 @@ public class Zote extends NPC {
 
     public SurroundSensors getSurroundSensors(){
         return surroundSensors;
+    }
+
+    public GameScreen getGameScreen(){
+        return gameScreen;
+    }
+
+    public Knight getKnight(){
+        return knight;
     }
 }

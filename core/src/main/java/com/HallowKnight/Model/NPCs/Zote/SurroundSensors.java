@@ -22,12 +22,12 @@ public class SurroundSensors {
         fdef.isSensor = true;
         fdef.shape = shape;
 
-        float radarWidth= 50f/HallowKnight.PPM;
-        float radarHeight=50f/HallowKnight.PPM;
+        float radarWidth= 70f/HallowKnight.PPM;
+        float radarHeight=70f/HallowKnight.PPM;
 
 
         shape.setAsBox(radarWidth, radarHeight, new Vector2(0, 0), 0);
-        body.createFixture(fdef).setUserData(FixtureType.ENEMY_BOTTOM);
+        body.createFixture(fdef).setUserData(FixtureType.NPC_RADAR);
 
         shape.dispose();
 

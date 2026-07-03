@@ -1,11 +1,13 @@
 package com.HallowKnight.Controller.Managers;
 
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.View.MenuScreen;
 import com.badlogic.gdx.Screen;
 
 public class ScreenManager {
     private static ScreenManager instance;
     private HallowKnight game;
+    private MenuScreen currentScreen;
 
     public static ScreenManager getInstance(){
         if (instance==null){
@@ -18,8 +20,13 @@ public class ScreenManager {
         this.game=game;
     }
 
-    public void setScreen(Screen screen){
+    public void setScreen(MenuScreen screen){
         game.setScreen(screen);
+        currentScreen=screen;
+    }
+
+    public MenuScreen getCurrentScreen(){
+        return currentScreen;
     }
 
 }

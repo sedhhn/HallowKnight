@@ -5,6 +5,9 @@ import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Map.MapObjectInitializer;
+import com.HallowKnight.Model.NPCs.NPC;
+import com.HallowKnight.Model.NPCs.Zote.Zote;
+import com.HallowKnight.Model.NPCs.Zote.State.Idle;
 import com.HallowKnight.View.Modals.HUD;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -63,7 +66,7 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.initializeCrystallizeds(controller);
         mapObjectInitializer.initializeMosquitoes(controller);
         mapObjectInitializer.initializeCrystalCrawlers(controller);
-        mapObjectInitializer.initializeZote(controller);
+        mapObjectInitializer.initializeZote(controller,this);
     }
 
     @Override
@@ -107,5 +110,9 @@ public class GameScreen extends MenuScreen{
         world.step(1/60f,6,2);
         controller.processPendingActions();
         super.render(delta);
+    }
+
+    public GameController getController(){
+        return controller;
     }
 }

@@ -76,4 +76,8 @@ public class GameController {
     public List<NPC> getNPCs(){
         return NPCs;
     }
+
+    public Knight getKnight(){
+        return knight;
+    }
 }

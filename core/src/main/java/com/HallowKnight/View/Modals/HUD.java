@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -40,10 +41,9 @@ public class HUD extends Stack {
         hpContainer.top().left().padTop(40).padLeft(120);
         add(hpContainer);
 
-
         frames= GameAssetManager.soulContainer.findRegions("HealthBar");
         frames.sort(Comparator.comparingInt(a->a.index));
-        soulContainerAnimation=new Animation<>(0.1f,frames);
+        soulContainerAnimation=new Animation<>(0.2f,frames);
 
         soulContainer=new Image(soulContainerAnimation.getKeyFrame(0));
         soulContainerTable.add(soulContainer).top().left();
