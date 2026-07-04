@@ -109,7 +109,6 @@ public class Knight extends Sprite {
 
     public void setFacingRight(boolean facingRight){
         this.facingRight=facingRight;
-
     }
 
     public void setState(State state){

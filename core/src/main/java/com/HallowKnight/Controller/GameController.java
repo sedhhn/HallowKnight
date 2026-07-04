@@ -1,7 +1,9 @@
 package com.HallowKnight.Controller;
 
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Effect;
 import com.HallowKnight.Model.Enemies.Enemy;
+import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.NPC;
 import com.HallowKnight.View.Modals.HUD;
@@ -14,10 +16,12 @@ import java.util.List;
 public class GameController {
     World world;
     Knight knight;
+    FalseKnight falseKnight;
     KnightController knightController;
     HUD hud;
     List<Enemy> enemies;
     List<NPC> NPCs;
+    List<Effect> effects;
 
     public GameController(World world, Knight knight,HUD hud){
         this.world=world;
@@ -27,6 +31,7 @@ public class GameController {
 
         enemies=new ArrayList<>();
         NPCs=new ArrayList<>();
+        effects=new ArrayList<>();
     }
 
 
@@ -42,6 +47,10 @@ public class GameController {
         for (NPC n: NPCs){
             n.update(dt);
         }
+        for (Effect e: effects){
+            e.update(dt);
+        }
+        falseKnight.update(dt);
     }
 
     private void handleInput(){
@@ -67,6 +76,15 @@ public class GameController {
             }
         }
         enemies.removeAll(toRemove);
+
+        List<Effect> toRemoveEffects=new ArrayList<>();
+        for (Effect e: effects){
+            if (e.isOver()){
+                world.destroyBody(e.getB2Body());
+                toRemoveEffects.add(e);
+            }
+        }
+        effects.removeAll(toRemoveEffects);
     }
 
     public List<Enemy> getEnemies(){
@@ -79,5 +97,19 @@ public class GameController {
 
     public Knight getKnight(){
         return knight;
+    }
+
+    public void setFalseKnight(FalseKnight falseKnight){
+        this.falseKnight=falseKnight;
+    }
+
+    public void renderFalseKnight(){
+        HallowKnight.hallowKnight.getBatch().begin();
+        falseKnight.draw(HallowKnight.hallowKnight.getBatch());
+        HallowKnight.hallowKnight.getBatch().end();
+    }
+
+    public List<Effect> getEffects(){
+        return effects;
     }
 }

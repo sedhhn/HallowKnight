@@ -34,8 +34,12 @@ public class GameAssetManager {
     //========= NPCs ============
     public static TextureAtlas zoteAtlas;
 
+    //========= Bosses ============
+    public static TextureAtlas falseKnight;
+
     //========= effects ==========
     public static TextureAtlas crystalLaserAtlas;
+    public static TextureAtlas shockwaveAtlas;
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
@@ -56,6 +60,8 @@ public class GameAssetManager {
         mosquitoAtlas=new TextureAtlas("Animations/Enemies/Mosquito.atlas");
         crystalCrawlerAtlas=new TextureAtlas("Animations/Enemies/Crystal_Crawler.atlas");
         zoteAtlas=new TextureAtlas("Animations/NPCs/Zote.atlas");
+        falseKnight=new TextureAtlas("Animations/FalseKnight/FalseKnight.atlas");
+        shockwaveAtlas=new TextureAtlas("Animations/Effects/Shockwave.atlas");
     }
 
     public static void dispose() {

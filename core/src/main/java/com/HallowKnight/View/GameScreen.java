@@ -3,6 +3,7 @@ package com.HallowKnight.View;
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.GameCamera;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Map.MapObjectInitializer;
 import com.HallowKnight.Model.NPCs.NPC;
@@ -28,7 +29,7 @@ public class GameScreen extends MenuScreen{
 
     World world;
     Box2DDebugRenderer b2DebugRenderer;
-    OrthographicCamera camera;
+    GameCamera camera;
     Knight knight;
     private TmxMapLoader mapLoader;
     private Viewport gameViewport;
@@ -42,7 +43,7 @@ public class GameScreen extends MenuScreen{
         Box2D.init();
         world=new World(new Vector2(0,-10),true);
         b2DebugRenderer=new Box2DDebugRenderer();
-        camera=new OrthographicCamera(viewport.getScreenWidth(),viewport.getScreenHeight());
+        camera=new GameCamera(viewport.getScreenWidth(),viewport.getScreenHeight());
         gameViewport=new FitViewport(1280/HallowKnight.PPM
             ,960/HallowKnight.PPM,camera);
 
@@ -58,6 +59,7 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.InitializeFloatingPlatforms();
         mapObjectInitializer.InitializeDeadlyBoxes();
         knight=mapObjectInitializer.initializeKnight();
+        camera.setKnight(knight);
         world.setContactListener(new ContactController(knight));
         hud=new HUD();
         mainStack.add(hud);
@@ -67,6 +69,7 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.initializeMosquitoes(controller);
         mapObjectInitializer.initializeCrystalCrawlers(controller);
         mapObjectInitializer.initializeZote(controller,this);
+        mapObjectInitializer.initializeFalseKnight(controller,this);
     }
 
     @Override
@@ -85,9 +88,7 @@ public class GameScreen extends MenuScreen{
         gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Update camera
-        camera.position.x=knight.b2Body.getPosition().x;
-        camera.position.y=knight.b2Body.getPosition().y;
-        camera.update();
+        camera.update(delta);
 
         // Set the renderer's view
         mapRenderer.setView(camera);
@@ -103,6 +104,8 @@ public class GameScreen extends MenuScreen{
         knight.draw(game.getBatch());
         game.getBatch().end();
 
+        //rendering false knight
+        controller.renderFalseKnight();
 
         // Render Box2D debug
         b2DebugRenderer.render(world, camera.combined);
@@ -114,5 +117,9 @@ public class GameScreen extends MenuScreen{
 
     public GameController getController(){
         return controller;
+    }
+
+    public GameCamera getCamera(){
+        return camera;
     }
 }

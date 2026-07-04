@@ -165,6 +165,10 @@ public class ContactController implements ContactListener {
             || userDataA == FixtureType.NPC && userDataB == FixtureType.KNIGHT) {
             contact.setEnabled(false);
         }
+        if (userDataA == FixtureType.KNIGHT && userDataB == FixtureType.BOSS
+            || userDataA == FixtureType.BOSS && userDataB == FixtureType.KNIGHT) {
+            contact.setEnabled(false);
+        }
     }
 
     @Override

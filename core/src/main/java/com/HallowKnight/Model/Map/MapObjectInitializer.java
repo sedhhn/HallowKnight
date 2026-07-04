@@ -7,6 +7,7 @@ import com.HallowKnight.Model.Enemies.Crystallized.Crystallized;
 import com.HallowKnight.Model.Enemies.GroundEnemy.GroundEnemy;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.Enemies.Mosquito.Mosquito;
+import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.Zote.Zote;
@@ -150,6 +151,16 @@ public class MapObjectInitializer {
             , world
             , new Vector2(point.getPoint().x, point.getPoint().y)
             ,gameScreen
+        ));
+    }
+
+    public void initializeFalseKnight(GameController controller, GameScreen gameScreen){
+        PointMapObject point = (PointMapObject) map.getLayers().get("BossFights").getObjects().get("False_knight");
+        controller.setFalseKnight(new FalseKnight(
+            world
+            , new Vector2(point.getPoint().x, point.getPoint().y)
+            , controller.getKnight()
+            , gameScreen
         ));
     }
 }

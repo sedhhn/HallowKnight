@@ -40,15 +40,21 @@ public class AttackState extends State{
     @Override
     protected void handleInputs() {
         super.handleInputs();
+        boolean moving=false;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && knight.b2Body.getLinearVelocity().x<=Knight.MAX_MOVEMENT_SPEED){
             knight.setFacingRight(true);
             knight.b2Body.applyLinearImpulse(new Vector2(0.3f,0f),knight.b2Body.getWorldCenter()
                 ,true);
+            moving=true;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)&& knight.b2Body.getLinearVelocity().x>=-Knight.MAX_MOVEMENT_SPEED){
             knight.setFacingRight(false);
             knight.b2Body.applyLinearImpulse(new Vector2(-0.3f,0f),knight.b2Body.getWorldCenter()
                 ,true);
+            moving=true;
+        }
+        if (!moving) {
+            knight.b2Body.setLinearVelocity(0, knight.b2Body.getLinearVelocity().y);
         }
         if (!isAttacking){
             knight.setState(new IdleState(knight));

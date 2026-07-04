@@ -21,5 +21,12 @@ public enum FixtureType {
     LASER,
     NAIL,
     NPC,
-    NPC_RADAR;
+    NPC_RADAR,
+    BOSS,
+    BOSS_LEFT,
+    BOSS_RIGHT,
+    BOSS_BOTTOM,
+    BOSS_RADAR,
+    MACE,
+    SHOCKWAVE;
 }

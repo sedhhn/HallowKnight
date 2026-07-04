@@ -48,7 +48,7 @@ public class Nail extends Sprite {
         FixtureDef fixtureDef=new FixtureDef();
         PolygonShape shape=new PolygonShape();
         switch (state){
-            case NORMAL ->shape.setAsBox(70/ HallowKnight.PPM, 30/HallowKnight.PPM);
+            case NORMAL ->shape.setAsBox(80/ HallowKnight.PPM, 30/HallowKnight.PPM);
             case DOWN -> shape.setAsBox(30/HallowKnight.PPM,70/HallowKnight.PPM);
         }
         fixtureDef.shape=shape;
