@@ -1,0 +1,15 @@
+SoulBall.png
+size:2048,256
+repeat:none
+SoulBall
+index:3
+bounds:2,2,317,143
+SoulBall
+index:0
+bounds:321,2,317,143
+SoulBall
+index:2
+bounds:640,2,317,143
+SoulBall
+index:1
+bounds:959,2,317,143

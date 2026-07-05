@@ -1,6 +1,8 @@
 package com.HallowKnight.Model.Knight.State;
 
 import com.HallowKnight.Controller.Managers.GameAssetManager;
+import com.HallowKnight.Model.Effects.SoulBall;
+import com.HallowKnight.Model.Effects.SoulScream;
 import com.HallowKnight.Model.Knight.Knight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -66,6 +68,14 @@ public class DoubleJumpState extends State{
         }
         if (!knight.isTouchingGround() && knight.isTouchingWall()){
             knight.setState(new WallSlideState(knight));
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
+            if (Gdx.input.isKeyPressed(Input.Keys.UP) && knight.getSoul()> SoulScream.SOUL_COST){
+                knight.setState(new Scream(knight));
+            }
+            if ( knight.getSoul()> SoulBall.SOUL_COST) {
+                knight.setState(new FireBallCast(knight));
+            }
         }
         if(stateTime>=0.1f) {
             if (knight.isTouchingGround()) {

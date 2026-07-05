@@ -42,6 +42,7 @@ public class GameScreen extends MenuScreen{
 
         Box2D.init();
         world=new World(new Vector2(0,-10),true);
+        world.setContactListener(new ContactController(knight));
         b2DebugRenderer=new Box2DDebugRenderer();
         camera=new GameCamera(viewport.getScreenWidth(),viewport.getScreenHeight());
         gameViewport=new FitViewport(1280/HallowKnight.PPM
@@ -58,9 +59,8 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.InitializeGrounds();
         mapObjectInitializer.InitializeFloatingPlatforms();
         mapObjectInitializer.InitializeDeadlyBoxes();
-        knight=mapObjectInitializer.initializeKnight();
+        knight=mapObjectInitializer.initializeKnight(this);
         camera.setKnight(knight);
-        world.setContactListener(new ContactController(knight));
         hud=new HUD();
         mainStack.add(hud);
         controller=new GameController(world,knight,hud);
@@ -97,6 +97,7 @@ public class GameScreen extends MenuScreen{
         //rendering enemies
         controller.renderEnemies();
 
+
         //rendering player
         game.getBatch().setProjectionMatrix(camera.combined);
         knight.update(delta);
@@ -106,6 +107,9 @@ public class GameScreen extends MenuScreen{
 
         //rendering false knight
         controller.renderFalseKnight();
+
+        //rendering effects
+        controller.renderEffects();
 
         // Render Box2D debug
         b2DebugRenderer.render(world, camera.combined);

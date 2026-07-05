@@ -1,5 +1,6 @@
 package com.HallowKnight.Model.Knight;
 
+import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.KnightController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
@@ -7,6 +8,7 @@ import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Nail.Nail;
 import com.HallowKnight.Model.Knight.State.IdleState;
 import com.HallowKnight.Model.Knight.State.State;
+import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -22,6 +24,8 @@ public class Knight extends Sprite {
     public static final float DASH_COOLDOWN=1.5f;
     public static final float MAX_SOUL=100f;
     public static final float FOCUS_DURATION=2f;
+    public static final float SCREAM_DURATION=1f;
+    public static final float FIREBALL_CAST_DURATION=0.7f;
 
     public World world;
     public Body b2Body;
@@ -30,7 +34,10 @@ public class Knight extends Sprite {
 
     private State state;
 
+    private GameScreen gameScreen;
+
     SurroundSensors surroundSensors;
+    private ContactManager contactManager;
 
     private KnightController controller;
     private int hp;
@@ -39,11 +46,14 @@ public class Knight extends Sprite {
     private float dashCooldown;
     private float soul;
 
-    public Knight(World world, Vector2 spawnPos){
+    public Knight(World world, Vector2 spawnPos, GameScreen gameScreen){
         super(GameAssetManager.knightIdleAtlas.findRegion("Idle"));
+        this.gameScreen=gameScreen;
         facingRight=true;
         controller=new KnightController(this);
         state=new IdleState(this);
+        contactManager=new ContactManager(this);
+        ContactController.getInstance().contactListeners.add(contactManager);
         surroundSensors=new SurroundSensors();
         this.world=world;
         hp = MAX_HP;
@@ -167,6 +177,14 @@ public class Knight extends Sprite {
         if (hp>MAX_HP){
             hp=MAX_HP;
         }
+    }
+
+    public GameScreen getGameScreen(){
+        return gameScreen;
+    }
+
+    public World getWorld(){
+        return world;
     }
 
 }

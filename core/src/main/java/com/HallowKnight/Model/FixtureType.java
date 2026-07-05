@@ -28,5 +28,7 @@ public enum FixtureType {
     BOSS_BOTTOM,
     BOSS_RADAR,
     MACE,
-    SHOCKWAVE;
+    SHOCKWAVE,
+    SOUL_SCREAM,
+    SOUL_BALL;
 }

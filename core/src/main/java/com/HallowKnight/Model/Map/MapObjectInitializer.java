@@ -139,9 +139,9 @@ public class MapObjectInitializer {
         }
     }
 
-    public Knight initializeKnight() {
+    public Knight initializeKnight(GameScreen gameScreen) {
         PointMapObject point = (PointMapObject) map.getLayers().get("Knight").getObjects().get("Knight_Spawn_Point");
-        return new Knight(world, new Vector2(point.getPoint().x, point.getPoint().y));
+        return new Knight(world, new Vector2(point.getPoint().x, point.getPoint().y),gameScreen);
     }
 
     public void initializeZote(GameController controller,GameScreen gameScreen) {

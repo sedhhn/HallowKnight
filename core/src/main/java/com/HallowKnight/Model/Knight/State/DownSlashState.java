@@ -1,6 +1,8 @@
 package com.HallowKnight.Model.Knight.State;
 
 import com.HallowKnight.Controller.Managers.GameAssetManager;
+import com.HallowKnight.Model.Effects.SoulBall;
+import com.HallowKnight.Model.Effects.SoulScream;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Knight.Nail.Nail;
 import com.HallowKnight.Model.Knight.Nail.State.SlashStates;

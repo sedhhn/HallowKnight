@@ -41,6 +41,8 @@ public class GameAssetManager {
     //========= effects ==========
     public static TextureAtlas crystalLaserAtlas;
     public static TextureAtlas shockwaveAtlas;
+    public static TextureAtlas soulScream;
+    public static TextureAtlas soulBall;
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
@@ -64,6 +66,8 @@ public class GameAssetManager {
         falseKnight=new TextureAtlas("Animations/FalseKnight/FalseKnight.atlas");
         shockwaveAtlas=new TextureAtlas("Animations/Effects/Shockwave.atlas");
         fullSoulOrb=new Texture("Sprites/HUD/SoulOrb_Full.png");
+        soulScream=new TextureAtlas("Animations/Effects/SoulScream.atlas");
+        soulBall=new TextureAtlas("Animations/Effects/SoulBall.atlas");
     }
 
     public static void dispose() {

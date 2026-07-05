@@ -1,13 +1,12 @@
 package com.HallowKnight.Controller;
 
 import com.HallowKnight.HallowKnight;
-import com.HallowKnight.Model.Effect;
+import com.HallowKnight.Model.Effects.Effect;
 import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.NPC;
 import com.HallowKnight.View.Modals.HUD;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -64,6 +63,14 @@ public class GameController {
         }
         for (NPC n: NPCs){
             n.draw(HallowKnight.hallowKnight.getBatch());
+        }
+        HallowKnight.hallowKnight.getBatch().end();
+    }
+
+    public void renderEffects(){
+        HallowKnight.hallowKnight.getBatch().begin();
+        for (Effect e:effects){
+            e.draw(HallowKnight.hallowKnight.getBatch());
         }
         HallowKnight.hallowKnight.getBatch().end();
     }
