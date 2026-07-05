@@ -40,6 +40,7 @@ public class GameController {
         handleInput();
         hud.update(dt);
         hud.updateHealth(knight.getHp(), Knight.MAX_HP);
+        hud.updateSoul(knight.getSoul(),Knight.MAX_SOUL);
 
         for (Enemy e: enemies){
             e.update(dt);

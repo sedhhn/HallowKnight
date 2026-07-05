@@ -98,12 +98,14 @@ public class ContactManager implements ContactListener {
             if (contact.getFixtureA().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
                     falseKnight.takeDamage(5);
+                    falseKnight.knight.increaseSoul(8);
                 }
             }
         } else if(userDataA== FixtureType.NAIL && userDataB==FixtureType.BOSS){
             if (contact.getFixtureB().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
                     falseKnight.takeDamage(5);
+                    falseKnight.knight.increaseSoul(8);
                 }
             }
         }

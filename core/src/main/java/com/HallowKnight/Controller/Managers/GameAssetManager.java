@@ -21,8 +21,9 @@ public class GameAssetManager {
     public static TextureAtlas knightJumpAtlas;
 
     //========= HUD =============
-    public static TextureAtlas soulContainer;
+    public static TextureAtlas healthBar;
     public static TextureAtlas knightHp;
+    public static Texture fullSoulOrb;
 
     //========= enemies ==========
     public static TextureAtlas crawlidAtlas;
@@ -51,7 +52,7 @@ public class GameAssetManager {
         knightAtlas=new TextureAtlas("Animations/Knight/knight.atlas");
         knightSlashEffect=new TextureAtlas("Animations/Knight/SlashEffect.atlas");
         knightJumpAtlas=new TextureAtlas("Animations/Knight/Jump.atlas");
-        soulContainer=new TextureAtlas("Animations/HUD/SoulContainer.atlas");
+        healthBar=new TextureAtlas("Animations/HUD/SoulContainer.atlas");
         knightHp=new TextureAtlas("Animations/HUD/KnightHp.atlas");
         crawlidAtlas=new TextureAtlas("Animations/Enemies/Crawlid.atlas");
         huskHornheadAtlas=new TextureAtlas("Animations/Enemies/Husk_Hornhead.atlas");
@@ -62,6 +63,7 @@ public class GameAssetManager {
         zoteAtlas=new TextureAtlas("Animations/NPCs/Zote.atlas");
         falseKnight=new TextureAtlas("Animations/FalseKnight/FalseKnight.atlas");
         shockwaveAtlas=new TextureAtlas("Animations/Effects/Shockwave.atlas");
+        fullSoulOrb=new Texture("Sprites/HUD/SoulOrb_Full.png");
     }
 
     public static void dispose() {

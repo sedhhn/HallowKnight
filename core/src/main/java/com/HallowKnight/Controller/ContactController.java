@@ -91,12 +91,18 @@ public class ContactController implements ContactListener {
 
         if (userDataA == FixtureType.NAIL && userDataB == FixtureType.ENEMY) {
             Enemy enemy = (Enemy) contact.getFixtureB().getBody().getUserData();
-            if (enemy != null) enemy.takeDamage();
+            if (enemy != null) {
+                enemy.takeDamage();
+                knight.increaseSoul(8);
+            }
             Nail nail= (Nail) contact.getFixtureA().getBody().getUserData();
             if (nail!=null) nail.getState().onContactWithDeadly();
         } else if (userDataA == FixtureType.ENEMY && userDataB == FixtureType.NAIL) {
             Enemy enemy = (Enemy) contact.getFixtureA().getBody().getUserData();
-            if (enemy != null) enemy.takeDamage();
+            if (enemy != null) {
+                enemy.takeDamage();
+                knight.increaseSoul(8);
+            }
             Nail nail= (Nail) contact.getFixtureB().getBody().getUserData();
             if (nail!=null) nail.getState().onContactWithDeadly();
         }

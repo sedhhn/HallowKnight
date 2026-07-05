@@ -20,6 +20,8 @@ public class Knight extends Sprite {
     public static final float DASH_TIME=0.35f;
     public static final float DASH_SPEED=7f;
     public static final float DASH_COOLDOWN=1.5f;
+    public static final float MAX_SOUL=100f;
+    public static final float FOCUS_DURATION=2f;
 
     public World world;
     public Body b2Body;
@@ -35,6 +37,7 @@ public class Knight extends Sprite {
     private boolean invincible;
     private float invincibleTimer;
     private float dashCooldown;
+    private float soul;
 
     public Knight(World world, Vector2 spawnPos){
         super(GameAssetManager.knightIdleAtlas.findRegion("Idle"));
@@ -139,6 +142,31 @@ public class Knight extends Sprite {
 
     public float getDashCooldown(){
         return dashCooldown;
+    }
+
+    public float getSoul(){
+        return soul;
+    }
+
+    public void increaseSoul(float amount){
+        soul+=amount;
+        if (soul>MAX_SOUL){
+            soul=MAX_SOUL;
+        }
+    }
+
+    public void decreaseSoul(float amount){
+        soul-=amount;
+        if (soul<0){
+            soul=0;
+        }
+    }
+
+    public void increaseHp(int amount){
+        hp+=amount;
+        if (hp>MAX_HP){
+            hp=MAX_HP;
+        }
     }
 
 }

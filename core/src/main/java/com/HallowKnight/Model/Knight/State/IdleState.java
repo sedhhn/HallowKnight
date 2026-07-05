@@ -44,6 +44,9 @@ public class IdleState extends State{
         if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldown()<=0){
             knight.setState(new DashState(knight));
         }
+        if (Gdx.input.isKeyPressed(Input.Keys.A) && knight.getSoul()>0 && knight.getHp()<Knight.MAX_HP){
+            knight.setState(new Focus(knight));
+        }
         if (!knight.isTouchingGround()){
             knight.setState(new FallState(knight));
         }

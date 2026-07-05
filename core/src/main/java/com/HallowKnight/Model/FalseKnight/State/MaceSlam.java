@@ -45,6 +45,8 @@ public class MaceSlam extends State{
     @Override
     public void exit() {
         super.exit();
-        mace.destroy();
+        if (mace!=null) {
+            mace.destroy();
+        }
     }
 }
