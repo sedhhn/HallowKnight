@@ -6,7 +6,10 @@ import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.NPC;
+import com.HallowKnight.View.GameScreen;
 import com.HallowKnight.View.Modals.HUD;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -21,12 +24,14 @@ public class GameController {
     List<Enemy> enemies;
     List<NPC> NPCs;
     List<Effect> effects;
+    GameScreen gameScreen;
 
-    public GameController(World world, Knight knight,HUD hud){
+    public GameController(World world, Knight knight,HUD hud, GameScreen gameScreen){
         this.world=world;
         this.knight=knight;
         knightController=knight.getController();
         this.hud=hud;
+        this.gameScreen=gameScreen;
 
         enemies=new ArrayList<>();
         NPCs=new ArrayList<>();
@@ -36,7 +41,6 @@ public class GameController {
 
 
     public void update(float dt){
-        handleInput();
         hud.update(dt);
         hud.updateHealth(knight.getHp(), Knight.MAX_HP);
         hud.updateSoul(knight.getSoul(),Knight.MAX_SOUL);
@@ -53,7 +57,10 @@ public class GameController {
         falseKnight.update(dt);
     }
 
-    private void handleInput(){
+    public void handleInput(){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
+            togglePauseMenu();
+        }
     }
 
     public void renderEnemies(){
@@ -119,5 +126,19 @@ public class GameController {
 
     public List<Effect> getEffects(){
         return effects;
+    }
+
+    public void togglePauseMenu(){
+        if (gameScreen.isPaused()) {
+            gameScreen.getPauseMenu().setVisible(false);
+            gameScreen.setPaused(false);
+        } else {
+            gameScreen.getPauseMenu().setVisible(true);
+            gameScreen.setPaused(true);
+        }
+    }
+
+    public GameScreen getGameScreen(){
+        return gameScreen;
     }
 }

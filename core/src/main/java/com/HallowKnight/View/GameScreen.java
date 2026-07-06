@@ -10,6 +10,7 @@ import com.HallowKnight.Model.NPCs.NPC;
 import com.HallowKnight.Model.NPCs.Zote.Zote;
 import com.HallowKnight.Model.NPCs.Zote.State.Idle;
 import com.HallowKnight.View.Modals.HUD;
+import com.HallowKnight.View.Modals.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -24,6 +25,25 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameScreen extends MenuScreen{
+
+    private static GameScreen instance;
+    private boolean paused;
+    private PauseMenu pauseMenu;
+
+    public static GameScreen getInstance(HallowKnight game){
+        if (instance==null){
+            instance=new GameScreen(game);
+        }
+        return instance;
+    }
+
+    public static void resetGameScreen(){
+        if (instance!=null) {
+            instance.dispose();
+            instance = null;
+        }
+    }
+
     GameController controller;
     HUD hud;
 
@@ -37,7 +57,7 @@ public class GameScreen extends MenuScreen{
     private OrthogonalTiledMapRenderer mapRenderer;
 
     private MapObjectInitializer mapObjectInitializer;
-    public GameScreen(HallowKnight game) {
+    private GameScreen(HallowKnight game) {
         super(game);
 
         Box2D.init();
@@ -63,13 +83,17 @@ public class GameScreen extends MenuScreen{
         camera.setKnight(knight);
         hud=new HUD();
         mainStack.add(hud);
-        controller=new GameController(world,knight,hud);
+        controller=new GameController(world,knight,hud,this);
         mapObjectInitializer.initializeHuskHornheads(controller);
         mapObjectInitializer.initializeCrystallizeds(controller);
         mapObjectInitializer.initializeMosquitoes(controller);
         mapObjectInitializer.initializeCrystalCrawlers(controller);
         mapObjectInitializer.initializeZote(controller,this);
         mapObjectInitializer.initializeFalseKnight(controller,this);
+        paused=false;
+        pauseMenu=new PauseMenu(controller);
+        mainStack.add(pauseMenu);
+        pauseMenu.setVisible(false);
     }
 
     @Override
@@ -82,7 +106,8 @@ public class GameScreen extends MenuScreen{
         Gdx.gl.glClearColor(0.3f,0.3f,0.3f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        controller.update(delta);
+        controller.handleInput();
+        if (!paused) controller.update(delta);
 
         // Update viewport
         gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -100,7 +125,7 @@ public class GameScreen extends MenuScreen{
 
         //rendering player
         game.getBatch().setProjectionMatrix(camera.combined);
-        knight.update(delta);
+        if (!paused) knight.update(delta);
         game.getBatch().begin();
         knight.draw(game.getBatch());
         game.getBatch().end();
@@ -114,8 +139,10 @@ public class GameScreen extends MenuScreen{
         // Render Box2D debug
         b2DebugRenderer.render(world, camera.combined);
 
-        world.step(1/60f,6,2);
-        controller.processPendingActions();
+        if (!paused) {
+            world.step(1 / 60f, 6, 2);
+            controller.processPendingActions();
+        }
         super.render(delta);
     }
 
@@ -125,5 +152,17 @@ public class GameScreen extends MenuScreen{
 
     public GameCamera getCamera(){
         return camera;
+    }
+
+    public PauseMenu getPauseMenu(){
+        return pauseMenu;
+    }
+
+    public void setPaused(boolean paused){
+        this.paused=paused;
+    }
+
+    public boolean isPaused(){
+        return paused;
     }
 }

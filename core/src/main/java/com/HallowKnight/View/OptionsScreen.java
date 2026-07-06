@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Scaling;
 
 public class OptionsScreen extends MenuScreen{
     SettingsController controller;
+    private MenuScreen lastScreen;
     private Table contentTable;
 
     Image background;
@@ -31,8 +32,9 @@ public class OptionsScreen extends MenuScreen{
     private TextButton resetBtn;
 
     private TextButton backBtn;
-    public OptionsScreen(HallowKnight game) {
+    public OptionsScreen(HallowKnight game, MenuScreen lastScreen) {
         super(game);
+        this.lastScreen=lastScreen;
         //controller
         controller=new SettingsController(game);
 
@@ -94,7 +96,11 @@ public class OptionsScreen extends MenuScreen{
         backBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ScreenManager.getInstance().setScreen(new MainMenuScreen(game));
+                if (lastScreen instanceof GameScreen){
+                    ScreenManager.getInstance().setScreen(GameScreen.getInstance(game));
+                } else {
+                    ScreenManager.getInstance().setScreen(new MainMenuScreen(game));
+                }
             }
         });
 

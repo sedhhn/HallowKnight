@@ -72,14 +72,14 @@ public class MainMenuScreen extends MenuScreen {
         optionsBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ScreenManager.getInstance().setScreen(new OptionsScreen(game));
+                ScreenManager.getInstance().setScreen(new OptionsScreen(game,null));
             }
         });
 
         guideBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ScreenManager.getInstance().setScreen(new GuideScreen(game));
+                ScreenManager.getInstance().setScreen(new GuideScreen(game,null));
             }
         });
 

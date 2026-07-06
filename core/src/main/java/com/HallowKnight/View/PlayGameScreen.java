@@ -49,7 +49,7 @@ public class PlayGameScreen extends MenuScreen {
         startBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                ScreenManager.getInstance().setScreen(new GameScreen(game));
+                ScreenManager.getInstance().setScreen(GameScreen.getInstance(game));
             }
         });
     }
