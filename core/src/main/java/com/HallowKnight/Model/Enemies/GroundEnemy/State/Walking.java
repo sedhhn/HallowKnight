@@ -5,6 +5,7 @@ import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.Enemies.GroundEnemy.GroundEnemy;
 import com.HallowKnight.Model.Enemies.State;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Comparator;
 
@@ -32,7 +33,8 @@ public class Walking extends State {
                 groundEnemy.setFacingRight(false);
             }
         }
-        enemy.getB2Body().setLinearVelocity(enemy.getMovementSpeed()
-            ,enemy.getB2Body().getLinearVelocity().y);
+        if (Math.abs(enemy.getB2Body().getLinearVelocity().x)<=Math.abs(enemy.getMovementSpeed())) {
+            enemy.getB2Body().applyLinearImpulse(new Vector2(enemy.getMovementSpeed() / 50f, 0), enemy.getB2Body().getWorldCenter(), true);
+        }
     }
 }

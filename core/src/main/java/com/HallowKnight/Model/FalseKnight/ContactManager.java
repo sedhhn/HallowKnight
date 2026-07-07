@@ -1,7 +1,10 @@
 package com.HallowKnight.Model.FalseKnight;
 
+import com.HallowKnight.Model.Charms.CharmType;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.Model.Knight.Knight;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -82,12 +85,22 @@ public class ContactManager implements ContactListener {
         if (userDataA== FixtureType.BOSS && userDataB==FixtureType.KNIGHT){
             if (contact.getFixtureA().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
+                    if (falseKnight.b2Body.getPosition().x>falseKnight.getKnight().b2Body.getPosition().x && !falseKnight.getKnight().isInvincible()){
+                        falseKnight.getKnight().b2Body.applyLinearImpulse(new Vector2(-8f,2f),falseKnight.getKnight().b2Body.getWorldCenter(),true);
+                    } else if(falseKnight.b2Body.getPosition().x<falseKnight.getKnight().b2Body.getPosition().x && !falseKnight.getKnight().isInvincible()){
+                        falseKnight.getKnight().b2Body.applyLinearImpulse(new Vector2(+8f,2f),falseKnight.getKnight().b2Body.getWorldCenter(),true);
+                    }
                     falseKnight.getKnight().takeDamage(1);
                 }
             }
         } else if(userDataA== FixtureType.KNIGHT && userDataB==FixtureType.BOSS){
             if (contact.getFixtureB().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
+                    if (falseKnight.b2Body.getPosition().x>falseKnight.getKnight().b2Body.getPosition().x && !falseKnight.getKnight().isInvincible()){
+                        falseKnight.getKnight().b2Body.applyLinearImpulse(new Vector2(-8f,2f),falseKnight.getKnight().b2Body.getWorldCenter(),true);
+                    } else if(falseKnight.b2Body.getPosition().x<falseKnight.getKnight().b2Body.getPosition().x && !falseKnight.getKnight().isInvincible()){
+                        falseKnight.getKnight().b2Body.applyLinearImpulse(new Vector2(+8f,2f),falseKnight.getKnight().b2Body.getWorldCenter(),true);
+                    }
                     falseKnight.getKnight().takeDamage(1);
                 }
             }
@@ -98,14 +111,22 @@ public class ContactManager implements ContactListener {
             if (contact.getFixtureA().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
                     falseKnight.takeDamage(5);
-                    falseKnight.knight.increaseSoul(8);
+                    if (falseKnight.getKnight().hasCharm(CharmType.SOUL_CATCHER)){
+                        falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE*2);
+                    } else {
+                        falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE);
+                    }
                 }
             }
         } else if(userDataA== FixtureType.NAIL && userDataB==FixtureType.BOSS){
             if (contact.getFixtureB().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
                     falseKnight.takeDamage(5);
-                    falseKnight.knight.increaseSoul(8);
+                    if (falseKnight.getKnight().hasCharm(CharmType.SOUL_CATCHER)){
+                        falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE*2);
+                    } else {
+                        falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE);
+                    }
                 }
             }
         }

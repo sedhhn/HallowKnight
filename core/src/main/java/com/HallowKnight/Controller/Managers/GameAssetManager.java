@@ -25,6 +25,16 @@ public class GameAssetManager {
     public static TextureAtlas knightHp;
     public static Texture fullSoulOrb;
 
+    //========== Charms ===========
+    public static Texture dashmaster;
+    public static Texture heavyBlow;
+    public static Texture quickFocus;
+    public static Texture quickSlash;
+    public static Texture sharpShadow;
+    public static Texture soulCatcher;
+    public static Texture unbreakableStrength;
+    public static Texture voidHeart;
+
     //========= enemies ==========
     public static TextureAtlas crawlidAtlas;
     public static TextureAtlas huskHornheadAtlas;
@@ -68,6 +78,15 @@ public class GameAssetManager {
         fullSoulOrb=new Texture("Sprites/HUD/SoulOrb_Full.png");
         soulScream=new TextureAtlas("Animations/Effects/SoulScream.atlas");
         soulBall=new TextureAtlas("Animations/Effects/SoulBall.atlas");
+        //========= Charms ==========
+        dashmaster=new Texture("Sprites/Inventory & UI/Charms/Dashmaster.png");
+        heavyBlow=new Texture("Sprites/Inventory & UI/Charms/Heavy Blow.png");
+        quickFocus=new Texture("Sprites/Inventory & UI/Charms/Quick Focus.png");
+        quickSlash=new Texture("Sprites/Inventory & UI/Charms/Quick Slash.png");
+        sharpShadow=new Texture("Sprites/Inventory & UI/Charms/Sharp Shadow.png");
+        soulCatcher=new Texture("Sprites/Inventory & UI/Charms/Soul Catcher.png");
+        unbreakableStrength=new Texture("Sprites/Inventory & UI/Charms/Unbreakable Strength.png");
+        voidHeart=new Texture("Sprites/Inventory & UI/Charms/Void Heart.png");
     }
 
     public static void dispose() {

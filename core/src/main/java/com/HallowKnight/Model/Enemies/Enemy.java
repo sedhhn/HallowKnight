@@ -52,8 +52,9 @@ public abstract class Enemy extends Sprite {
         return dead;
     }
 
-    public void takeDamage() {
-        dead = true;
+    public void takeDamage(float amount) {
+        hp-=amount;
+        if (hp<=0) dead=true;
     }
 
     public boolean isFacingRight(){
@@ -70,5 +71,9 @@ public abstract class Enemy extends Sprite {
 
     public World getWorld(){
         return world;
+    }
+
+    public void setDead(boolean dead){
+        this.dead=dead;
     }
 }

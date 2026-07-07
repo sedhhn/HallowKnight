@@ -4,6 +4,7 @@ import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.KnightController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Charms.*;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Nail.Nail;
 import com.HallowKnight.Model.Knight.State.IdleState;
@@ -12,6 +13,9 @@ import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Knight extends Sprite {
@@ -26,6 +30,11 @@ public class Knight extends Sprite {
     public static final float FOCUS_DURATION=2f;
     public static final float SCREAM_DURATION=1f;
     public static final float FIREBALL_CAST_DURATION=0.7f;
+    public static final float SLASH_COOLDOWN=0.5f;
+    public static final float BASE_NAIL_DAMAGE=1f;
+    public static final float BASE_SOUL_INCREASE=8f;
+
+    private float damage;
 
     public World world;
     public Body b2Body;
@@ -44,7 +53,14 @@ public class Knight extends Sprite {
     private boolean invincible;
     private float invincibleTimer;
     private float dashCooldown;
+    private float dashCooldownRemaining;
     private float soul;
+    private float slashCooldown;
+    private float slashCooldownRemaining;
+    private float focusDuration;
+    private float soulIncrease;
+
+    private List<Charm> charms;
 
     public Knight(World world, Vector2 spawnPos, GameScreen gameScreen){
         super(GameAssetManager.knightIdleAtlas.findRegion("Idle"));
@@ -64,7 +80,14 @@ public class Knight extends Sprite {
             ,349/HallowKnight.PPM
             ,186/HallowKnight.PPM);
 
-        dashCooldown=0;
+        dashCooldownRemaining=0;
+        slashCooldownRemaining=0;
+        charms=new ArrayList<>();
+        dashCooldown=DASH_COOLDOWN;
+        slashCooldown=SLASH_COOLDOWN;
+        focusDuration=FOCUS_DURATION;
+        soulIncrease=BASE_SOUL_INCREASE;
+        damage=BASE_NAIL_DAMAGE;
     }
 
     public void defineKnight(Vector2 spawnPos){
@@ -99,9 +122,15 @@ public class Knight extends Sprite {
             }
         }
 
-        if (dashCooldown>0){
-            dashCooldown-=deltaTime;
+        if (dashCooldownRemaining>0){
+            dashCooldownRemaining-=deltaTime;
         }
+
+        if(slashCooldownRemaining>0){
+            slashCooldownRemaining-=deltaTime;
+        }
+
+
     }
 
     public void takeDamage(int damage) {
@@ -147,7 +176,7 @@ public class Knight extends Sprite {
     }
 
     public void resetDashCooldown(){
-        dashCooldown=DASH_COOLDOWN;
+        dashCooldownRemaining=dashCooldown;
     }
 
     public float getDashCooldown(){
@@ -185,6 +214,96 @@ public class Knight extends Sprite {
 
     public World getWorld(){
         return world;
+    }
+
+    public void setDashCooldown(float dashCooldown){
+        this.dashCooldown=dashCooldown;
+    }
+
+    public float getSlashCooldown(){
+        return slashCooldown;
+    }
+
+    public void setSlashCooldown(float slashCooldown){
+        this.slashCooldown=slashCooldown;
+    }
+
+    public float getSlashCooldownRemaining(){
+        return slashCooldownRemaining;
+    }
+
+    public void setSlashCooldownRemaining(float slashCooldownRemaining){
+        this.slashCooldownRemaining=slashCooldownRemaining;
+    }
+
+    public float getDashCooldownRemaining(){
+        return dashCooldownRemaining;
+    }
+
+    public void setDashCooldownRemaining(float dashCooldownRemaining){
+        this.dashCooldownRemaining=dashCooldownRemaining;
+    }
+
+    public void equipCharm(CharmType type){
+        switch (type){
+            case DASHMASTER -> charms.add(new Dashmaster(this));
+            case QUICK_SLASH -> charms.add(new QuickSlash(this));
+            case QUICK_FOCUS -> charms.add(new QuickFocus(this));
+            case SOUL_CATCHER -> charms.add(new SoulCatcher(this));
+            case UNBREAKABLE_STRENGTH -> charms.add(new UnbreakableStrength(this));
+        }
+        charms.get(charms.size()-1).onEquip();
+    }
+
+    public void unEquipCharm(CharmType type){
+        for (Charm c: charms){
+            if (c.getType()==type){
+                c.onUnEquip();
+                charms.remove(c);
+                break;
+            }
+        }
+    }
+
+    public boolean hasCharm(CharmType type){
+        for (Charm c: charms){
+            if (c.getType()==type){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int charmsCount(){
+        return charms.size();
+    }
+
+    public float getDamage(){
+        return damage;
+    }
+
+    public void setDamage(float damage){
+        this.damage=damage;
+    }
+
+    public boolean isInvincible(){
+        return invincible;
+    }
+
+    public void setFocusDuration(float focusDuration){
+        this.focusDuration=focusDuration;
+    }
+
+    public float getFocusDuration(){
+        return focusDuration;
+    }
+
+    public void setSoulIncrease(float soulIncrease){
+        this.soulIncrease=soulIncrease;
+    }
+
+    public float getSoulIncrease(){
+        return soulIncrease;
     }
 
 }

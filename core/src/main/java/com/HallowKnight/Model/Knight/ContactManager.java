@@ -1,10 +1,14 @@
 package com.HallowKnight.Model.Knight;
 
+import com.HallowKnight.Model.Charms.CharmType;
 import com.HallowKnight.Model.Effects.Effect;
+import com.HallowKnight.Model.Effects.SoulBall;
+import com.HallowKnight.Model.Effects.SoulScream;
 import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Nail.Nail;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -20,11 +24,29 @@ public class ContactManager implements ContactListener {
         Object userDataA = contact.getFixtureA().getUserData();
         Object userDataB = contact.getFixtureB().getUserData();
 
+        //Knight & Deadly
+        if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.DEADLY){
+            knight.takeDamage(1);
+        } else if(userDataA==FixtureType.DEADLY && userDataB==FixtureType.KNIGHT){
+            knight.takeDamage(1);
+        }
 
-        if (userDataA == FixtureType.KNIGHT && userDataB == FixtureType.DEADLY
-            || userDataA == FixtureType.DEADLY && userDataB == FixtureType.KNIGHT
-            || userDataA == FixtureType.KNIGHT && userDataB == FixtureType.ENEMY
-            || userDataA == FixtureType.ENEMY && userDataB == FixtureType.KNIGHT) {
+        //Knight & Enemy
+        if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.ENEMY){
+            Enemy enemy=(Enemy) contact.getFixtureB().getBody().getUserData();
+            if (enemy!=null && enemy.getB2Body().getPosition().x>knight.b2Body.getPosition().x && !knight.isInvincible()){
+                knight.b2Body.applyLinearImpulse(new Vector2(-5f,2f),knight.b2Body.getWorldCenter(),true);
+            } else if(enemy!=null && enemy.getB2Body().getPosition().x<knight.b2Body.getPosition().x && !knight.isInvincible()){
+                knight.b2Body.applyLinearImpulse(new Vector2(+5f,2f),knight.b2Body.getWorldCenter(),true);
+            }
+            knight.takeDamage(1);
+        } else if(userDataA==FixtureType.ENEMY && userDataB==FixtureType.KNIGHT){
+            Enemy enemy=(Enemy) contact.getFixtureA().getBody().getUserData();
+            if (enemy!=null && enemy.getB2Body().getPosition().x>knight.b2Body.getPosition().x && !knight.isInvincible()){
+                knight.b2Body.applyLinearImpulse(new Vector2(-5f,2f),knight.b2Body.getWorldCenter(),true);
+            } else if(enemy!=null && enemy.getB2Body().getPosition().x<knight.b2Body.getPosition().x && !knight.isInvincible()){
+                knight.b2Body.applyLinearImpulse(new Vector2(+5f,2f),knight.b2Body.getWorldCenter(),true);
+            }
             knight.takeDamage(1);
         }
 
@@ -71,12 +93,12 @@ public class ContactManager implements ContactListener {
         if (userDataA== FixtureType.SOUL_SCREAM && userDataB==FixtureType.ENEMY){
             Enemy enemy = (Enemy) contact.getFixtureB().getBody().getUserData();
             if (enemy != null) {
-                enemy.takeDamage();
+                enemy.takeDamage(SoulScream.DAMAGE);
             }
         } else if(userDataA== FixtureType.ENEMY && userDataB==FixtureType.SOUL_SCREAM){
             Enemy enemy = (Enemy) contact.getFixtureA().getBody().getUserData();
             if (enemy != null) {
-                enemy.takeDamage();
+                enemy.takeDamage(SoulScream.DAMAGE);
             }
         }
 
@@ -84,12 +106,12 @@ public class ContactManager implements ContactListener {
         if (userDataA== FixtureType.SOUL_SCREAM && userDataB==FixtureType.BOSS){
             FalseKnight falseKnight = (FalseKnight) contact.getFixtureB().getBody().getUserData();
             if (falseKnight != null) {
-                falseKnight.takeDamage(10);
+                falseKnight.takeDamage(SoulScream.DAMAGE);
             }
         } else if(userDataA== FixtureType.BOSS && userDataB==FixtureType.SOUL_SCREAM){
             FalseKnight falseKnight = (FalseKnight) contact.getFixtureA().getBody().getUserData();
             if (falseKnight != null) {
-                falseKnight.takeDamage(10);
+                falseKnight.takeDamage(SoulScream.DAMAGE);
             }
         }
 
@@ -97,12 +119,12 @@ public class ContactManager implements ContactListener {
         if (userDataA== FixtureType.SOUL_BALL && userDataB==FixtureType.BOSS){
             FalseKnight falseKnight = (FalseKnight) contact.getFixtureB().getBody().getUserData();
             if (falseKnight != null) {
-                falseKnight.takeDamage(10);
+                falseKnight.takeDamage(SoulBall.DAMAGE);
             }
         } else if(userDataA== FixtureType.BOSS && userDataB==FixtureType.SOUL_BALL){
             FalseKnight falseKnight = (FalseKnight) contact.getFixtureA().getBody().getUserData();
             if (falseKnight != null) {
-                falseKnight.takeDamage(10);
+                falseKnight.takeDamage(SoulBall.DAMAGE);
             }
         }
 
@@ -110,12 +132,12 @@ public class ContactManager implements ContactListener {
         if (userDataA== FixtureType.SOUL_BALL && userDataB==FixtureType.ENEMY){
             Enemy enemy = (Enemy) contact.getFixtureB().getBody().getUserData();
             if (enemy != null) {
-                enemy.takeDamage();
+                enemy.takeDamage(SoulBall.DAMAGE);
             }
         } else if(userDataA== FixtureType.ENEMY && userDataB==FixtureType.SOUL_BALL){
             Enemy enemy = (Enemy) contact.getFixtureA().getBody().getUserData();
             if (enemy != null) {
-                enemy.takeDamage();
+                enemy.takeDamage(SoulBall.DAMAGE);
             }
         }
 
@@ -145,16 +167,38 @@ public class ContactManager implements ContactListener {
         if (userDataA == FixtureType.NAIL && userDataB == FixtureType.ENEMY) {
             Enemy enemy = (Enemy) contact.getFixtureB().getBody().getUserData();
             if (enemy != null) {
-                enemy.takeDamage();
-                knight.increaseSoul(8);
+                enemy.takeDamage(knight.getDamage());
+                if (knight.isFacingRight()){
+                    enemy.getB2Body().applyLinearImpulse(
+                        new Vector2(12,8)
+                        ,enemy.getB2Body().getWorldCenter()
+                        ,true);
+                } else {
+                    enemy.getB2Body().applyLinearImpulse(
+                        new Vector2(-12,8)
+                        ,enemy.getB2Body().getWorldCenter()
+                        ,true);
+                }
+                knight.increaseSoul(knight.getSoulIncrease());
             }
             Nail nail= (Nail) contact.getFixtureA().getBody().getUserData();
             if (nail!=null) nail.getState().onContactWithDeadly();
         } else if (userDataA == FixtureType.ENEMY && userDataB == FixtureType.NAIL) {
             Enemy enemy = (Enemy) contact.getFixtureA().getBody().getUserData();
             if (enemy != null) {
-                enemy.takeDamage();
-                knight.increaseSoul(8);
+                enemy.takeDamage(knight.getDamage());
+                if (knight.isFacingRight()){
+                    enemy.getB2Body().applyLinearImpulse(
+                        new Vector2(3,1)
+                        ,enemy.getB2Body().getWorldCenter()
+                    ,true);
+                } else {
+                    enemy.getB2Body().applyLinearImpulse(
+                        new Vector2(-3,1)
+                        ,enemy.getB2Body().getWorldCenter()
+                        ,true);
+                }
+                knight.increaseSoul(knight.getSoulIncrease());
             }
             Nail nail= (Nail) contact.getFixtureB().getBody().getUserData();
             if (nail!=null) nail.getState().onContactWithDeadly();

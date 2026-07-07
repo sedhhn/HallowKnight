@@ -60,11 +60,11 @@ public class RunState extends State {
             knight.setState(new JumpState(knight));
             isIdle=false;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && knight.getSlashCooldownRemaining()<=0){
             knight.setState(new AttackState(knight));
             isIdle=false;
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldown()<=0){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldownRemaining()<=0){
             knight.setState(new DashState(knight));
         }
         if (!knight.isTouchingGround()){

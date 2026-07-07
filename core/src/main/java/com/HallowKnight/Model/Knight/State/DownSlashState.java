@@ -26,6 +26,12 @@ public class DownSlashState extends State {
     }
 
     @Override
+    public void enter() {
+        super.enter();
+        knight.setSlashCooldownRemaining(knight.getSlashCooldown());
+    }
+
+    @Override
     public void update(float dt) {
         super.update(dt);
         if (stateTime>=Knight.ATTACK_DURATION){

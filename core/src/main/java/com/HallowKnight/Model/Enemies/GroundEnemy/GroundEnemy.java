@@ -23,6 +23,7 @@ public class GroundEnemy extends Enemy {
         setBounds(0, 0
             ,getWidth()/1.3f/HallowKnight.PPM
             ,getHeight()/1.3f/HallowKnight.PPM);
+        this.hp=2;
     }
 
     @Override

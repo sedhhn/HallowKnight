@@ -26,11 +26,11 @@ public class PauseMenu extends Stack {
         this.gameController=gameController;
         setFillParent(true);
         buttonsWrapper=new Table();
-        buttonsWrapper.defaults().space(10);
+        buttonsWrapper.defaults().space(15);
         add(buttonsWrapper);
 
         continueBtn=new TextButton("Continue", GameAssetManager.skin);
-        continueBtn.pad(5);
+        continueBtn.pad(10);
         continueBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -41,7 +41,7 @@ public class PauseMenu extends Stack {
         buttonsWrapper.add(continueBtn).row();
 
         settingsBtn=new TextButton("Settings",GameAssetManager.skin);
-        settingsBtn.pad(5);
+        settingsBtn.pad(10);
         settingsBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -54,7 +54,7 @@ public class PauseMenu extends Stack {
         buttonsWrapper.add(settingsBtn).row();
 
         guideBtn=new TextButton("Guide", GameAssetManager.skin);
-        guideBtn.pad(5);
+        guideBtn.pad(10);
         guideBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -67,7 +67,7 @@ public class PauseMenu extends Stack {
         buttonsWrapper.add(guideBtn).row();
 
         quitBtn=new TextButton("Quit to Main Menu", GameAssetManager.skin);
-        quitBtn.pad(5);
+        quitBtn.pad(10);
         quitBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

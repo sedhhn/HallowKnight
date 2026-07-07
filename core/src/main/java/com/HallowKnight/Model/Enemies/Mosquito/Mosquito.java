@@ -29,6 +29,7 @@ public class Mosquito extends Enemy {
             ,getWidth()/HallowKnight.PPM
             ,getHeight()/HallowKnight.PPM);
         targetPos=new Vector2(position.x,position.y);
+        this.hp=4f;
     }
 
     @Override

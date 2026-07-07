@@ -5,6 +5,7 @@ import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.Enemies.State;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Comparator;
 
@@ -42,7 +43,8 @@ public class Angry extends State {
                 huskHornhead.setState(new Walking(huskHornhead));
             }
         }
-        huskHornhead.getB2Body().setLinearVelocity(huskHornhead.getMovementSpeed()
-            ,huskHornhead.getB2Body().getLinearVelocity().y);
+        if (Math.abs(enemy.getMovementSpeed())>Math.abs(enemy.getB2Body().getLinearVelocity().x)) {
+            enemy.getB2Body().applyLinearImpulse(new Vector2(enemy.getMovementSpeed()/10,0),enemy.getB2Body().getWorldCenter(),true);
+        }
     }
 }

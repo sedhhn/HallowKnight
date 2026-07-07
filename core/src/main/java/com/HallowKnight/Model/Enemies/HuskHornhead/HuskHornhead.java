@@ -28,6 +28,7 @@ public class HuskHornhead extends Enemy {
         setBounds(0, 0
             ,getWidth()/HallowKnight.PPM
             ,getHeight()/HallowKnight.PPM);
+        this.hp=5;
     }
 
     @Override

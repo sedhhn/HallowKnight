@@ -10,6 +10,7 @@ import com.HallowKnight.Model.NPCs.NPC;
 import com.HallowKnight.Model.NPCs.Zote.Zote;
 import com.HallowKnight.Model.NPCs.Zote.State.Idle;
 import com.HallowKnight.View.Modals.HUD;
+import com.HallowKnight.View.Modals.Inventory;
 import com.HallowKnight.View.Modals.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -29,6 +30,7 @@ public class GameScreen extends MenuScreen{
     private static GameScreen instance;
     private boolean paused;
     private PauseMenu pauseMenu;
+    private Inventory inventory;
 
     public static GameScreen getInstance(HallowKnight game){
         if (instance==null){
@@ -90,10 +92,15 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.initializeCrystalCrawlers(controller);
         mapObjectInitializer.initializeZote(controller,this);
         mapObjectInitializer.initializeFalseKnight(controller,this);
+
         paused=false;
         pauseMenu=new PauseMenu(controller);
         mainStack.add(pauseMenu);
         pauseMenu.setVisible(false);
+
+        inventory=new Inventory(knight);
+        mainStack.add(inventory);
+        inventory.setVisible(false);
     }
 
     @Override
@@ -156,6 +163,10 @@ public class GameScreen extends MenuScreen{
 
     public PauseMenu getPauseMenu(){
         return pauseMenu;
+    }
+
+    public Inventory getInventory(){
+        return inventory;
     }
 
     public void setPaused(boolean paused){

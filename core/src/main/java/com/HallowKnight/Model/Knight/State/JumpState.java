@@ -61,7 +61,7 @@ public class JumpState extends State{
         if (!movingRightOrLeft){
             knight.b2Body.setLinearVelocity(0,knight.b2Body.getLinearVelocity().y);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.X)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.X) && knight.getSlashCooldownRemaining()<=0){
             if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
                 knight.setState(new DownSlashState(knight));
             } else {
@@ -79,7 +79,7 @@ public class JumpState extends State{
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new DoubleJumpState(knight));
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldown()<=0){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldownRemaining()<=0){
             knight.setState(new DashState(knight));
         }
         if(stateTime>=0.1f) {

@@ -14,6 +14,7 @@ public class SoulBall extends Effect{
     public static final float SOUL_COST=30f;
     public static final float MAX_DURATION=2f;
     public static final float SPEED=8f;
+    public static final float DAMAGE=3f;
     Knight knight;
     World world;
     public SoulBall(TextureAtlas.AtlasRegion atlasRegion, Knight knight) {

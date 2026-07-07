@@ -61,6 +61,9 @@ public class GameController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             togglePauseMenu();
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
+            toggleInventory();
+        }
     }
 
     public void renderEnemies(){
@@ -135,6 +138,14 @@ public class GameController {
         } else {
             gameScreen.getPauseMenu().setVisible(true);
             gameScreen.setPaused(true);
+        }
+    }
+
+    public void toggleInventory(){
+        if (gameScreen.getInventory().isVisible()){
+            gameScreen.getInventory().setVisible(false);
+        } else{
+            gameScreen.getInventory().setVisible(true);
         }
     }
 

@@ -107,6 +107,21 @@ public class ContactManager implements ContactListener {
                 }
             }
         }
+
+        //Left Radar Sensor
+        if (userDataA== FixtureType.ENEMY && userDataB==FixtureType.DEADLY){
+            if (contact.getFixtureA().getBody().getUserData() instanceof HuskHornhead c) {
+                if (c==huskHornhead) {
+                    huskHornhead.setDead(true);
+                }
+            }
+        } else if(userDataA== FixtureType.DEADLY && userDataB==FixtureType.ENEMY) {
+            if (contact.getFixtureB().getBody().getUserData() instanceof HuskHornhead c) {
+                if (c==huskHornhead) {
+                    huskHornhead.setDead(true);
+                }
+            }
+        }
     }
 
     @Override

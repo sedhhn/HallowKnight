@@ -12,6 +12,7 @@ import java.util.Comparator;
 
 public class SoulScream extends Effect {
     public static final float SOUL_COST=30f;
+    public static final float DAMAGE=6;
     Knight knight;
     World world;
     public SoulScream(TextureAtlas.AtlasRegion atlasRegion, Knight knight) {

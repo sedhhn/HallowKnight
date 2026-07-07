@@ -23,7 +23,7 @@ public class Focus extends State{
         if (knight.getSoul()<=0){
             knight.setState(new IdleState(knight));
         }
-        if (stateTime>Knight.FOCUS_DURATION){
+        if (stateTime>knight.getFocusDuration()){
             knight.setState(new IdleState(knight));
             knight.increaseHp(1);
         }

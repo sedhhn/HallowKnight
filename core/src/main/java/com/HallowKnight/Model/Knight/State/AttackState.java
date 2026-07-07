@@ -28,6 +28,11 @@ public class AttackState extends State{
     }
 
     @Override
+    public void enter() {
+        super.enter();
+    }
+
+    @Override
     public void update(float dt) {
         super.update(dt);
         if (stateTime>=Knight.ATTACK_DURATION){
@@ -65,5 +70,6 @@ public class AttackState extends State{
     public void exit() {
         super.exit();
         nail.destroy();
+        knight.setSlashCooldownRemaining(knight.getSlashCooldown());
     }
 }

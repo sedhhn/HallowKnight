@@ -2,6 +2,7 @@ package com.HallowKnight.Model.Knight.Nail;
 
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Charms.CharmType;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Knight.Nail.State.DownSlash;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Nail extends Sprite {
+
     private Body b2Body;
     private World world;
     private Knight knight;
@@ -82,4 +84,5 @@ public class Nail extends Sprite {
     public SlashState getState(){
         return state;
     }
+
 }
