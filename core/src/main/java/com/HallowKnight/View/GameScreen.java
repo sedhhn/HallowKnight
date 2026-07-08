@@ -143,6 +143,9 @@ public class GameScreen extends MenuScreen{
         //rendering effects
         controller.renderEffects();
 
+        //rendering barriers
+        controller.renderBarriers();
+
         // Render Box2D debug
         b2DebugRenderer.render(world, camera.combined);
 

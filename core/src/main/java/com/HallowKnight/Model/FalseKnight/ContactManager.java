@@ -4,6 +4,7 @@ import com.HallowKnight.Model.Charms.CharmType;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
+import com.HallowKnight.Model.Map.MapObjectInitializer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -143,6 +144,13 @@ public class ContactManager implements ContactListener {
             falseKnight.getKnight().takeDamage(2);
         } else if(userDataA== FixtureType.SHOCKWAVE && userDataB==FixtureType.KNIGHT){
             falseKnight.getKnight().takeDamage(2);
+        }
+
+        //Knight entered boss arena
+        if (userDataA== FixtureType.KNIGHT && userDataB==FixtureType.BOSS_ARENA_RADAR){
+            falseKnight.createBarriers();
+        } else if(userDataA== FixtureType.BOSS_ARENA_RADAR && userDataB==FixtureType.KNIGHT){
+            falseKnight.createBarriers();
         }
     }
 

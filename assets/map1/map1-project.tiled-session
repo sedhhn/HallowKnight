@@ -8,11 +8,11 @@
     ],
     "fileStates": {
         "map1.tmx": {
-            "scale": 1,
-            "selectedLayer": 17,
+            "scale": 0.33,
+            "selectedLayer": 14,
             "viewCenter": {
-                "x": 6627.5,
-                "y": 2208
+                "x": 5745.454545454546,
+                "y": 3481.818181818182
             }
         },
         "map1.tmx#atlas_floor_wall_0": {
@@ -24,7 +24,22 @@
         "map1.tmx#bench_1": {
             "scaleInDock": 1
         },
+        "map1.tmx#brk_Crystal1": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#brk_Crystal2": {
+            "scaleInDock": 1
+        },
         "map1.tmx#cd_spikes_BG": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#crystal_spike_short": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#elev_mine_wood_back": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#far_bg_mines_plats_0002_3": {
             "scaleInDock": 1
         },
         "map1.tmx#floor_01": {
@@ -34,6 +49,27 @@
             "scaleInDock": 1
         },
         "map1.tmx#lamp_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#mine_break_bridge_02_0001_mine_bridge_01": {
+            "scaleInDock": 0.5
+        },
+        "map1.tmx#mine_break_wall": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#mine_break_wall_03": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#mine_floor_01": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#mine_platform": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#mine_spike_02": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#mines_additions_02_0010_a": {
             "scaleInDock": 1
         },
         "map1.tmx#plat_lifts_0000_a": {
@@ -46,6 +82,9 @@
             "scaleInDock": 1
         },
         "map1.tmx#spike_back": {
+            "scaleInDock": 1
+        },
+        "map1.tmx#summit_spikes_0001_3": {
             "scaleInDock": 1
         }
     },

@@ -31,7 +31,7 @@ public class SurroundSensors{
         fdef.shape = shape;
 
         float sideSensorWidth = 4f / HallowKnight.PPM;
-        float sideSensorHeight = hy * 0.8f;
+        float sideSensorHeight = hy * 0.9f;
         float groundSensorWidth = hx * 0.8f;
         float groundSensorHeight = 4f / HallowKnight.PPM;
         float cornerSensorWidth = 6f/HallowKnight.PPM;

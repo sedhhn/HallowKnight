@@ -30,5 +30,6 @@ public enum FixtureType {
     MACE,
     SHOCKWAVE,
     SOUL_SCREAM,
-    SOUL_BALL;
+    SOUL_BALL,
+    BOSS_ARENA_RADAR;
 }

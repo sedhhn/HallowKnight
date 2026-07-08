@@ -161,6 +161,17 @@ public class MapObjectInitializer {
             , new Vector2(point.getPoint().x, point.getPoint().y)
             , controller.getKnight()
             , gameScreen
+            , getLeftBarrierPos()
+            , getRightBarrierPos()
         ));
+    }
+
+    public Vector2 getLeftBarrierPos(){
+        PointMapObject point = (PointMapObject) map.getLayers().get("BossWalls").getObjects().get("Boss_wall1");
+        return new Vector2(point.getPoint().x,point.getPoint().y);
+    }
+    public Vector2 getRightBarrierPos(){
+        PointMapObject point = (PointMapObject) map.getLayers().get("BossWalls").getObjects().get("Boss_wall2");
+        return new Vector2(point.getPoint().x,point.getPoint().y);
     }
 }

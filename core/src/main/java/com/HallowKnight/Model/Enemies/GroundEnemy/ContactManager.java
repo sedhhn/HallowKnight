@@ -31,6 +31,19 @@ public class ContactManager implements ContactListener {
                 }
             }
         }
+        if (userDataA== FixtureType.ENEMY_LEFT && userDataB==FixtureType.DEADLY){
+            if (contact.getFixtureA().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().leftSensor++;
+                }
+            }
+        } else if(userDataA== FixtureType.DEADLY && userDataB==FixtureType.ENEMY_LEFT){
+            if (contact.getFixtureB().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().leftSensor++;
+                }
+            }
+        }
 
         //Right Sensor
         if (userDataA== FixtureType.ENEMY_RIGHT && userDataB==FixtureType.GROUND){
@@ -40,6 +53,19 @@ public class ContactManager implements ContactListener {
                 }
             }
         } else if(userDataA== FixtureType.GROUND && userDataB==FixtureType.ENEMY_RIGHT){
+            if (contact.getFixtureB().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().rightSensor++;
+                }
+            }
+        }
+        if (userDataA== FixtureType.ENEMY_RIGHT && userDataB==FixtureType.DEADLY){
+            if (contact.getFixtureA().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().rightSensor++;
+                }
+            }
+        } else if(userDataA== FixtureType.DEADLY && userDataB==FixtureType.ENEMY_RIGHT){
             if (contact.getFixtureB().getBody().getUserData() instanceof GroundEnemy c) {
                 if (c==groundEnemy) {
                     groundEnemy.getSurroundSensors().rightSensor++;
@@ -97,6 +123,19 @@ public class ContactManager implements ContactListener {
                 }
             }
         }
+        if (userDataA== FixtureType.ENEMY_LEFT && userDataB==FixtureType.DEADLY){
+            if (contact.getFixtureA().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().leftSensor--;
+                }
+            }
+        } else if(userDataA== FixtureType.DEADLY && userDataB==FixtureType.ENEMY_LEFT){
+            if (contact.getFixtureB().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().leftSensor--;
+                }
+            }
+        }
 
         //Right Sensor
         if (userDataA== FixtureType.ENEMY_RIGHT && userDataB==FixtureType.GROUND){
@@ -106,6 +145,19 @@ public class ContactManager implements ContactListener {
                 }
             }
         } else if(userDataA== FixtureType.GROUND && userDataB==FixtureType.ENEMY_RIGHT){
+            if (contact.getFixtureB().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().rightSensor--;
+                }
+            }
+        }
+        if (userDataA== FixtureType.ENEMY_RIGHT && userDataB==FixtureType.DEADLY){
+            if (contact.getFixtureA().getBody().getUserData() instanceof GroundEnemy c) {
+                if (c==groundEnemy) {
+                    groundEnemy.getSurroundSensors().rightSensor--;
+                }
+            }
+        } else if(userDataA== FixtureType.DEADLY && userDataB==FixtureType.ENEMY_RIGHT){
             if (contact.getFixtureB().getBody().getUserData() instanceof GroundEnemy c) {
                 if (c==groundEnemy) {
                     groundEnemy.getSurroundSensors().rightSensor--;

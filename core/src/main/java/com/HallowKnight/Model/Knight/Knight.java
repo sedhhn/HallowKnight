@@ -60,6 +60,9 @@ public class Knight extends Sprite {
     private float focusDuration;
     private float soulIncrease;
 
+    private Vector2 lastSafePos;
+    private boolean shouldTeleport;
+
     private List<Charm> charms;
 
     public Knight(World world, Vector2 spawnPos, GameScreen gameScreen){
@@ -88,6 +91,7 @@ public class Knight extends Sprite {
         focusDuration=FOCUS_DURATION;
         soulIncrease=BASE_SOUL_INCREASE;
         damage=BASE_NAIL_DAMAGE;
+        lastSafePos=new Vector2(b2Body.getPosition());
     }
 
     public void defineKnight(Vector2 spawnPos){
@@ -304,6 +308,26 @@ public class Knight extends Sprite {
 
     public float getSoulIncrease(){
         return soulIncrease;
+    }
+
+    public void setLastSafePos(){
+        lastSafePos.set(b2Body.getPosition());
+    }
+
+    public Vector2 getLastSafePos(){
+        return lastSafePos;
+    }
+
+    public void teleportToSafePos(){
+        shouldTeleport=true;
+    }
+
+    public void setShouldTeleport(boolean shouldTeleport){
+        this.shouldTeleport=shouldTeleport;
+    }
+
+    public boolean shouldTeleport(){
+        return shouldTeleport;
     }
 
 }

@@ -2,10 +2,12 @@ package com.HallowKnight.Model.FalseKnight;
 
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
+import com.HallowKnight.Controller.Managers.ScreenManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.FalseKnight.State.*;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Knight;
+import com.HallowKnight.View.EndGameScreen;
 import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -24,6 +26,7 @@ public class FalseKnight extends Sprite {
     public static final float PHASE2_COOLDOWN=1.25f;
 
     private float cooldown;
+    private float gameEndTimer;
 
     private boolean phase2;
 
@@ -33,6 +36,10 @@ public class FalseKnight extends Sprite {
 
     public World world;
     public Body b2Body;
+
+    private Vector2 leftBarrierPos;
+    private Vector2 rightBarrierPos;
+    private boolean createBarriers;
 
     private boolean facingRight;
     private float movementSpeed=0;
@@ -47,7 +54,7 @@ public class FalseKnight extends Sprite {
 
     private float hp;
 
-    public FalseKnight(World world, Vector2 spawnPos, Knight knight, GameScreen gameScreen){
+    public FalseKnight(World world, Vector2 spawnPos, Knight knight, GameScreen gameScreen, Vector2 leftBarrierPos, Vector2 rightBarrierPos){
         super(GameAssetManager.falseKnight.findRegion("Idle"));
         this.knight=knight;
         this.gameScreen=gameScreen;
@@ -57,11 +64,16 @@ public class FalseKnight extends Sprite {
         this.world=world;
         hp=MAX_HP;
         defineFalseKnight(spawnPos);
+        ArenaSensor arenaSensor=new ArenaSensor(b2Body,world);
         contactManager=new ContactManager(this);
         ContactController.getInstance().contactListeners.add(contactManager);
         setBounds(0,0,getWidth()/HallowKnight.PPM,getHeight()/HallowKnight.PPM);
         cooldown=PHASE1_COOLDOWN;
         phase2=false;
+        this.setLeftBarrierPos(leftBarrierPos);
+        this.setRightBarrierPos(rightBarrierPos);
+        createBarriers=false;
+        gameEndTimer=0;
     }
 
     public void defineFalseKnight(Vector2 spawnPos){
@@ -97,6 +109,13 @@ public class FalseKnight extends Sprite {
             setState(new Dead(this));
             ContactController.getInstance().contactListeners.remove(contactManager);
             dead=true;
+        }
+        if (dead){
+            gameEndTimer+=dt;
+        }
+        if (gameEndTimer>5f){
+            ScreenManager.getInstance().setScreen(new EndGameScreen(HallowKnight.hallowKnight));
+            GameScreen.resetGameScreen();
         }
     }
 
@@ -166,4 +185,34 @@ public class FalseKnight extends Sprite {
     public float getRecentDamageAmount(){
         return 1;
     }
+
+    public void createBarriers(){
+        setCreateBarriers(true);
+    }
+
+    public Vector2 getLeftBarrierPos() {
+        return leftBarrierPos;
+    }
+
+    public void setLeftBarrierPos(Vector2 leftBarrierPos) {
+        this.leftBarrierPos = leftBarrierPos;
+    }
+
+    public Vector2 getRightBarrierPos() {
+        return rightBarrierPos;
+    }
+
+    public void setRightBarrierPos(Vector2 rightBarrierPos) {
+        this.rightBarrierPos = rightBarrierPos;
+    }
+
+    public boolean isCreateBarriers() {
+        return createBarriers;
+    }
+
+    public void setCreateBarriers(boolean createBarriers) {
+        this.createBarriers = createBarriers;
+    }
+
+
 }

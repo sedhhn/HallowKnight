@@ -3,6 +3,7 @@ package com.HallowKnight.Controller;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Effects.Effect;
 import com.HallowKnight.Model.Enemies.Enemy;
+import com.HallowKnight.Model.FalseKnight.Barrier;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.NPC;
@@ -25,6 +26,8 @@ public class GameController {
     List<NPC> NPCs;
     List<Effect> effects;
     GameScreen gameScreen;
+    Barrier leftBarrier;
+    Barrier rightBarrier;
 
     public GameController(World world, Knight knight,HUD hud, GameScreen gameScreen){
         this.world=world;
@@ -103,6 +106,15 @@ public class GameController {
             }
         }
         effects.removeAll(toRemoveEffects);
+        if (knight.shouldTeleport()){
+            knight.b2Body.setTransform(knight.getLastSafePos(),0);
+            knight.setShouldTeleport(false);
+        }
+        if (falseKnight.isCreateBarriers()){
+            leftBarrier=new Barrier(falseKnight.getLeftBarrierPos(),world);
+            rightBarrier=new Barrier(falseKnight.getRightBarrierPos(),world);
+            falseKnight.setCreateBarriers(false);
+        }
     }
 
     public List<Enemy> getEnemies(){
@@ -124,6 +136,16 @@ public class GameController {
     public void renderFalseKnight(){
         HallowKnight.hallowKnight.getBatch().begin();
         falseKnight.draw(HallowKnight.hallowKnight.getBatch());
+        HallowKnight.hallowKnight.getBatch().end();
+    }
+
+    public void renderBarriers(){
+        if (leftBarrier ==null || rightBarrier == null){
+            return;
+        }
+        HallowKnight.hallowKnight.getBatch().begin();
+        leftBarrier.draw(HallowKnight.hallowKnight.getBatch());
+        rightBarrier.draw(HallowKnight.hallowKnight.getBatch());
         HallowKnight.hallowKnight.getBatch().end();
     }
 

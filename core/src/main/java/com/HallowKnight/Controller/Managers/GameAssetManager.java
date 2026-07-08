@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class GameAssetManager {
     public static Texture backgroundTexture;
+    public static Texture backgroundTexture2;
     public static Texture logoTexture;
     public static Texture uiDivider;
     public static Skin skin;
@@ -47,6 +48,7 @@ public class GameAssetManager {
 
     //========= Bosses ============
     public static TextureAtlas falseKnight;
+    public static Texture bossArenaBarrier;
 
     //========= effects ==========
     public static TextureAtlas crystalLaserAtlas;
@@ -56,6 +58,7 @@ public class GameAssetManager {
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
+        backgroundTexture2=new Texture("MenuBackgrounds/background2.png");
         logoTexture = new Texture("MenuBackgrounds/hollow_knight_logo.png");
         uiDivider=new Texture("Ui/Ui_Divider.png");
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
@@ -73,7 +76,9 @@ public class GameAssetManager {
         mosquitoAtlas=new TextureAtlas("Animations/Enemies/Mosquito.atlas");
         crystalCrawlerAtlas=new TextureAtlas("Animations/Enemies/Crystal_Crawler.atlas");
         zoteAtlas=new TextureAtlas("Animations/NPCs/Zote.atlas");
+        //========== BOSS =============
         falseKnight=new TextureAtlas("Animations/FalseKnight/FalseKnight.atlas");
+        bossArenaBarrier=new Texture("Sprites/Architecture & Environment/pillar_cell.png");
         shockwaveAtlas=new TextureAtlas("Animations/Effects/Shockwave.atlas");
         fullSoulOrb=new Texture("Sprites/HUD/SoulOrb_Full.png");
         soulScream=new TextureAtlas("Animations/Effects/SoulScream.atlas");

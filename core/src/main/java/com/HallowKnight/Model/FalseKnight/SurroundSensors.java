@@ -33,7 +33,7 @@ public class SurroundSensors {
         float groundSensorWidth = hx * 0.8f;
         float groundSensorHeight = 4f / HallowKnight.PPM;
 
-        float radarSensorWidth=700f/HallowKnight.PPM;
+        float radarSensorWidth=800f/HallowKnight.PPM;
 
 
         shape.setAsBox(groundSensorWidth, groundSensorHeight, new Vector2(0, -hy -groundSensorHeight), 0);

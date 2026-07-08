@@ -27,8 +27,10 @@ public class ContactManager implements ContactListener {
         //Knight & Deadly
         if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.DEADLY){
             knight.takeDamage(1);
+            knight.teleportToSafePos();
         } else if(userDataA==FixtureType.DEADLY && userDataB==FixtureType.KNIGHT){
             knight.takeDamage(1);
+            knight.teleportToSafePos();
         }
 
         //Knight & Enemy
@@ -213,8 +215,10 @@ public class ContactManager implements ContactListener {
 
         if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
             knight.getSurroundSensors().bottomSensor--;
+            knight.setLastSafePos();
         } else if(userDataA==FixtureType.GROUND && userDataB==FixtureType.KNIGHT_BOTTOM){
             knight.getSurroundSensors().bottomSensor--;
+            knight.setLastSafePos();
         }
 
         if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.PLATFORM){
