@@ -57,6 +57,10 @@ public class GameAssetManager {
     public static TextureAtlas soulBall;
     public static TextureAtlas torch;
 
+    //========== Sounds ============
+    //Musics:
+    public static String crystalPeakMusic="audio/Musics/11 - Crystal Peak.mp3";
+
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
         backgroundTexture2=new Texture("MenuBackgrounds/background2.png");

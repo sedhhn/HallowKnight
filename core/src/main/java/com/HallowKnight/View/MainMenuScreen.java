@@ -50,10 +50,15 @@ public class MainMenuScreen extends MenuScreen {
         buttonsTable.defaults().space(10);
 
         startGameBtn=new TextButton("Start Game",skin);
+        startGameBtn.pad(10);
         optionsBtn=new TextButton("Options",skin);
+        optionsBtn.pad(10);
         achievementsBtn=new TextButton("Achievements",skin);
+        achievementsBtn.pad(10);
         guideBtn=new TextButton("Guide",skin);
+        guideBtn.pad(10);
         quitGameBtn=new TextButton("Quit Game",skin);
+        quitGameBtn.pad(10);
 
         buttonsTable.add(startGameBtn).row();
         buttonsTable.add(optionsBtn).row();

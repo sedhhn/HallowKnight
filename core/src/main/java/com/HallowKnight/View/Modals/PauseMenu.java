@@ -12,6 +12,7 @@ import com.HallowKnight.View.MainMenuScreen;
 import com.HallowKnight.View.OptionsScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,6 +21,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class PauseMenu extends Stack {
     GameController gameController;
     Table buttonsWrapper;
+    Label bossArenaTeleport;
+    Label spectatorMode;
+    Label emergencyHeal;
+    Label refillSoulVessel;
+    Label godMode;
     TextButton continueBtn;
     TextButton settingsBtn;
     TextButton guideBtn;
@@ -30,6 +36,21 @@ public class PauseMenu extends Stack {
         buttonsWrapper=new Table();
         buttonsWrapper.defaults().space(15);
         add(buttonsWrapper);
+
+        bossArenaTeleport=new Label("Boss Arena Teleport: CTRL + B",GameAssetManager.skin);
+        buttonsWrapper.add(bossArenaTeleport).row();
+
+        spectatorMode=new Label("Spectator Mode: CTRL + Q", GameAssetManager.skin);
+        buttonsWrapper.add(spectatorMode).row();
+
+        emergencyHeal=new Label("Emergency Heal: CTRL + H",GameAssetManager.skin);
+        buttonsWrapper.add(emergencyHeal).row();
+
+        refillSoulVessel=new Label("Refill Soul Vessel: CTRL + R",GameAssetManager.skin);
+        buttonsWrapper.add(refillSoulVessel).row();
+
+        godMode=new Label("God Mode: CTRL + G",GameAssetManager.skin);
+        buttonsWrapper.add(godMode).row();
 
         continueBtn=new TextButton("Continue", GameAssetManager.skin);
         continueBtn.pad(10);

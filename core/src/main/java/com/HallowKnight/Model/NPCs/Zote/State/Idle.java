@@ -45,10 +45,10 @@ public class Idle extends State{
         super.update(dt);
         if (zote.getSurroundSensors().radarSensor>0){
             zote.getGameScreen().getMainStack().add(table);
+            handleInputs();
         } else {
             zote.getGameScreen().getMainStack().removeActor(table);
         }
-        handleInputs();
     }
 
     @Override

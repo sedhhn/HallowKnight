@@ -90,7 +90,7 @@ public class GuideScreen extends MenuScreen {
         bossArenaTeleportLabel = new Label("CTRL + B", skin);
         spectatorModeLabel = new Label("CTRL + Q", skin);
         emergencyHealLabel = new Label("CTRL + H", skin);
-        refillSoulVesselLabel = new Label("CTRL + V", skin);
+        refillSoulVesselLabel = new Label("CTRL + R", skin);
         godModeLabel = new Label("CTRL + G", skin);
 
         // ========== Back Button ==========

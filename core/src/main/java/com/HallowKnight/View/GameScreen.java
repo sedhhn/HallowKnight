@@ -2,6 +2,8 @@ package com.HallowKnight.View;
 
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.GameController;
+import com.HallowKnight.Controller.Managers.AudioManager;
+import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.GameCamera;
 import com.HallowKnight.Model.GameState;
@@ -110,6 +112,7 @@ public class GameScreen extends MenuScreen{
     @Override
     public void show() {
         super.show();
+        AudioManager.getInstance().playMusic(GameAssetManager.crystalPeakMusic,true,game.getsettings().getMusicVolume());
     }
 
     @Override
