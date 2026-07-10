@@ -87,19 +87,19 @@ public class GuideScreen extends MenuScreen {
 
         // ========== Cheat Codes ==========
         cheatCodesTitle = new Label("Cheat Codes", skin, "subtitle");
-        bossArenaTeleportLabel = new Label("[KEY]", skin);
-        spectatorModeLabel = new Label("[KEY]", skin);
-        emergencyHealLabel = new Label("[KEY]", skin);
-        refillSoulVesselLabel = new Label("[KEY]", skin);
-        godModeLabel = new Label("[KEY]", skin);
+        bossArenaTeleportLabel = new Label("CTRL + B", skin);
+        spectatorModeLabel = new Label("CTRL + Q", skin);
+        emergencyHealLabel = new Label("CTRL + H", skin);
+        refillSoulVesselLabel = new Label("CTRL + V", skin);
+        godModeLabel = new Label("CTRL + G", skin);
 
         // ========== Back Button ==========
         backBtn = new TextButton("Back", skin);
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (lastScreen instanceof GameScreen){
-                    ScreenManager.getInstance().setScreen(GameScreen.getInstance(game));
+                if (lastScreen instanceof GameScreen gameScreen){
+                    ScreenManager.getInstance().setScreen(GameScreen.getInstance(game,gameScreen.getGameState()));
                 } else {
                     ScreenManager.getInstance().setScreen(new MainMenuScreen(game));
                 }

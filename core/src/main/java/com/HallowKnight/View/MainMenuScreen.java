@@ -76,6 +76,14 @@ public class MainMenuScreen extends MenuScreen {
             }
         });
 
+        achievementsBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                ScreenManager.getInstance().setScreen(new AchievementScreen(game));
+            }
+        });
+
         guideBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {

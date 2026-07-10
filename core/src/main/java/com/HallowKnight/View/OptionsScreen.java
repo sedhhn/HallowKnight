@@ -96,8 +96,8 @@ public class OptionsScreen extends MenuScreen{
         backBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (lastScreen instanceof GameScreen){
-                    ScreenManager.getInstance().setScreen(GameScreen.getInstance(game));
+                if (lastScreen instanceof GameScreen gameScreen){
+                    ScreenManager.getInstance().setScreen(GameScreen.getInstance(game,gameScreen.getGameState()));
                 } else {
                     ScreenManager.getInstance().setScreen(new MainMenuScreen(game));
                 }

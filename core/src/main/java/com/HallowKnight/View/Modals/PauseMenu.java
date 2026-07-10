@@ -2,8 +2,10 @@ package com.HallowKnight.View.Modals;
 
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
+import com.HallowKnight.Controller.Managers.SaveManager;
 import com.HallowKnight.Controller.Managers.ScreenManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.GameState;
 import com.HallowKnight.View.GameScreen;
 import com.HallowKnight.View.GuideScreen;
 import com.HallowKnight.View.MainMenuScreen;
@@ -66,16 +68,42 @@ public class PauseMenu extends Stack {
         });
         buttonsWrapper.add(guideBtn).row();
 
-        quitBtn=new TextButton("Quit to Main Menu", GameAssetManager.skin);
+        quitBtn=new TextButton("Save & Quit", GameAssetManager.skin);
         quitBtn.pad(10);
         quitBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                saveGame();
                 ScreenManager.getInstance().setScreen(new MainMenuScreen(HallowKnight.hallowKnight));
                 GameScreen.resetGameScreen();
             }
         });
         buttonsWrapper.add(quitBtn).row();
+    }
+
+    public void saveGame(float x, float y){
+        HallowKnight.hallowKnight.saveManager.saveGame(
+            GameScreen.getInstance().getGameState().save,
+            x,
+            y,
+            gameController.getKnight().getHp(),
+            (int) gameController.getKnight().getSoul(),
+            gameController.getPlayTime(),
+            gameController.getGameScreen().getGameState().totalDamageTaken,
+            gameController.getGameScreen().getGameState().crystallized,
+            gameController.getGameScreen().getGameState().mosquito,
+            gameController.getGameScreen().getGameState().husk,
+            gameController.getGameScreen().getGameState().crawler
+        );
+        GameState gameState=gameController.getGameScreen().getGameState();
+        if (gameState.mosquito>0 && gameState.husk>0 && gameState.crawler>0 && gameState.crystallized>0){
+            HallowKnight.hallowKnight.saveManager.saveAchievement(SaveManager.ACHIEVEMENT_TRUE_HUNTER);
+        }
+    }
+
+    public void saveGame(){
+        saveGame(gameController.getKnight().b2Body.getPosition().x*HallowKnight.PPM,
+            gameController.getKnight().b2Body.getPosition().y*HallowKnight.PPM);
     }
 }

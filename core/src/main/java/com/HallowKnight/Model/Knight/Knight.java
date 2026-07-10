@@ -6,7 +6,7 @@ import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Charms.*;
 import com.HallowKnight.Model.FixtureType;
-import com.HallowKnight.Model.Knight.Nail.Nail;
+import com.HallowKnight.Model.Knight.State.Death;
 import com.HallowKnight.Model.Knight.State.IdleState;
 import com.HallowKnight.Model.Knight.State.State;
 import com.HallowKnight.View.GameScreen;
@@ -26,13 +26,13 @@ public class Knight extends Sprite {
     public static final float DASH_TIME=0.35f;
     public static final float DASH_SPEED=7f;
     public static final float DASH_COOLDOWN=1.5f;
-    public static final float MAX_SOUL=100f;
-    public static final float FOCUS_DURATION=2f;
+    public static final float MAX_SOUL=99f;
+    public static final float FOCUS_DURATION=1.5f;
     public static final float SCREAM_DURATION=1f;
     public static final float FIREBALL_CAST_DURATION=0.7f;
     public static final float SLASH_COOLDOWN=0.5f;
     public static final float BASE_NAIL_DAMAGE=1f;
-    public static final float BASE_SOUL_INCREASE=8f;
+    public static final float BASE_SOUL_INCREASE=11f;
 
     private float damage;
 
@@ -59,6 +59,7 @@ public class Knight extends Sprite {
     private float slashCooldownRemaining;
     private float focusDuration;
     private float soulIncrease;
+    public boolean godMode;
 
     private Vector2 lastSafePos;
     private boolean shouldTeleport;
@@ -71,11 +72,11 @@ public class Knight extends Sprite {
         facingRight=true;
         controller=new KnightController(this);
         state=new IdleState(this);
-        contactManager=new ContactManager(this);
-        ContactController.getInstance().contactListeners.add(contactManager);
+        setContactManager(new ContactManager(this));
+        ContactController.getInstance().contactListeners.add(getContactManager());
         surroundSensors=new SurroundSensors();
         this.world=world;
-        hp = MAX_HP;
+        setHp(MAX_HP);
         invincible = false;
         invincibleTimer = 0;
         defineKnight(spawnPos);
@@ -134,13 +135,15 @@ public class Knight extends Sprite {
             slashCooldownRemaining-=deltaTime;
         }
 
-
+        if (hp<=0 && !(state instanceof Death)){
+            setState(new Death(this));
+        }
     }
 
     public void takeDamage(int damage) {
-        if (invincible) return;
-        hp -= damage;
-        if (hp < 0) hp = 0;
+        if (invincible || godMode) return;
+        setHp(getHp() - damage);
+        if (getHp() < 0) setHp(0);
         invincible = true;
         invincibleTimer = INVINCIBILITY_TIME;
     }
@@ -192,23 +195,23 @@ public class Knight extends Sprite {
     }
 
     public void increaseSoul(float amount){
-        soul+=amount;
-        if (soul>MAX_SOUL){
-            soul=MAX_SOUL;
+        setSoul(getSoul() + amount);
+        if (getSoul() >MAX_SOUL){
+            setSoul(MAX_SOUL);
         }
     }
 
     public void decreaseSoul(float amount){
-        soul-=amount;
-        if (soul<0){
-            soul=0;
+        setSoul(getSoul() - amount);
+        if (getSoul() <0){
+            setSoul(0);
         }
     }
 
     public void increaseHp(int amount){
-        hp+=amount;
-        if (hp>MAX_HP){
-            hp=MAX_HP;
+        setHp(getHp() + amount);
+        if (getHp() >MAX_HP){
+            setHp(MAX_HP);
         }
     }
 
@@ -330,4 +333,23 @@ public class Knight extends Sprite {
         return shouldTeleport;
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setSoul(float soul) {
+        this.soul = soul;
+    }
+
+    public ContactManager getContactManager() {
+        return contactManager;
+    }
+
+    public void setContactManager(ContactManager contactManager) {
+        this.contactManager = contactManager;
+    }
+
+    public State getState(){
+        return state;
+    }
 }

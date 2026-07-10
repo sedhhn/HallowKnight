@@ -1,6 +1,7 @@
 package com.HallowKnight;
 
 import com.HallowKnight.Controller.Managers.GameAssetManager;
+import com.HallowKnight.Controller.Managers.SaveManager;
 import com.HallowKnight.Controller.Managers.ScreenManager;
 import com.HallowKnight.Model.Settings;
 import com.HallowKnight.View.MainMenuScreen;
@@ -16,6 +17,7 @@ public class HallowKnight extends Game {
     public Skin skin;
     private SpriteBatch batch;
     private Settings settings;
+    public SaveManager saveManager;
 
     @Override
     public void create() {
@@ -26,6 +28,7 @@ public class HallowKnight extends Game {
         skin=new Skin(Gdx.files.internal("ui/uiskin.json"));
         ScreenManager.getInstance().initialize(this);
         ScreenManager.getInstance().setScreen(new MainMenuScreen(this));
+        saveManager=new SaveManager();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.HallowKnight.Model.FalseKnight;
 
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
+import com.HallowKnight.Controller.Managers.SaveManager;
 import com.HallowKnight.Controller.Managers.ScreenManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.FalseKnight.State.*;
@@ -109,12 +110,21 @@ public class FalseKnight extends Sprite {
             setState(new Dead(this));
             ContactController.getInstance().contactListeners.remove(contactManager);
             dead=true;
+            HallowKnight.hallowKnight.saveManager.saveAchievement(SaveManager.ACHIEVEMENT_COMPLETION);
+            HallowKnight.hallowKnight.saveManager.saveAchievement(SaveManager.ACHIEVEMENT_DEFEAT_FALSE_KNIGHT);
+            if (gameScreen.getController().getPlayTime()<180){
+                HallowKnight.hallowKnight.saveManager.saveAchievement(SaveManager.ACHIEVEMENT_SPEEDRUN);
+            }
+            if (gameScreen.getGameState().totalDamageTaken==0){
+                HallowKnight.hallowKnight.saveManager.saveAchievement(SaveManager.ACHIEVEMENT_NO_DAMAGE);
+            }
         }
         if (dead){
             gameEndTimer+=dt;
         }
         if (gameEndTimer>5f){
-            ScreenManager.getInstance().setScreen(new EndGameScreen(HallowKnight.hallowKnight));
+            GameScreen.getInstance().getPauseMenu().saveGame(0,0);
+            ScreenManager.getInstance().setScreen(new EndGameScreen(HallowKnight.hallowKnight,gameScreen.getGameState()));
             GameScreen.resetGameScreen();
         }
     }
@@ -142,12 +152,6 @@ public class FalseKnight extends Sprite {
 
     public SurroundSensors getSurroundSensors(){
         return surroundSensors;
-    }
-
-    public Vector2 vecToKnight(){
-        float vecX=knight.b2Body.getPosition().x-b2Body.getPosition().x;
-        float vecY=knight.b2Body.getPosition().y=b2Body.getPosition().y;
-        return new Vector2(vecX,vecY);
     }
 
     public Knight getKnight(){

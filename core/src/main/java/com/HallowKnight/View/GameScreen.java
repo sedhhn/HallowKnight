@@ -4,17 +4,14 @@ import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.GameCamera;
+import com.HallowKnight.Model.GameState;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Map.MapObjectInitializer;
-import com.HallowKnight.Model.NPCs.NPC;
-import com.HallowKnight.Model.NPCs.Zote.Zote;
-import com.HallowKnight.Model.NPCs.Zote.State.Idle;
 import com.HallowKnight.View.Modals.HUD;
 import com.HallowKnight.View.Modals.Inventory;
 import com.HallowKnight.View.Modals.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -31,11 +28,16 @@ public class GameScreen extends MenuScreen{
     private boolean paused;
     private PauseMenu pauseMenu;
     private Inventory inventory;
+    private GameState gameState;
 
-    public static GameScreen getInstance(HallowKnight game){
+    public static GameScreen getInstance(HallowKnight game,GameState gameState){
         if (instance==null){
-            instance=new GameScreen(game);
+            instance=new GameScreen(game,gameState);
         }
+        return instance;
+    }
+
+    public static GameScreen getInstance(){
         return instance;
     }
 
@@ -59,8 +61,9 @@ public class GameScreen extends MenuScreen{
     private OrthogonalTiledMapRenderer mapRenderer;
 
     private MapObjectInitializer mapObjectInitializer;
-    private GameScreen(HallowKnight game) {
+    private GameScreen(HallowKnight game, GameState gameState) {
         super(game);
+        this.gameState = gameState;
 
         Box2D.init();
         world=new World(new Vector2(0,-10),true);
@@ -81,11 +84,11 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.InitializeGrounds();
         mapObjectInitializer.InitializeFloatingPlatforms();
         mapObjectInitializer.InitializeDeadlyBoxes();
-        knight=mapObjectInitializer.initializeKnight(this);
+        knight=mapObjectInitializer.initializeKnight(this,gameState);
         camera.setKnight(knight);
         hud=new HUD();
         mainStack.add(hud);
-        controller=new GameController(world,knight,hud,this);
+        controller=new GameController(world,knight,hud,this,gameState.time);
         mapObjectInitializer.initializeHuskHornheads(controller);
         mapObjectInitializer.initializeCrystallizeds(controller);
         mapObjectInitializer.initializeMosquitoes(controller);
@@ -129,6 +132,8 @@ public class GameScreen extends MenuScreen{
         //rendering enemies
         controller.renderEnemies();
 
+        //rendering false knight
+        controller.renderFalseKnight();
 
         //rendering player
         game.getBatch().setProjectionMatrix(camera.combined);
@@ -137,9 +142,6 @@ public class GameScreen extends MenuScreen{
         knight.draw(game.getBatch());
         game.getBatch().end();
 
-        //rendering false knight
-        controller.renderFalseKnight();
-
         //rendering effects
         controller.renderEffects();
 
@@ -147,11 +149,13 @@ public class GameScreen extends MenuScreen{
         controller.renderBarriers();
 
         // Render Box2D debug
-        b2DebugRenderer.render(world, camera.combined);
+        //b2DebugRenderer.render(world, camera.combined);
 
         if (!paused) {
             world.step(1 / 60f, 6, 2);
-            controller.processPendingActions();
+            if (instance!=null) {
+                controller.processPendingActions();
+            }
         }
         super.render(delta);
     }
@@ -178,5 +182,13 @@ public class GameScreen extends MenuScreen{
 
     public boolean isPaused(){
         return paused;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }

@@ -9,6 +9,7 @@ import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.Enemies.Mosquito.Mosquito;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.Model.GameState;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.NPCs.Zote.Zote;
 import com.HallowKnight.View.GameScreen;
@@ -139,9 +140,20 @@ public class MapObjectInitializer {
         }
     }
 
-    public Knight initializeKnight(GameScreen gameScreen) {
-        PointMapObject point = (PointMapObject) map.getLayers().get("Knight").getObjects().get("Knight_Spawn_Point");
-        return new Knight(world, new Vector2(point.getPoint().x, point.getPoint().y),gameScreen);
+    public Knight initializeKnight(GameScreen gameScreen, GameState gameState) {
+        float spawnX, spawnY;
+        if (gameState.x==0 && gameState.y==0){
+            PointMapObject point = (PointMapObject) map.getLayers().get("Knight").getObjects().get("Knight_Spawn_Point");
+            spawnX=point.getPoint().x;
+            spawnY=point.getPoint().y;
+        } else{
+            spawnX=gameState.x;
+            spawnY=gameState.y;
+        }
+        Knight knight=new Knight(world, new Vector2(spawnX, spawnY),gameScreen);
+        knight.setSoul(gameState.soul);
+        knight.setHp(gameState.hp);
+        return knight;
     }
 
     public void initializeZote(GameController controller,GameScreen gameScreen) {

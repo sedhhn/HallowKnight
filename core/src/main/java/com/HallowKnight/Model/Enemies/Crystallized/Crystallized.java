@@ -6,6 +6,7 @@ import com.HallowKnight.Model.Enemies.Crystallized.State.Idle;
 import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.Enemies.HuskHornhead.SurroundSensors;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -55,5 +56,11 @@ public class Crystallized extends Enemy {
 
     public SurroundSensors getSurroundSensors(){
         return surroundSensors;
+    }
+
+    @Override
+    public boolean isDead() {
+        GameScreen.getInstance().getGameState().crystallized++;
+        return super.isDead();
     }
 }

@@ -6,11 +6,14 @@ import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.FalseKnight.Barrier;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.Knight.Knight;
+import com.HallowKnight.Model.Knight.State.IdleState;
+import com.HallowKnight.Model.Knight.State.Spectator;
 import com.HallowKnight.Model.NPCs.NPC;
 import com.HallowKnight.View.GameScreen;
 import com.HallowKnight.View.Modals.HUD;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.ArrayList;
@@ -28,8 +31,10 @@ public class GameController {
     GameScreen gameScreen;
     Barrier leftBarrier;
     Barrier rightBarrier;
+    private float playTime;
+    Vector2 bossRoomSpawnPos;
 
-    public GameController(World world, Knight knight,HUD hud, GameScreen gameScreen){
+    public GameController(World world, Knight knight,HUD hud, GameScreen gameScreen, float playTime){
         this.world=world;
         this.knight=knight;
         knightController=knight.getController();
@@ -58,6 +63,7 @@ public class GameController {
             e.update(dt);
         }
         falseKnight.update(dt);
+        setPlayTime(getPlayTime() + dt);
     }
 
     public void handleInput(){
@@ -66,6 +72,30 @@ public class GameController {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.I)){
             toggleInventory();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.H)){
+            knight.increaseHp(1);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.V)){
+            knight.setSoul(Knight.MAX_SOUL);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.B)){
+            if (bossRoomSpawnPos==null){
+                bossRoomSpawnPos=new Vector2(
+                    falseKnight.b2Body.getPosition().x-300/HallowKnight.PPM ,
+                    falseKnight.b2Body.getPosition().y+10/HallowKnight.PPM);
+            }
+            knight.b2Body.setTransform(bossRoomSpawnPos, 0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.G)){
+            knight.godMode= !knight.godMode;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            if (knight.getState() instanceof Spectator){
+                knight.setState(new IdleState(knight));
+            } else {
+                knight.setState(new Spectator(knight));
+            }
         }
     }
 
@@ -173,5 +203,13 @@ public class GameController {
 
     public GameScreen getGameScreen(){
         return gameScreen;
+    }
+
+    public float getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(float playTime) {
+        this.playTime = playTime;
     }
 }

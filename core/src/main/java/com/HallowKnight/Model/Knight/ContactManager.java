@@ -8,6 +8,7 @@ import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.FalseKnight.FalseKnight;
 import com.HallowKnight.Model.FixtureType;
 import com.HallowKnight.Model.Knight.Nail.Nail;
+import com.HallowKnight.Model.Knight.State.Spectator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -24,32 +25,34 @@ public class ContactManager implements ContactListener {
         Object userDataA = contact.getFixtureA().getUserData();
         Object userDataB = contact.getFixtureB().getUserData();
 
-        //Knight & Deadly
-        if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.DEADLY){
-            knight.takeDamage(1);
-            knight.teleportToSafePos();
-        } else if(userDataA==FixtureType.DEADLY && userDataB==FixtureType.KNIGHT){
-            knight.takeDamage(1);
-            knight.teleportToSafePos();
-        }
+        if (!(knight.getState() instanceof Spectator)) {
+            //Knight & Deadly
+            if (userDataA == FixtureType.KNIGHT && userDataB == FixtureType.DEADLY) {
+                knight.takeDamage(1);
+                knight.teleportToSafePos();
+            } else if (userDataA == FixtureType.DEADLY && userDataB == FixtureType.KNIGHT) {
+                knight.takeDamage(1);
+                knight.teleportToSafePos();
+            }
 
-        //Knight & Enemy
-        if (userDataA==FixtureType.KNIGHT && userDataB==FixtureType.ENEMY){
-            Enemy enemy=(Enemy) contact.getFixtureB().getBody().getUserData();
-            if (enemy!=null && enemy.getB2Body().getPosition().x>knight.b2Body.getPosition().x && !knight.isInvincible()){
-                knight.b2Body.applyLinearImpulse(new Vector2(-5f,2f),knight.b2Body.getWorldCenter(),true);
-            } else if(enemy!=null && enemy.getB2Body().getPosition().x<knight.b2Body.getPosition().x && !knight.isInvincible()){
-                knight.b2Body.applyLinearImpulse(new Vector2(+5f,2f),knight.b2Body.getWorldCenter(),true);
+            //Knight & Enemy
+            if (userDataA == FixtureType.KNIGHT && userDataB == FixtureType.ENEMY) {
+                Enemy enemy = (Enemy) contact.getFixtureB().getBody().getUserData();
+                if (enemy != null && enemy.getB2Body().getPosition().x > knight.b2Body.getPosition().x && !knight.isInvincible()) {
+                    knight.b2Body.applyLinearImpulse(new Vector2(-5f, 2f), knight.b2Body.getWorldCenter(), true);
+                } else if (enemy != null && enemy.getB2Body().getPosition().x < knight.b2Body.getPosition().x && !knight.isInvincible()) {
+                    knight.b2Body.applyLinearImpulse(new Vector2(+5f, 2f), knight.b2Body.getWorldCenter(), true);
+                }
+                knight.takeDamage(1);
+            } else if (userDataA == FixtureType.ENEMY && userDataB == FixtureType.KNIGHT) {
+                Enemy enemy = (Enemy) contact.getFixtureA().getBody().getUserData();
+                if (enemy != null && enemy.getB2Body().getPosition().x > knight.b2Body.getPosition().x && !knight.isInvincible()) {
+                    knight.b2Body.applyLinearImpulse(new Vector2(-5f, 2f), knight.b2Body.getWorldCenter(), true);
+                } else if (enemy != null && enemy.getB2Body().getPosition().x < knight.b2Body.getPosition().x && !knight.isInvincible()) {
+                    knight.b2Body.applyLinearImpulse(new Vector2(+5f, 2f), knight.b2Body.getWorldCenter(), true);
+                }
+                knight.takeDamage(1);
             }
-            knight.takeDamage(1);
-        } else if(userDataA==FixtureType.ENEMY && userDataB==FixtureType.KNIGHT){
-            Enemy enemy=(Enemy) contact.getFixtureA().getBody().getUserData();
-            if (enemy!=null && enemy.getB2Body().getPosition().x>knight.b2Body.getPosition().x && !knight.isInvincible()){
-                knight.b2Body.applyLinearImpulse(new Vector2(-5f,2f),knight.b2Body.getWorldCenter(),true);
-            } else if(enemy!=null && enemy.getB2Body().getPosition().x<knight.b2Body.getPosition().x && !knight.isInvincible()){
-                knight.b2Body.applyLinearImpulse(new Vector2(+5f,2f),knight.b2Body.getWorldCenter(),true);
-            }
-            knight.takeDamage(1);
         }
 
         if (userDataA==FixtureType.KNIGHT_BOTTOM && userDataB==FixtureType.GROUND){
@@ -260,6 +263,10 @@ public class ContactManager implements ContactListener {
     public void preSolve(Contact contact, Manifold oldManifold) {
         Object userDataA = contact.getFixtureA().getUserData();
         Object userDataB = contact.getFixtureB().getUserData();
+
+        if (knight.getState() instanceof Spectator && (userDataA==FixtureType.KNIGHT || userDataB==FixtureType.KNIGHT)){
+            contact.setEnabled(false);
+        }
 
         if (userDataA == FixtureType.KNIGHT && userDataB == FixtureType.ENEMY
             || userDataA == FixtureType.ENEMY && userDataB == FixtureType.KNIGHT) {

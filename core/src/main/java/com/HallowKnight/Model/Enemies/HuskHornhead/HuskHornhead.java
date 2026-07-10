@@ -5,6 +5,7 @@ import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.Enemies.HuskHornhead.State.Walking;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.View.GameScreen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -57,5 +58,11 @@ public class HuskHornhead extends Enemy {
 
     public SurroundSensors getSurroundSensors(){
         return surroundSensors;
+    }
+
+    @Override
+    public boolean isDead() {
+        GameScreen.getInstance().getGameState().husk++;
+        return super.isDead();
     }
 }
