@@ -9,6 +9,7 @@ import com.HallowKnight.Model.Knight.Nail.State.DownSlash;
 import com.HallowKnight.Model.Knight.Nail.State.NormalSlash;
 import com.HallowKnight.Model.Knight.Nail.State.SlashState;
 import com.HallowKnight.Model.Knight.Nail.State.SlashStates;
+import com.HallowKnight.Model.Knight.Nail.State.UpSlash;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.*;
 
@@ -28,6 +29,7 @@ public class Nail extends Sprite {
         switch (state){
             case NORMAL -> this.state=new NormalSlash(this);
             case DOWN -> this.state=new DownSlash(this);
+            case UP -> this.state=new UpSlash(this);
         }
     }
 
@@ -43,6 +45,10 @@ public class Nail extends Sprite {
                 bodyDef.position.set(knight.b2Body.getPosition().x
             , knight.b2Body.getPosition().y-50f/HallowKnight.PPM);
             }
+            case UP -> {
+                bodyDef.position.set(knight.b2Body.getPosition().x
+            , knight.b2Body.getPosition().y+50f/HallowKnight.PPM);
+            }
         }
         bodyDef.type= BodyDef.BodyType.DynamicBody;
         b2Body=world.createBody(bodyDef);
@@ -52,6 +58,7 @@ public class Nail extends Sprite {
         switch (state){
             case NORMAL ->shape.setAsBox(80/ HallowKnight.PPM, 30/HallowKnight.PPM);
             case DOWN -> shape.setAsBox(30/HallowKnight.PPM,70/HallowKnight.PPM);
+            case UP -> shape.setAsBox(30/HallowKnight.PPM, 70/HallowKnight.PPM);
         }
         fixtureDef.shape=shape;
         fixtureDef.isSensor=true;

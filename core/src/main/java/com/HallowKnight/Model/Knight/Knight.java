@@ -22,6 +22,7 @@ public class Knight extends Sprite {
     public static final float MAX_MOVEMENT_SPEED=4f;
     public static final int MAX_HP = 5;
     private static final float INVINCIBILITY_TIME = 1.5f;
+    private static final float BLINK_INTERVAL = 0.1f;
     public static final float ATTACK_DURATION=0.3f;
     public static final float DASH_TIME=0.35f;
     public static final float DASH_SPEED=7f;
@@ -122,8 +123,11 @@ public class Knight extends Sprite {
 
         if (invincible) {
             invincibleTimer -= deltaTime;
+            int blinkPhase = (int)(invincibleTimer / BLINK_INTERVAL);
+            setAlpha(blinkPhase % 2 == 0 ? 1f : 0f);
             if (invincibleTimer <= 0) {
                 invincible = false;
+                setAlpha(1f);
             }
         }
 

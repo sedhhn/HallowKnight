@@ -3,6 +3,7 @@ package com.HallowKnight.Model.Map;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Effects.Torch;
 import com.HallowKnight.Model.Enemies.Crystallized.Crystallized;
 import com.HallowKnight.Model.Enemies.GroundEnemy.GroundEnemy;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
@@ -185,5 +186,10 @@ public class MapObjectInitializer {
     public Vector2 getRightBarrierPos(){
         PointMapObject point = (PointMapObject) map.getLayers().get("BossWalls").getObjects().get("Boss_wall2");
         return new Vector2(point.getPoint().x,point.getPoint().y);
+    }
+
+    public void initializeTorch(GameController gameController){
+        PointMapObject point = (PointMapObject) map.getLayers().get("Effects").getObjects().get("Fire0");
+        gameController.getEffects().add(new Torch(new Vector2(point.getPoint().x/HallowKnight.PPM, point.getPoint().y/HallowKnight.PPM)));
     }
 }

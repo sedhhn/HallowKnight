@@ -49,7 +49,11 @@ public class IdleState extends State{
             knight.setState(new JumpState(knight));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X) && knight.getSlashCooldownRemaining()<=0){
-            knight.setState(new AttackState(knight));
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+                knight.setState(new UpSlashState(knight));
+            } else {
+                knight.setState(new AttackState(knight));
+            }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.C) && knight.getDashCooldownRemaining()<=0){
             knight.setState(new DashState(knight));

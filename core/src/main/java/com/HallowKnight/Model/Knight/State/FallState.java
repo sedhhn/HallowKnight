@@ -55,7 +55,9 @@ public class FallState extends State {
             knight.b2Body.setLinearVelocity(0,knight.b2Body.getLinearVelocity().y);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.X) && knight.getSlashCooldownRemaining()<=0){
-            if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+            if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+                knight.setState(new UpSlashState(knight));
+            } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
                 knight.setState(new DownSlashState(knight));
             } else {
                 knight.setState(new AttackState(knight));

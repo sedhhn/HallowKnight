@@ -5611,7 +5611,7 @@
   </object>
  </objectgroup>
  <objectgroup id="25" name="Effects">
-  <object id="114" name="Fire0" x="3598.5" y="1680">
+  <object id="114" name="Fire0" x="3563.83" y="1689.33">
    <point/>
   </object>
  </objectgroup>

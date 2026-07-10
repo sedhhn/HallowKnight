@@ -55,6 +55,7 @@ public class GameAssetManager {
     public static TextureAtlas shockwaveAtlas;
     public static TextureAtlas soulScream;
     public static TextureAtlas soulBall;
+    public static TextureAtlas torch;
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");
@@ -92,6 +93,8 @@ public class GameAssetManager {
         soulCatcher=new Texture("Sprites/Inventory & UI/Charms/Soul Catcher.png");
         unbreakableStrength=new Texture("Sprites/Inventory & UI/Charms/Unbreakable Strength.png");
         voidHeart=new Texture("Sprites/Inventory & UI/Charms/Void Heart.png");
+        //========== Effects ===========
+        torch=new TextureAtlas("Animations/Effects/Torch.atlas");
     }
 
     public static void dispose() {
