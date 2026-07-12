@@ -8,11 +8,11 @@
     ],
     "fileStates": {
         "map1.tmx": {
-            "scale": 0.33,
+            "scale": 0.25,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 5606.060606060606,
-                "y": 3515.151515151515
+                "x": 4592,
+                "y": 2276
             }
         },
         "map1.tmx#ChatGPT Image Jul 12, 2026, 01_45_25 PM": {

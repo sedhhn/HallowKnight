@@ -32,8 +32,6 @@ public class GameCamera extends OrthographicCamera {
 
         float minX=Math.min(HallowKnight.BOSS_ROOM_MIN_X,HallowKnight.BOSS_ROOM_MAX_X);
         float maxX=Math.max(HallowKnight.BOSS_ROOM_MIN_X,HallowKnight.BOSS_ROOM_MAX_X);
-        float minY=Math.min(HallowKnight.BOSS_ROOM_TOP_Y,HallowKnight.BOSS_ROOM_BOTTOM_Y);
-        float maxY=Math.max(HallowKnight.BOSS_ROOM_TOP_Y,HallowKnight.BOSS_ROOM_BOTTOM_Y);
         this.bossMinX=minX*8f/HallowKnight.PPM;
         this.bossMaxX=maxX*8f/HallowKnight.PPM;
         this.bossMinY=6f;

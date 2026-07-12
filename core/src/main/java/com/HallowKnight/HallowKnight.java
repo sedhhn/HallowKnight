@@ -15,8 +15,8 @@ public class HallowKnight extends Game {
     public static final float PPM=100; //Pixels Per Meter
     public static final float BOSS_ROOM_MIN_X=592;
     public static final float BOSS_ROOM_MAX_X=804;
-    public static final float BOSS_ROOM_BOTTOM_Y=520;
-    public static final float BOSS_ROOM_TOP_Y=392;
+    public static final float MAP_CENTER_X=600;
+    public static final float MAP_TRANSITION_WIDTH=200;
     public static HallowKnight hallowKnight;
     public Skin skin;
     private SpriteBatch batch;

@@ -112,16 +112,19 @@ public class GameScreen extends MenuScreen{
     @Override
     public void show() {
         super.show();
-        AudioManager.getInstance().playMusic(GameAssetManager.crystalPeakMusic,true,game.getsettings().getMusicVolume());
+        float knightTiledX=knight.b2Body.getPosition().x*HallowKnight.PPM/8f;
+        float zoneRight=HallowKnight.MAP_CENTER_X+HallowKnight.MAP_TRANSITION_WIDTH/2f;
+        if (knightTiledX>=zoneRight){
+            AudioManager.getInstance().playMusic(GameAssetManager.crystalPeakMusic,true,game.getsettings().getMusicVolume());
+        } else {
+            AudioManager.getInstance().playMusic(GameAssetManager.crossroadsMusic,true,game.getsettings().getMusicVolume());
+        }
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0.3f,0.3f,0.3f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        controller.handleInput();
-        if (!paused) controller.update(delta);
 
         // Update viewport
         gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -132,6 +135,9 @@ public class GameScreen extends MenuScreen{
         // Set the renderer's view
         mapRenderer.setView(camera);
         mapRenderer.render();
+
+        controller.handleInput();
+        if (!paused) controller.update(delta);
 
         //rendering enemies
         controller.renderEnemies();

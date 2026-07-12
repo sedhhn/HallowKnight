@@ -7,6 +7,8 @@ public class AudioManager {
     private static AudioManager instance;
     private Music currentMusic;
     private String currentMusicPath;
+    private Music secondaryMusic;
+    private String secondaryMusicPath;
 
     private AudioManager(){
 
@@ -20,6 +22,7 @@ public class AudioManager {
     }
 
     public void playMusic(String path, boolean looping, float volume){
+        stopSecondary();
         if (currentMusic!=null && currentMusicPath!=null && currentMusicPath.equals(path)){
             currentMusic.setVolume(volume);
             if (!currentMusic.isPlaying()){
@@ -42,6 +45,54 @@ public class AudioManager {
             currentMusic=null;
             currentMusicPath=null;
         }
+    }
+
+    public void ensureSecondary(String path, boolean looping){
+        if (secondaryMusicPath!=null && secondaryMusicPath.equals(path)){
+            if (!secondaryMusic.isPlaying()){
+                secondaryMusic.play();
+            }
+            return;
+        }
+        stopSecondary();
+        secondaryMusic=Gdx.audio.newMusic(Gdx.files.internal(path));
+        secondaryMusic.setLooping(looping);
+        secondaryMusic.setVolume(0);
+        secondaryMusic.play();
+        secondaryMusicPath=path;
+    }
+
+    public void setSecondaryVolume(float volume){
+        if (secondaryMusic!=null){
+            secondaryMusic.setVolume(volume);
+        }
+    }
+
+    public void stopSecondary(){
+        if (secondaryMusic!=null){
+            secondaryMusic.stop();
+            secondaryMusic.dispose();
+            secondaryMusic=null;
+            secondaryMusicPath=null;
+        }
+    }
+
+    public void promoteSecondary(float volume){
+        if (currentMusic!=null){
+            currentMusic.stop();
+            currentMusic.dispose();
+        }
+        currentMusic=secondaryMusic;
+        currentMusicPath=secondaryMusicPath;
+        secondaryMusic=null;
+        secondaryMusicPath=null;
+        if (currentMusic!=null){
+            currentMusic.setVolume(volume);
+        }
+    }
+
+    public String getCurrentMusicPath(){
+        return currentMusicPath;
     }
 
     public void pauseMusic() {

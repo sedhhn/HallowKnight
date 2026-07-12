@@ -1,6 +1,8 @@
 package com.HallowKnight.Controller;
 
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Controller.Managers.AudioManager;
+import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Effects.Effect;
 import com.HallowKnight.Model.Enemies.Enemy;
 import com.HallowKnight.Model.FalseKnight.Barrier;
@@ -63,7 +65,42 @@ public class GameController {
             e.update(dt);
         }
         falseKnight.update(dt);
+        updateMusicTransition();
         setPlayTime(getPlayTime() + dt);
+    }
+
+    public void updateMusicTransition(){
+        float knightTiledX=knight.b2Body.getPosition().x*HallowKnight.PPM/8f;
+        float zoneLeft=HallowKnight.MAP_CENTER_X-HallowKnight.MAP_TRANSITION_WIDTH/2f;
+        float zoneRight=HallowKnight.MAP_CENTER_X+HallowKnight.MAP_TRANSITION_WIDTH/2f;
+
+        float blend;
+        if (knightTiledX<=zoneLeft){
+            blend=0;
+        } else if (knightTiledX>=zoneRight){
+            blend=1;
+        } else {
+            blend=(knightTiledX-zoneLeft)/(zoneRight-zoneLeft);
+        }
+
+        float maxVolume=HallowKnight.hallowKnight.getsettings().getMusicVolume();
+        AudioManager audio=AudioManager.getInstance();
+
+        if (blend<=0){
+            audio.setMusicVolume(maxVolume);
+            audio.stopSecondary();
+        } else if (blend>=1){
+            if (GameAssetManager.crossroadsMusic.equals(audio.getCurrentMusicPath())){
+                audio.promoteSecondary(maxVolume);
+            } else {
+                audio.setMusicVolume(maxVolume);
+                audio.stopSecondary();
+            }
+        } else {
+            audio.ensureSecondary(GameAssetManager.crystalPeakMusic,true);
+            audio.setMusicVolume((1f-blend)*maxVolume);
+            audio.setSecondaryVolume(blend*maxVolume);
+        }
     }
 
     public void handleInput(){
