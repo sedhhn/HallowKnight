@@ -80,7 +80,7 @@ public class GuideScreen extends MenuScreen {
         FocusBindingLabel = new Label("A", skin);
         interactBindingLabel = new Label("Z", skin);
         vengefulSpritBindingLabel = new Label("S", skin);
-        howlingWraithBindingLabel = new Label("S + Up Arrow", skin);
+        howlingWraithBindingLabel = new Label("D", skin);
         dashBindingLabel = new Label("C", skin);
         inventoryBindingLabel = new Label("I", skin);
         pauseMenuLabel = new Label("Esc", skin);

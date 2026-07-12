@@ -37,13 +37,11 @@ public class IdleState extends State{
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             knight.setState(new RunState(knight));
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)){
-            if (Gdx.input.isKeyPressed(Input.Keys.UP) && knight.getSoul()>SoulScream.SOUL_COST){
-                knight.setState(new Scream(knight));
-            }
-            if ( knight.getSoul()> SoulBall.SOUL_COST) {
-                knight.setState(new FireBallCast(knight));
-            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D) && knight.getSoul()> SoulScream.SOUL_COST){
+            knight.setState(new Scream(knight));
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S) && knight.getSoul()> SoulBall.SOUL_COST) {
+            knight.setState(new FireBallCast(knight));
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             knight.setState(new JumpState(knight));
