@@ -63,6 +63,7 @@ public class GameScreen extends MenuScreen{
     private OrthogonalTiledMapRenderer mapRenderer;
 
     private MapObjectInitializer mapObjectInitializer;
+    private int currentMusicZone = -1; // 0 = crossroads, 1 = crystal peak
     private GameScreen(HallowKnight game, GameState gameState) {
         super(game);
         this.gameState = gameState;
@@ -112,12 +113,15 @@ public class GameScreen extends MenuScreen{
     @Override
     public void show() {
         super.show();
-        float knightTiledX=knight.b2Body.getPosition().x*HallowKnight.PPM/8f;
-        float zoneRight=HallowKnight.MAP_CENTER_X+HallowKnight.MAP_TRANSITION_WIDTH/2f;
-        if (knightTiledX>=zoneRight){
-            AudioManager.getInstance().playMusic(GameAssetManager.crystalPeakMusic,true,game.getsettings().getMusicVolume());
+        AudioManager audio = AudioManager.getInstance();
+        float volume = game.getsettings().getMusicVolume();
+        float knightTiledX = knight.b2Body.getPosition().x * HallowKnight.PPM / 8f;
+        if (knightTiledX < HallowKnight.MAP_CENTER_X) {
+            audio.playMusic(GameAssetManager.crossroadsMusic, true, volume);
+            audio.stopSecondary();
         } else {
-            AudioManager.getInstance().playMusic(GameAssetManager.crossroadsMusic,true,game.getsettings().getMusicVolume());
+            audio.playMusic(GameAssetManager.crystalPeakMusic, true, volume);
+            audio.stopSecondary();
         }
     }
 
@@ -167,6 +171,7 @@ public class GameScreen extends MenuScreen{
                 controller.processPendingActions();
             }
         }
+
         super.render(delta);
     }
 

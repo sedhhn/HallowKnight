@@ -61,6 +61,11 @@ public class GameAssetManager {
     //Musics:
     public static String crystalPeakMusic="audio/Musics/11 - Crystal Peak.mp3";
     public static String crossroadsMusic="audio/Musics/03 - Crossroads.mp3";
+    public static String zote0="audio/SFX/Zote/Zote_01.wav";
+    public static String zote1="audio/SFX/Zote/Zote_02.wav";
+    public static String zote2="audio/SFX/Zote/Zote_03.wav";
+    public static String zote3="audio/SFX/Zote/Zote_04.wav";
+    public static String zote4="audio/SFX/Zote/Zote_05.wav";
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");

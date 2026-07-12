@@ -35,6 +35,8 @@ public class GameController {
     Barrier rightBarrier;
     private float playTime;
     Vector2 bossRoomSpawnPos;
+    private int lastMusicZone = -1;
+    private float currentBlend = -1f;
 
     public GameController(World world, Knight knight,HUD hud, GameScreen gameScreen, float playTime){
         this.world=world;
@@ -67,39 +69,59 @@ public class GameController {
         falseKnight.update(dt);
         updateMusicTransition();
         setPlayTime(getPlayTime() + dt);
+        updateMusicTransition();
     }
 
-    public void updateMusicTransition(){
-        float knightTiledX=knight.b2Body.getPosition().x*HallowKnight.PPM/8f;
-        float zoneLeft=HallowKnight.MAP_CENTER_X-HallowKnight.MAP_TRANSITION_WIDTH/2f;
-        float zoneRight=HallowKnight.MAP_CENTER_X+HallowKnight.MAP_TRANSITION_WIDTH/2f;
+    private void updateMusicTransition() {
+        float knightTiledX = knight.b2Body.getPosition().x * HallowKnight.PPM / 8f;
+        float zoneLeft = HallowKnight.MAP_CENTER_X - HallowKnight.MAP_TRANSITION_WIDTH / 2f;
+        float zoneRight = HallowKnight.MAP_CENTER_X + HallowKnight.MAP_TRANSITION_WIDTH / 2f;
 
         float blend;
-        if (knightTiledX<=zoneLeft){
-            blend=0;
-        } else if (knightTiledX>=zoneRight){
-            blend=1;
+        int newZone;
+        if (knightTiledX <= zoneLeft) {
+            blend = 0f;
+            newZone = 0;
+        } else if (knightTiledX >= zoneRight) {
+            blend = 1f;
+            newZone = 1;
         } else {
-            blend=(knightTiledX-zoneLeft)/(zoneRight-zoneLeft);
+            blend = (knightTiledX - zoneLeft) / (zoneRight - zoneLeft);
+            newZone = (blend < 0.5f) ? 0 : 1;
         }
 
-        float maxVolume=HallowKnight.hallowKnight.getsettings().getMusicVolume();
-        AudioManager audio=AudioManager.getInstance();
+        if (currentBlend == blend && lastMusicZone == newZone) {
+            return;
+        }
 
-        if (blend<=0){
-            audio.setMusicVolume(maxVolume);
+        currentBlend = blend;
+        lastMusicZone = newZone;
+
+        AudioManager audio = AudioManager.getInstance();
+        float maxVolume = HallowKnight.hallowKnight.getsettings().getMusicVolume();
+
+        if (blend <= 0) {
+            audio.playMusic(GameAssetManager.crossroadsMusic, true, maxVolume);
             audio.stopSecondary();
-        } else if (blend>=1){
-            if (GameAssetManager.crossroadsMusic.equals(audio.getCurrentMusicPath())){
-                audio.promoteSecondary(maxVolume);
-            } else {
-                audio.setMusicVolume(maxVolume);
-                audio.stopSecondary();
-            }
+        } else if (blend >= 1) {
+            audio.playMusic(GameAssetManager.crystalPeakMusic, true, maxVolume);
+            audio.stopSecondary();
         } else {
-            audio.ensureSecondary(GameAssetManager.crystalPeakMusic,true);
-            audio.setMusicVolume((1f-blend)*maxVolume);
-            audio.setSecondaryVolume(blend*maxVolume);
+            if (lastMusicZone == 0) {
+                if (!GameAssetManager.crossroadsMusic.equals(audio.getCurrentMusicPath())) {
+                    audio.playMusic(GameAssetManager.crossroadsMusic, true, maxVolume);
+                }
+                audio.ensureSecondary(GameAssetManager.crystalPeakMusic, true);
+                audio.setMusicVolume(maxVolume * (1f - blend));
+                audio.setSecondaryVolume(maxVolume * blend);
+            } else {
+                if (!GameAssetManager.crystalPeakMusic.equals(audio.getCurrentMusicPath())) {
+                    audio.playMusic(GameAssetManager.crystalPeakMusic, true, maxVolume);
+                }
+                audio.ensureSecondary(GameAssetManager.crossroadsMusic, true);
+                audio.setMusicVolume(maxVolume * blend);
+                audio.setSecondaryVolume(maxVolume * (1f - blend));
+            }
         }
     }
 
@@ -249,4 +271,6 @@ public class GameController {
     public void setPlayTime(float playTime) {
         this.playTime = playTime;
     }
+
+
 }
