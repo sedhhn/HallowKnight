@@ -1,5 +1,6 @@
 package com.HallowKnight.Model.NPCs.Zote.State;
 
+import com.HallowKnight.Controller.Managers.AudioManager;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Knight.State.IdleState;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class Talk extends State{
     List<String> dialogs=Arrays.asList(
@@ -46,6 +48,11 @@ public class Talk extends State{
     Table table;
     int nextDialogIdx=0;
     Label dialog;
+    private static final String[] zoteSounds = {
+        GameAssetManager.zote0, GameAssetManager.zote1, GameAssetManager.zote2,
+        GameAssetManager.zote3, GameAssetManager.zote4
+    };
+    private final Random random = new Random();
     public Talk(Zote zote) {
         super(zote);
         this.zote=zote;
@@ -86,6 +93,7 @@ public class Talk extends State{
     protected void handleInputs() {
         super.handleInputs();
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)){
+            AudioManager.getInstance().playSFX(zoteSounds[random.nextInt(zoteSounds.length)]);
             if (nextDialogIdx>=dialogs.size()){
                 zote.getKnight().setState(new IdleState(zote.getKnight()));
                 zote.setState(new Idle(zote));

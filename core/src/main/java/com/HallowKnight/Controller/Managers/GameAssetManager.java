@@ -66,6 +66,7 @@ public class GameAssetManager {
     public static String zote2="audio/SFX/Zote/Zote_03.wav";
     public static String zote3="audio/SFX/Zote/Zote_04.wav";
     public static String zote4="audio/SFX/Zote/Zote_05.wav";
+    
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");

@@ -1,7 +1,9 @@
 package com.HallowKnight.Controller.Managers;
 
+import com.HallowKnight.HallowKnight;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 public class AudioManager {
     private static AudioManager instance;
@@ -104,6 +106,13 @@ public class AudioManager {
 
     public void resumeMusic() {
         if (currentMusic != null && !currentMusic.isPlaying()) currentMusic.play();
+    }
+
+    public void playSFX(String path) {
+        var settings = HallowKnight.hallowKnight.getsettings();
+        if (settings.isSfxMuted()) return;
+        Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
+        sound.play(settings.getSfxVolume());
     }
 
     public void disposeAll() {
