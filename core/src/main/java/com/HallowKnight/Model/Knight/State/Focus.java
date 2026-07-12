@@ -1,5 +1,6 @@
 package com.HallowKnight.Model.Knight.State;
 
+import com.HallowKnight.Controller.Managers.AudioManager;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Knight.Knight;
 import com.badlogic.gdx.Gdx;
@@ -14,6 +15,12 @@ public class Focus extends State{
         frames= GameAssetManager.knightAtlas.findRegions("Focus");
         frames.sort(Comparator.comparingInt(a->a.index));
         stateAnimation=new Animation<>(1/10f,frames, Animation.PlayMode.LOOP);
+    }
+
+    @Override
+    public void enter() {
+        super.enter();
+        AudioManager.getInstance().playLoopedSFX(GameAssetManager.knightFocus);
     }
 
     @Override
@@ -36,5 +43,11 @@ public class Focus extends State{
         if (!Gdx.input.isKeyPressed(Input.Keys.A)){
             knight.setState(new IdleState(knight));
         }
+    }
+
+    @Override
+    public void exit() {
+        super.exit();
+        AudioManager.getInstance().stopLoopedSFX();
     }
 }

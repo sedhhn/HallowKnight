@@ -11,6 +11,8 @@ public class AudioManager {
     private String currentMusicPath;
     private Music secondaryMusic;
     private String secondaryMusicPath;
+    private Sound currentLoopedSound;
+    private String currentLoopedSoundPath;
 
     private AudioManager() {}
 
@@ -115,8 +117,28 @@ public class AudioManager {
         sound.play(settings.getSfxVolume());
     }
 
+    public void playLoopedSFX(String path) {
+        var settings = HallowKnight.hallowKnight.getsettings();
+        if (settings.isSfxMuted()) return;
+        stopLoopedSFX();
+        currentLoopedSound = Gdx.audio.newSound(Gdx.files.internal(path));
+        long soundId = currentLoopedSound.play(settings.getSfxVolume()); // ← soundId را ذخیره کن
+        currentLoopedSound.setLooping(soundId, true); // ← از soundId استفاده کن
+        currentLoopedSoundPath = path;
+    }
+
+    public void stopLoopedSFX() {
+        if (currentLoopedSound != null) {
+            currentLoopedSound.stop();
+            currentLoopedSound.dispose();
+            currentLoopedSound = null;
+            currentLoopedSoundPath = null;
+        }
+    }
+
     public void disposeAll() {
         stopMusic();
         stopSecondary();
+        stopLoopedSFX();
     }
 }

@@ -1,5 +1,6 @@
 package com.HallowKnight.Model.Knight.State;
 
+import com.HallowKnight.Controller.Managers.AudioManager;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Knight.Knight;
 import com.HallowKnight.Model.Knight.Nail.Nail;
@@ -30,6 +31,7 @@ public class AttackState extends State{
     @Override
     public void enter() {
         super.enter();
+        AudioManager.getInstance().playSFX(GameAssetManager.nailAttack);
     }
 
     @Override

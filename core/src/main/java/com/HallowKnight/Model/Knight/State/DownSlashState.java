@@ -1,5 +1,6 @@
 package com.HallowKnight.Model.Knight.State;
 
+import com.HallowKnight.Controller.Managers.AudioManager;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Effects.SoulBall;
 import com.HallowKnight.Model.Effects.SoulScream;
@@ -28,6 +29,7 @@ public class DownSlashState extends State {
     @Override
     public void enter() {
         super.enter();
+        AudioManager.getInstance().playSFX(GameAssetManager.nailAttack);
         knight.setSlashCooldownRemaining(knight.getSlashCooldown());
     }
 

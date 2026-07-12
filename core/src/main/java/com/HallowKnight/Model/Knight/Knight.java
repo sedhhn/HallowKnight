@@ -2,6 +2,7 @@ package com.HallowKnight.Model.Knight;
 
 import com.HallowKnight.Controller.ContactController;
 import com.HallowKnight.Controller.KnightController;
+import com.HallowKnight.Controller.Managers.AudioManager;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Charms.*;
@@ -146,6 +147,7 @@ public class Knight extends Sprite {
 
     public void takeDamage(int damage) {
         if (invincible || godMode) return;
+        AudioManager.getInstance().playSFX(GameAssetManager.knightDamage);
         setHp(getHp() - damage);
         if (getHp() < 0) setHp(0);
         invincible = true;

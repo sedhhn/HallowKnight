@@ -1,5 +1,7 @@
 package com.HallowKnight.Model.FalseKnight;
 
+import com.HallowKnight.Controller.Managers.AudioManager;
+import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Charms.CharmType;
 import com.HallowKnight.Model.Enemies.HuskHornhead.HuskHornhead;
 import com.HallowKnight.Model.FixtureType;
@@ -111,23 +113,27 @@ public class ContactManager implements ContactListener {
         if (userDataA== FixtureType.BOSS && userDataB==FixtureType.NAIL){
             if (contact.getFixtureA().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
+                    AudioManager.getInstance().playSFX(GameAssetManager.enemyDamage);
                     falseKnight.takeDamage(5);
                     if (falseKnight.getKnight().hasCharm(CharmType.SOUL_CATCHER)){
                         falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE*2);
                     } else {
                         falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE);
                     }
+                    AudioManager.getInstance().playSFX(GameAssetManager.soulGain);
                 }
             }
         } else if(userDataA== FixtureType.NAIL && userDataB==FixtureType.BOSS){
             if (contact.getFixtureB().getBody().getUserData() instanceof FalseKnight c) {
                 if (c==falseKnight) {
+                    AudioManager.getInstance().playSFX(GameAssetManager.enemyDamage);
                     falseKnight.takeDamage(5);
                     if (falseKnight.getKnight().hasCharm(CharmType.SOUL_CATCHER)){
                         falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE*2);
                     } else {
                         falseKnight.getKnight().increaseSoul(Knight.BASE_SOUL_INCREASE);
                     }
+                    AudioManager.getInstance().playSFX(GameAssetManager.soulGain);
                 }
             }
         }

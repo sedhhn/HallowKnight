@@ -66,7 +66,11 @@ public class GameAssetManager {
     public static String zote2="audio/SFX/Zote/Zote_03.wav";
     public static String zote3="audio/SFX/Zote/Zote_04.wav";
     public static String zote4="audio/SFX/Zote/Zote_05.wav";
-    
+    public static String nailAttack="audio/SFX/hero_evade.wav";
+    public static String knightDamage="audio/SFX/hero_damage.wav";
+    public static String enemyDamage="audio/SFX/enemy_damage.wav";
+    public static String soulGain="audio/SFX/spa_heal.wav";
+    public static String knightFocus="audio/SFX/focus_health_charging.wav";
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");

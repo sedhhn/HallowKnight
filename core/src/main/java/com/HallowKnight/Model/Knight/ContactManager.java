@@ -1,5 +1,7 @@
 package com.HallowKnight.Model.Knight;
 
+import com.HallowKnight.Controller.Managers.AudioManager;
+import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.Model.Charms.CharmType;
 import com.HallowKnight.Model.Effects.Effect;
 import com.HallowKnight.Model.Effects.SoulBall;
@@ -172,6 +174,7 @@ public class ContactManager implements ContactListener {
         if (userDataA == FixtureType.NAIL && userDataB == FixtureType.ENEMY) {
             Enemy enemy = (Enemy) contact.getFixtureB().getBody().getUserData();
             if (enemy != null) {
+                AudioManager.getInstance().playSFX(GameAssetManager.enemyDamage);
                 enemy.takeDamage(knight.getDamage());
                 if (knight.isFacingRight()){
                     enemy.getB2Body().applyLinearImpulse(
@@ -185,12 +188,14 @@ public class ContactManager implements ContactListener {
                         ,true);
                 }
                 knight.increaseSoul(knight.getSoulIncrease());
+                AudioManager.getInstance().playSFX(GameAssetManager.soulGain);
             }
             Nail nail= (Nail) contact.getFixtureA().getBody().getUserData();
             if (nail!=null) nail.getState().onContactWithDeadly();
         } else if (userDataA == FixtureType.ENEMY && userDataB == FixtureType.NAIL) {
             Enemy enemy = (Enemy) contact.getFixtureA().getBody().getUserData();
             if (enemy != null) {
+                AudioManager.getInstance().playSFX(GameAssetManager.enemyDamage);
                 enemy.takeDamage(knight.getDamage());
                 if (knight.isFacingRight()){
                     enemy.getB2Body().applyLinearImpulse(
@@ -204,6 +209,7 @@ public class ContactManager implements ContactListener {
                         ,true);
                 }
                 knight.increaseSoul(knight.getSoulIncrease());
+                AudioManager.getInstance().playSFX(GameAssetManager.soulGain);
             }
             Nail nail= (Nail) contact.getFixtureB().getBody().getUserData();
             if (nail!=null) nail.getState().onContactWithDeadly();
