@@ -74,8 +74,7 @@ public class Mosquito extends Enemy {
     }
 
     @Override
-    public boolean isDead() {
+    public void onKilled() {
         GameScreen.getInstance().getGameState().mosquito++;
-        return super.isDead();
     }
 }

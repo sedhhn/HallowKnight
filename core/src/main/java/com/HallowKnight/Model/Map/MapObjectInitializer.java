@@ -3,6 +3,7 @@ package com.HallowKnight.Model.Map;
 import com.HallowKnight.Controller.GameController;
 import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
+import com.HallowKnight.Model.Effects.GrimmFlame;
 import com.HallowKnight.Model.Effects.Torch;
 import com.HallowKnight.Model.Enemies.Crystallized.Crystallized;
 import com.HallowKnight.Model.Enemies.GroundEnemy.GroundEnemy;
@@ -191,5 +192,10 @@ public class MapObjectInitializer {
     public void initializeTorch(GameController gameController){
         PointMapObject point = (PointMapObject) map.getLayers().get("Effects").getObjects().get("Fire0");
         gameController.getEffects().add(new Torch(new Vector2(point.getPoint().x/HallowKnight.PPM, point.getPoint().y/HallowKnight.PPM)));
+    }
+
+    public void initializeGrimmFlame(GameController gameController){
+        PointMapObject point = (PointMapObject) map.getLayers().get("GrimmFire").getObjects().get("Fire1");
+        gameController.getEffects().add(new GrimmFlame(new Vector2(point.getPoint().x/HallowKnight.PPM, point.getPoint().y/HallowKnight.PPM)));
     }
 }

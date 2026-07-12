@@ -56,6 +56,7 @@ public class GameAssetManager {
     public static TextureAtlas soulScream;
     public static TextureAtlas soulBall;
     public static TextureAtlas torch;
+    public static TextureAtlas grimmFlame;
 
     //========== Sounds ============
     //Musics:
@@ -110,6 +111,7 @@ public class GameAssetManager {
         voidHeart=new Texture("Sprites/Inventory & UI/Charms/Void Heart.png");
         //========== Effects ===========
         torch=new TextureAtlas("Animations/Effects/Torch.atlas");
+        grimmFlame=new TextureAtlas("Animations/Effects/GrimmFlame.atlas");
     }
 
     public static void dispose() {

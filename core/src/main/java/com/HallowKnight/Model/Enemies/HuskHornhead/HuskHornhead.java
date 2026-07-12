@@ -61,8 +61,7 @@ public class HuskHornhead extends Enemy {
     }
 
     @Override
-    public boolean isDead() {
+    public void onKilled() {
         GameScreen.getInstance().getGameState().husk++;
-        return super.isDead();
     }
 }

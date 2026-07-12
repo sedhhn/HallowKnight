@@ -123,6 +123,7 @@ public class FalseKnight extends Sprite {
             gameEndTimer+=dt;
         }
         if (gameEndTimer>5f){
+            GameScreen.getInstance().getGameState().time=GameScreen.getInstance().getController().getPlayTime();
             GameScreen.getInstance().getPauseMenu().saveGame(0,0);
             ScreenManager.getInstance().setScreen(new EndGameScreen(HallowKnight.hallowKnight,gameScreen.getGameState()));
             GameScreen.resetGameScreen();

@@ -59,8 +59,7 @@ public class Crystallized extends Enemy {
     }
 
     @Override
-    public boolean isDead() {
+    public void onKilled() {
         GameScreen.getInstance().getGameState().crystallized++;
-        return super.isDead();
     }
 }

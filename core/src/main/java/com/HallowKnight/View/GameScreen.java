@@ -99,6 +99,7 @@ public class GameScreen extends MenuScreen{
         mapObjectInitializer.initializeZote(controller,this);
         mapObjectInitializer.initializeFalseKnight(controller,this);
         mapObjectInitializer.initializeTorch(controller);
+        mapObjectInitializer.initializeGrimmFlame(controller);
 
         paused=false;
         pauseMenu=new PauseMenu(controller);

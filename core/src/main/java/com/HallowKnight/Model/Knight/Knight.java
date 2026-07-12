@@ -27,7 +27,7 @@ public class Knight extends Sprite {
     private static final float BLINK_INTERVAL = 0.1f;
     public static final float ATTACK_DURATION=0.3f;
     public static final float DASH_TIME=0.35f;
-    public static final float DASH_SPEED=7.5f;
+    public static final float DASH_SPEED=8f;
     public static final float DASH_COOLDOWN=1.5f;
     public static final float MAX_SOUL=99f;
     public static final float FOCUS_DURATION=1.5f;

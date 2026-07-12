@@ -52,9 +52,14 @@ public abstract class Enemy extends Sprite {
         return dead;
     }
 
+    protected void onKilled() {}
+
     public void takeDamage(float amount) {
-        hp-=amount;
-        if (hp<=0) dead=true;
+        hp -= amount;
+        if (hp <= 0) {
+            dead = true;
+            onKilled();
+        }
     }
 
     public boolean isFacingRight(){

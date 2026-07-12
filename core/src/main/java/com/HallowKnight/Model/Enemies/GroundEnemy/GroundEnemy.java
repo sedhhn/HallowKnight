@@ -57,7 +57,12 @@ public class GroundEnemy extends Enemy {
 
     @Override
     public boolean isDead() {
-        GameScreen.getInstance().getGameState().crawler++;
         return super.isDead();
+    }
+
+    @Override
+    protected void onKilled() {
+        super.onKilled();
+        GameScreen.getInstance().getGameState().crawler++;
     }
 }
