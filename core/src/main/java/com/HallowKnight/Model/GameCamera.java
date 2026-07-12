@@ -9,6 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 public class GameCamera extends OrthographicCamera {
     public static final float DEFAULT_SHAKE_DURATION=0.5f;
     public static final float DEFAULT_MAX_SHAKE_INTENSITY=0.1f;
+    public static final float DEFAULT_LIGHT_SHAKE_DURATION=0.3f;
+    public static final float DEFAULT_LIGHT_SHAKE_MAX_INTENSITY=0.05f;
     Knight knight;
 
     private float maxShakeIntensity;
@@ -80,6 +82,13 @@ public class GameCamera extends OrthographicCamera {
         maxShakeIntensity=DEFAULT_MAX_SHAKE_INTENSITY;
         shakeIntensity=maxShakeIntensity;
         shakeDuration=DEFAULT_SHAKE_DURATION;
+        shaking=true;
+    }
+
+    public void startShake(float intensity, float duration){
+        maxShakeIntensity=intensity;
+        shakeIntensity=intensity;
+        shakeDuration=duration;
         shaking=true;
     }
 

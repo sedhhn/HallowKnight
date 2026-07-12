@@ -7,6 +7,7 @@ import com.HallowKnight.Controller.Managers.GameAssetManager;
 import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Charms.*;
 import com.HallowKnight.Model.FixtureType;
+import com.HallowKnight.Model.GameCamera;
 import com.HallowKnight.Model.Knight.State.Death;
 import com.HallowKnight.Model.Knight.State.IdleState;
 import com.HallowKnight.Model.Knight.State.State;
@@ -152,6 +153,10 @@ public class Knight extends Sprite {
         if (getHp() < 0) setHp(0);
         invincible = true;
         invincibleTimer = INVINCIBILITY_TIME;
+        gameScreen.getCamera().startShake(
+            GameCamera.DEFAULT_LIGHT_SHAKE_MAX_INTENSITY,
+            GameCamera.DEFAULT_LIGHT_SHAKE_DURATION
+        );
     }
 
     public int getHp() {
