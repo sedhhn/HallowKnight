@@ -13,6 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class HallowKnight extends Game {
     public static final float PPM=100; //Pixels Per Meter
+    public static final float BOSS_ROOM_MIN_X=592;
+    public static final float BOSS_ROOM_MAX_X=804;
+    public static final float BOSS_ROOM_BOTTOM_Y=520;
+    public static final float BOSS_ROOM_TOP_Y=392;
     public static HallowKnight hallowKnight;
     public Skin skin;
     private SpriteBatch batch;

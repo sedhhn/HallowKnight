@@ -60,6 +60,7 @@ public class GameAssetManager {
     //========== Sounds ============
     //Musics:
     public static String crystalPeakMusic="audio/Musics/11 - Crystal Peak.mp3";
+    public static String crossroadsMusic="audio/Musics/03 - Crossroads.mp3";
 
     public static void load() {
         backgroundTexture = new Texture("MenuBackgrounds/main_menu_background.png");

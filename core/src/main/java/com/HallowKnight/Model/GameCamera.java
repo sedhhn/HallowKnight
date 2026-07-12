@@ -1,5 +1,6 @@
 package com.HallowKnight.Model;
 
+import com.HallowKnight.HallowKnight;
 import com.HallowKnight.Model.Knight.Knight;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,12 +16,28 @@ public class GameCamera extends OrthographicCamera {
     private float shakeDuration;
     private boolean shaking;
 
+    private boolean bossRoomClamp;
+    private float bossMinX;
+    private float bossMaxX;
+    private float bossMinY;
+    private float bossMaxY;
+
     public GameCamera(float viewportWidth, float viewportHeight){
         super(viewportWidth, viewportHeight);
 
         this.shakeIntensity=0;
         this.shakeDuration=0;
         this.shaking=false;
+        this.bossRoomClamp=false;
+
+        float minX=Math.min(HallowKnight.BOSS_ROOM_MIN_X,HallowKnight.BOSS_ROOM_MAX_X);
+        float maxX=Math.max(HallowKnight.BOSS_ROOM_MIN_X,HallowKnight.BOSS_ROOM_MAX_X);
+        float minY=Math.min(HallowKnight.BOSS_ROOM_TOP_Y,HallowKnight.BOSS_ROOM_BOTTOM_Y);
+        float maxY=Math.max(HallowKnight.BOSS_ROOM_TOP_Y,HallowKnight.BOSS_ROOM_BOTTOM_Y);
+        this.bossMinX=minX*8f/HallowKnight.PPM;
+        this.bossMaxX=maxX*8f/HallowKnight.PPM;
+        this.bossMinY=6f;
+        this.bossMaxY=16.5f;
     }
 
     public void update(float dt) {
@@ -28,14 +45,37 @@ public class GameCamera extends OrthographicCamera {
         if (knight!=null) {
             position.x = knight.b2Body.getPosition().x;
             position.y = knight.b2Body.getPosition().y;
+
+            float kx=knight.b2Body.getPosition().x;
+            float ky=knight.b2Body.getPosition().y;
+            bossRoomClamp=kx>=bossMinX && kx<=bossMaxX && ky>=bossMinY && ky<=bossMaxY;
         }
         if (shaking){
             shake(dt);
+        }
+        if (bossRoomClamp){
+            clampToBossRoom();
+        }
+    }
+
+    private void clampToBossRoom(){
+        float halfViewW=viewportWidth/2f;
+        float halfViewH=viewportHeight/2f;
+
+        if (bossMaxX-bossMinX>halfViewW*2f){
+            position.x=MathUtils.clamp(position.x,bossMinX+halfViewW,bossMaxX-halfViewW);
+        }
+        if (bossMaxY-bossMinY>halfViewH*2f){
+            position.y=MathUtils.clamp(position.y,bossMinY+halfViewH,bossMaxY-halfViewH);
         }
     }
 
     public void setKnight(Knight knight){
         this.knight=knight;
+    }
+
+    public void setBossRoomClamp(boolean clamp){
+        this.bossRoomClamp=clamp;
     }
 
     public void startShake(){
