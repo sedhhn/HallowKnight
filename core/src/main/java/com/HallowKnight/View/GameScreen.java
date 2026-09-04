@@ -73,8 +73,8 @@ public class GameScreen extends MenuScreen{
         world.setContactListener(new ContactController(knight));
         b2DebugRenderer=new Box2DDebugRenderer();
         camera=new GameCamera(viewport.getScreenWidth(),viewport.getScreenHeight());
-        gameViewport=new FitViewport(1280/HallowKnight.PPM
-            ,960/HallowKnight.PPM,camera);
+        gameViewport=new FitViewport(1920/HallowKnight.PPM
+            ,1080/HallowKnight.PPM,camera);
 
         camera.update();
         gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
